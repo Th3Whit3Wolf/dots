@@ -1,0 +1,11 @@
+bindsym XF86AudioRaiseVolume exec volumectl raise
+bindsym XF86AudioLowerVolume exec volumectl lower
+bindsym XF86AudioMute exec volumectl mute
+
+bindsym XF86MonBrightnessUp exec lightctl raise
+bindsym XF86MonBrightnessDown exec lightctl lower
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+

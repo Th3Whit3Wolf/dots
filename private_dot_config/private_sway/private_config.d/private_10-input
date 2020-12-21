@@ -1,0 +1,14 @@
+input type:keyboard {
+    xkb_layout us
+    xkb_variant altgr-intl
+    xkb_options compose:ralt
+}
+input type:touchpad {
+    accel_profile adaptive
+    dwt enabled
+    tap enabled
+    tap_button_map lrm
+    drag enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}

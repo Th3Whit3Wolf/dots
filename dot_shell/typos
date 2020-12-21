@@ -1,0 +1,5 @@
+# vim: set filetype=sh :
+
+alias cta='cat' 
+alias sl='ls' 
+alias cd..='cd ..' 

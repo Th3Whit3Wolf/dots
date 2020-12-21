@@ -1,0 +1,5 @@
+#!/bin/bash
+# copyright 2007 - 2010 Christopher Bratusek
+#
+# Shows top 10 most used commands
+top10() { history | awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}' | sort -rn | head; }

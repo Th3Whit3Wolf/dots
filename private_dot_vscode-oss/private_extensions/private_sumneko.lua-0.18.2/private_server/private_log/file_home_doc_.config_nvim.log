@@ -1,0 +1,933 @@
+[2020-12-19 20:48:38.000][info]: [main:14]Lua Lsp startup, root: 	/home/doc/.vscode-oss/extensions/sumneko.lua-0.18.2/server
+[2020-12-19 20:48:38.001][debug]: [main:15]ROOT:	/home/doc/.vscode-oss/extensions/sumneko.lua-0.18.2/server
+[2020-12-19 20:48:38.001][debug]: cannot open /home/doc/.vscode-oss/extensions/sumneko.lua-0.18.2/server/debugger.lua: No such file or directory
+[2020-12-19 20:48:38.075][info]: [script.language:125]VSC language: en
+[2020-12-19 20:48:38.075][info]: [script.language:126]LS  language: en-us
+[2020-12-19 20:48:38.298][debug]: [script.async.async:55]Create thread, id: 	1	task: 	proto
+[2020-12-19 20:48:38.340][debug]: [script.service:860]collectgarbage: 	0.042
+[2020-12-19 20:48:38.340][debug]: [script.service:931]
+State
+Main Mem:  [8063.120]kb
+#001 Mem:  <Unknown>
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [0]
+DeadVal:   [0]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:48:38.340][debug]: [script.service:973]test memory: 	0.000
+[2020-12-19 20:48:38.343][info]: [script.method.initialize:21]{
+	capabilities = {
+		textDocument = {
+			callHierarchy = {
+				dynamicRegistration = true,
+			},
+			codeAction = {
+				codeActionLiteralSupport = {
+					codeActionKind = {
+						valueSet = {
+							[1] = "",
+							[2] = "quickfix",
+							[3] = "refactor",
+							[4] = "refactor.extract",
+							[5] = "refactor.inline",
+							[6] = "refactor.rewrite",
+							[7] = "source",
+							[8] = "source.organizeImports",
+						},
+					},
+				},
+				dynamicRegistration = true,
+				isPreferredSupport = true,
+			},
+			codeLens = {
+				dynamicRegistration = true,
+			},
+			colorProvider = {
+				dynamicRegistration = true,
+			},
+			completion = {
+				completionItem = {
+					commitCharactersSupport = true,
+					deprecatedSupport = true,
+					documentationFormat = {
+						[1] = "markdown",
+						[2] = "plaintext",
+					},
+					insertReplaceSupport = true,
+					preselectSupport = true,
+					snippetSupport = true,
+					tagSupport = {
+						valueSet = {
+							[1] = 1,
+						},
+					},
+				},
+				completionItemKind = {
+					valueSet = {
+						[01] = 1,
+						[02] = 2,
+						[03] = 3,
+						[04] = 4,
+						[05] = 5,
+						[06] = 6,
+						[07] = 7,
+						[08] = 8,
+						[09] = 9,
+						[10] = 10,
+						[11] = 11,
+						[12] = 12,
+						[13] = 13,
+						[14] = 14,
+						[15] = 15,
+						[16] = 16,
+						[17] = 17,
+						[18] = 18,
+						[19] = 19,
+						[20] = 20,
+						[21] = 21,
+						[22] = 22,
+						[23] = 23,
+						[24] = 24,
+						[25] = 25,
+					},
+				},
+				contextSupport = true,
+				dynamicRegistration = true,
+			},
+			declaration = {
+				dynamicRegistration = true,
+				linkSupport = true,
+			},
+			definition = {
+				dynamicRegistration = true,
+				linkSupport = true,
+			},
+			documentHighlight = {
+				dynamicRegistration = true,
+			},
+			documentLink = {
+				dynamicRegistration = true,
+				tooltipSupport = true,
+			},
+			documentSymbol = {
+				["hierarchicalDocumentSymbolSupport"] = true,
+				dynamicRegistration = true,
+				symbolKind = {
+					valueSet = {
+						[01] = 1,
+						[02] = 2,
+						[03] = 3,
+						[04] = 4,
+						[05] = 5,
+						[06] = 6,
+						[07] = 7,
+						[08] = 8,
+						[09] = 9,
+						[10] = 10,
+						[11] = 11,
+						[12] = 12,
+						[13] = 13,
+						[14] = 14,
+						[15] = 15,
+						[16] = 16,
+						[17] = 17,
+						[18] = 18,
+						[19] = 19,
+						[20] = 20,
+						[21] = 21,
+						[22] = 22,
+						[23] = 23,
+						[24] = 24,
+						[25] = 25,
+						[26] = 26,
+					},
+				},
+				tagSupport = {
+					valueSet = {
+						[1] = 1,
+					},
+				},
+			},
+			foldingRange = {
+				dynamicRegistration = true,
+				lineFoldingOnly = true,
+				rangeLimit = 5000,
+			},
+			formatting = {
+				dynamicRegistration = true,
+			},
+			hover = {
+				contentFormat = {
+					[1] = "markdown",
+					[2] = "plaintext",
+				},
+				dynamicRegistration = true,
+			},
+			implementation = {
+				dynamicRegistration = true,
+				linkSupport = true,
+			},
+			onTypeFormatting = {
+				dynamicRegistration = true,
+			},
+			publishDiagnostics = {
+				complexDiagnosticCodeSupport = true,
+				relatedInformation = true,
+				tagSupport = {
+					valueSet = {
+						[1] = 1,
+						[2] = 2,
+					},
+				},
+				versionSupport = false,
+			},
+			rangeFormatting = {
+				dynamicRegistration = true,
+			},
+			references = {
+				dynamicRegistration = true,
+			},
+			rename = {
+				dynamicRegistration = true,
+				prepareSupport = true,
+			},
+			selectionRange = {
+				dynamicRegistration = true,
+			},
+			semanticTokens = {
+				dynamicRegistration = true,
+				tokenModifiers = {
+					[10] = "defaultLibrary",
+					[1] = "declaration",
+					[2] = "definition",
+					[3] = "readonly",
+					[4] = "static",
+					[5] = "deprecated",
+					[6] = "abstract",
+					[7] = "async",
+					[8] = "modification",
+					[9] = "documentation",
+				},
+				tokenTypes = {
+					[01] = "namespace",
+					[02] = "type",
+					[03] = "class",
+					[04] = "enum",
+					[05] = "interface",
+					[06] = "struct",
+					[07] = "typeParameter",
+					[08] = "parameter",
+					[09] = "variable",
+					[10] = "property",
+					[11] = "enumMember",
+					[12] = "event",
+					[13] = "function",
+					[14] = "member",
+					[15] = "macro",
+					[16] = "keyword",
+					[17] = "modifier",
+					[18] = "comment",
+					[19] = "string",
+					[20] = "number",
+					[21] = "regexp",
+					[22] = "operator",
+				},
+			},
+			signatureHelp = {
+				contextSupport = true,
+				dynamicRegistration = true,
+				signatureInformation = {
+					activeParameterSupport = true,
+					documentationFormat = {
+						[1] = "markdown",
+						[2] = "plaintext",
+					},
+					parameterInformation = {
+						labelOffsetSupport = true,
+					},
+				},
+			},
+			synchronization = {
+				didSave = true,
+				dynamicRegistration = true,
+				willSave = true,
+				willSaveWaitUntil = true,
+			},
+			typeDefinition = {
+				dynamicRegistration = true,
+				linkSupport = true,
+			},
+		},
+		window = {
+			workDoneProgress = true,
+		},
+		workspace = {
+			applyEdit = true,
+			configuration = true,
+			didChangeConfiguration = {
+				dynamicRegistration = true,
+			},
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+			},
+			executeCommand = {
+				dynamicRegistration = true,
+			},
+			symbol = {
+				dynamicRegistration = true,
+				symbolKind = {
+					valueSet = {
+						[01] = 1,
+						[02] = 2,
+						[03] = 3,
+						[04] = 4,
+						[05] = 5,
+						[06] = 6,
+						[07] = 7,
+						[08] = 8,
+						[09] = 9,
+						[10] = 10,
+						[11] = 11,
+						[12] = 12,
+						[13] = 13,
+						[14] = 14,
+						[15] = 15,
+						[16] = 16,
+						[17] = 17,
+						[18] = 18,
+						[19] = 19,
+						[20] = 20,
+						[21] = 21,
+						[22] = 22,
+						[23] = 23,
+						[24] = 24,
+						[25] = 25,
+						[26] = 26,
+					},
+				},
+				tagSupport = {
+					valueSet = {
+						[1] = 1,
+					},
+				},
+			},
+			workspaceEdit = {
+				documentChanges = true,
+				failureHandling = "textOnlyTransactional",
+				resourceOperations = {
+					[1] = "create",
+					[2] = "rename",
+					[3] = "delete",
+				},
+			},
+			workspaceFolders = true,
+		},
+	},
+	clientInfo = {
+		name = "vscode",
+		version = "1.52.0",
+	},
+	processId = 89608,
+	rootPath = "/home/doc/.config/nvim",
+	rootUri = "file:///home/doc/.config/nvim",
+	trace = "off",
+	workspaceFolders = {
+		[1] = {
+			name = "nvim",
+			uri = "file:///home/doc/.config/nvim",
+		},
+	},
+}
+[2020-12-19 20:48:38.343][info]: [script.service:181]Add workspace	nvim	file:///home/doc/.config/nvim
+[2020-12-19 20:48:38.343][debug]: [script.async.async:55]Create thread, id: 	2	task: 	loadfile
+[2020-12-19 20:48:38.343][info]: [script.workspace:188]Workspace inited, root: 	/home/doc/.config/nvim
+[2020-12-19 20:48:38.343][info]: [script.workspace:189]Workspace inited, uri: 	file:///home/doc/.config/nvim
+[2020-12-19 20:48:38.343][info]: [script.workspace:191]Log path: 	/home/doc/.vscode-oss/extensions/sumneko.lua-0.18.2/server/log/file_home_doc_.config_nvim.log
+[2020-12-19 20:48:38.344][debug]: [script.async.async:55]Create thread, id: 	3	task: 	scanfiles
+[2020-12-19 20:48:38.346][debug]: [script.workspace:160]Scanning:	/home/doc/.config/nvim
+[2020-12-19 20:48:38.346][debug]: [script.workspace:160]Scan pattern:	{
+}
+[2020-12-19 20:48:38.346][debug]: [script.workspace:160]Scan options:	{
+	ignoreCase = false,
+}
+[2020-12-19 20:48:38.355][info]: [script.workspace:154]Scan finish, got	10	files.
+[2020-12-19 20:48:38.355][debug]: [script.service:408]reCompile:	10	10
+[2020-12-19 20:48:38.393][debug]: [script.service:860]collectgarbage: 	0.039
+[2020-12-19 20:48:38.394][debug]: [script.service:931]
+State
+Main Mem:  [8173.185]kb
+#001 Mem:  [107.168]kb
+#002 Mem:  <Unknown>
+#003 Mem:  <Unknown>
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [0]
+DeadVal:   [0]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:48:38.394][debug]: [script.service:973]test memory: 	0.000
+[2020-12-19 20:48:38.394][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/variables.lua
+[2020-12-19 20:48:38.410][debug]: [script.config:190]Config update: 	{
+	color = {
+		mode = "Semantic",
+	},
+	completion = {
+		callSnippet = "Disable",
+		enable = true,
+		keywordSnippet = "Replace",
+	},
+	diagnostics = {
+		disable = {
+		},
+		enable = true,
+		globals = {
+			vim = true,
+		},
+		severity = {
+			["ambiguity-1"] = "Warning",
+			["duplicate-index"] = "Warning",
+			["duplicate-method"] = "Warning",
+			["emmy-lua"] = "Warning",
+			["empty-block"] = "Hint",
+			["global-in-nil-env"] = "Warning",
+			["lowercase-global"] = "Information",
+			["newfield-call"] = "Warning",
+			["newline-call"] = "Information",
+			["redefined-local"] = "Hint",
+			["redundant-parameter"] = "Hint",
+			["redundant-value"] = "Hint",
+			["set-const"] = "Error",
+			["trailing-space"] = "Hint",
+			["undefined-env-child"] = "Information",
+			["undefined-global"] = "Warning",
+			["unused-function"] = "Hint",
+			["unused-label"] = "Hint",
+			["unused-local"] = "Hint",
+			["unused-vararg"] = "Hint",
+		},
+	},
+	plugin = {
+		enable = false,
+		path = ".vscode/lua-plugin/*.lua",
+	},
+	runtime = {
+		library = {
+		},
+		path = {
+			[1] = "?.lua",
+			[2] = "?/init.lua",
+			[3] = "?/?.lua",
+		},
+		version = "LuaJIT",
+	},
+	signatureHelp = {
+		enable = true,
+	},
+	workspace = {
+		ignoreDir = {
+			[".vscode"] = true,
+		},
+		ignoreSubmodules = true,
+		library = {
+		},
+		maxPreload = 300,
+		preloadFileSize = 100,
+		useGitIgnore = true,
+	},
+}	{
+	associations = {
+	},
+	exclude = {
+		["**/.DS_Store"] = true,
+		["**/.git"] = true,
+		["**/.hg"] = true,
+		["**/.svn"] = true,
+		["**/CVS"] = true,
+	},
+}
+[2020-12-19 20:48:38.624][debug]: [script.service:408]reCompile:	10	10
+[2020-12-19 20:48:38.678][debug]: [script.service:860]collectgarbage: 	0.054
+[2020-12-19 20:48:38.678][debug]: [script.service:931]
+State
+Main Mem:  [9289.090]kb
+#001 Mem:  [94.930]kb
+#002 Mem:  [62.002]kb
+#003 Mem:  [98.187]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [1]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [292]
+DeadVal:   [292]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:48:38.678][debug]: [script.service:973]test memory: 	0.000
+[2020-12-19 20:48:38.678][debug]: [script.service:830]reDiagnostic
+[2020-12-19 20:48:38.678][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/global.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plug.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/mapping.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/init.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/tree_sitter.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/event.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/statusline.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/lsp.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/variables.lua
+[2020-12-19 20:48:38.679][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/options.lua
+[2020-12-19 20:48:38.679][debug]: [script.capability.completion:27]Enable completion.
+[2020-12-19 20:48:38.683][debug]: [script.capability.semantic:26]Enable semantic.
+[2020-12-19 20:48:38.684][debug]: [script.service:811]reScanFiles
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/global.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plug.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/mapping.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/init.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/tree_sitter.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/event.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/statusline.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/plugins/lsp.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/variables.lua
+[2020-12-19 20:48:38.684][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/options.lua
+[2020-12-19 20:48:38.685][debug]: [script.method.initialized:57]client/registerCapability Success!
+[2020-12-19 20:48:38.686][debug]: [script.workspace:160]Scanning:	/home/doc/.config/nvim
+[2020-12-19 20:48:38.686][debug]: [script.workspace:160]Scan pattern:	{
+	[1] = ".vscode",
+	[2] = "**/CVS",
+	[3] = "**/.git",
+	[4] = "**/.svn",
+	[5] = "**/.DS_Store",
+	[6] = "**/.hg",
+}
+[2020-12-19 20:48:38.686][debug]: [script.workspace:160]Scan options:	{
+	ignoreCase = false,
+}
+[2020-12-19 20:48:38.686][info]: [script.workspace:154]Scan finish, got	10	files.
+[2020-12-19 20:48:38.686][debug]: [script.service:408]reCompile:	0	0
+[2020-12-19 20:48:38.733][debug]: [script.service:860]collectgarbage: 	0.045
+[2020-12-19 20:48:38.733][debug]: [script.service:931]
+State
+Main Mem:  [9228.304]kb
+#001 Mem:  [101.966]kb
+#002 Mem:  [62.002]kb
+#003 Mem:  [98.187]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [1]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [292]
+DeadVal:   [292]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:48:38.733][debug]: [script.service:973]test memory: 	0.000
+[2020-12-19 20:48:38.737][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/variables.lua
+[2020-12-19 20:48:38.796][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/variables.lua
+[2020-12-19 20:49:38.331][debug]: [script.service:860]collectgarbage: 	0.032
+[2020-12-19 20:49:38.333][debug]: [script.service:931]
+State
+Main Mem:  [14823.167]kb
+#001 Mem:  [113.015]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [10]
+AlivedVM:  [10]
+DeadVM:    [0]
+-------------------
+CachedSrc: [6282]
+AlivedSrc: [7086]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[62]
+AlivedFunc:[227]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [2128]
+DeadVal:   [179]
+-------------------
+TotalLoc:  [404]
+TotalEmmy: [10]
+
+[2020-12-19 20:49:38.333][debug]: [script.service:973]test memory: 	0.003
+[2020-12-19 20:50:38.379][debug]: [script.service:860]collectgarbage: 	0.080
+[2020-12-19 20:50:38.382][debug]: [script.service:931]
+State
+Main Mem:  [18012.566]kb
+#001 Mem:  [57.948]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [10]
+AlivedVM:  [10]
+DeadVM:    [0]
+-------------------
+CachedSrc: [8283]
+AlivedSrc: [9087]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[61]
+AlivedFunc:[226]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [3197]
+DeadVal:   [579]
+-------------------
+TotalLoc:  [404]
+TotalEmmy: [10]
+
+[2020-12-19 20:50:38.382][debug]: [script.service:973]test memory: 	0.003
+[2020-12-19 20:51:31.821][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/utils/paths.lua
+[2020-12-19 20:51:31.832][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/utils/paths.lua
+[2020-12-19 20:51:31.853][debug]: [script.service:408]reCompile:	11	11
+[2020-12-19 20:51:31.927][debug]: [script.service:860]collectgarbage: 	0.074
+[2020-12-19 20:51:31.928][debug]: [script.service:931]
+State
+Main Mem:  [12137.798]kb
+#001 Mem:  [589.442]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [1097]
+DeadVal:   [1097]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:31.928][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:31.929][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/utils/paths.lua
+[2020-12-19 20:51:32.931][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/utils/windows.lua
+[2020-12-19 20:51:32.944][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/utils/windows.lua
+[2020-12-19 20:51:32.961][debug]: [script.service:408]reCompile:	12	12
+[2020-12-19 20:51:33.006][debug]: [script.service:860]collectgarbage: 	0.045
+[2020-12-19 20:51:33.007][debug]: [script.service:931]
+State
+Main Mem:  [10341.840]kb
+#001 Mem:  [621.600]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [517]
+DeadVal:   [517]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:33.007][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:33.009][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/utils/windows.lua
+[2020-12-19 20:51:37.490][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/init.lua
+[2020-12-19 20:51:37.500][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/vcs/init.lua
+[2020-12-19 20:51:37.508][debug]: [script.service:408]reCompile:	13	13
+[2020-12-19 20:51:37.546][debug]: [script.service:860]collectgarbage: 	0.038
+[2020-12-19 20:51:37.546][debug]: [script.service:931]
+State
+Main Mem:  [10527.271]kb
+#001 Mem:  [540.083]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [516]
+DeadVal:   [516]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:37.546][debug]: [script.service:973]test memory: 	0.000
+[2020-12-19 20:51:37.547][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/init.lua
+[2020-12-19 20:51:38.337][debug]: [script.service:860]collectgarbage: 	0.039
+[2020-12-19 20:51:38.341][debug]: [script.service:931]
+State
+Main Mem:  [15817.607]kb
+#001 Mem:  [551.027]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [13]
+AlivedVM:  [13]
+DeadVM:    [0]
+-------------------
+CachedSrc: [8927]
+AlivedSrc: [9734]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[72]
+AlivedFunc:[237]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [2736]
+DeadVal:   [0]
+-------------------
+TotalLoc:  [456]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:38.341][debug]: [script.service:973]test memory: 	0.003
+[2020-12-19 20:51:39.031][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/init.lua
+[2020-12-19 20:51:39.043][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/init.lua
+[2020-12-19 20:51:39.053][debug]: [script.service:408]reCompile:	14	14
+[2020-12-19 20:51:39.090][debug]: [script.service:860]collectgarbage: 	0.037
+[2020-12-19 20:51:39.091][debug]: [script.service:931]
+State
+Main Mem:  [10498.434]kb
+#001 Mem:  [557.315]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [516]
+DeadVal:   [516]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:39.091][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:39.091][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/init.lua
+[2020-12-19 20:51:39.108][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/init.lua
+[2020-12-19 20:51:40.298][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitlens.lua
+[2020-12-19 20:51:40.308][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitlens.lua
+[2020-12-19 20:51:40.325][debug]: [script.service:408]reCompile:	15	15
+[2020-12-19 20:51:40.368][debug]: [script.service:860]collectgarbage: 	0.043
+[2020-12-19 20:51:40.368][debug]: [script.service:931]
+State
+Main Mem:  [10523.490]kb
+#001 Mem:  [590.391]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [533]
+DeadVal:   [533]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:40.368][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:40.369][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitlens.lua
+[2020-12-19 20:51:41.804][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitui.lua
+[2020-12-19 20:51:41.816][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitui.lua
+[2020-12-19 20:51:41.828][debug]: [script.service:408]reCompile:	16	16
+[2020-12-19 20:51:41.886][debug]: [script.service:860]collectgarbage: 	0.058
+[2020-12-19 20:51:41.886][debug]: [script.service:931]
+State
+Main Mem:  [10652.886]kb
+#001 Mem:  [624.436]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [551]
+DeadVal:   [551]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:41.886][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:41.888][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/gitui.lua
+[2020-12-19 20:51:42.616][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/lazygit.lua
+[2020-12-19 20:51:42.628][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/lazygit.lua
+[2020-12-19 20:51:42.639][debug]: [script.service:408]reCompile:	17	17
+[2020-12-19 20:51:42.710][debug]: [script.service:860]collectgarbage: 	0.071
+[2020-12-19 20:51:42.710][debug]: [script.service:931]
+State
+Main Mem:  [11095.898]kb
+#001 Mem:  [654.420]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [558]
+DeadVal:   [558]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:42.711][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:42.711][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/vcs/git/lazygit.lua
+[2020-12-19 20:51:45.722][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/lsp_install_prompt.lua
+[2020-12-19 20:51:45.734][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/lsp_install_prompt.lua
+[2020-12-19 20:51:45.746][debug]: [script.service:408]reCompile:	18	18
+[2020-12-19 20:51:45.812][debug]: [script.service:860]collectgarbage: 	0.066
+[2020-12-19 20:51:45.813][debug]: [script.service:931]
+State
+Main Mem:  [11107.345]kb
+#001 Mem:  [540.514]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [575]
+DeadVal:   [575]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:45.813][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:45.818][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/lsp_install_prompt.lua
+[2020-12-19 20:51:47.163][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/async_make.lua
+[2020-12-19 20:51:47.176][debug]: [script.service:325]Read failed due to duplicate:	file:///home/doc/.config/nvim/lua/myplugins/async_make.lua
+[2020-12-19 20:51:47.188][debug]: [script.service:408]reCompile:	19	19
+[2020-12-19 20:51:47.254][debug]: [script.service:860]collectgarbage: 	0.066
+[2020-12-19 20:51:47.254][debug]: [script.service:931]
+State
+Main Mem:  [11224.452]kb
+#001 Mem:  [497.961]kb
+#002 Mem:  [62.627]kb
+#003 Mem:  [104.218]kb
+-------------------
+CachedVM:  [0]
+AlivedVM:  [0]
+DeadVM:    [0]
+-------------------
+CachedSrc: [0]
+AlivedSrc: [1]
+DeadSrc:   [0]
+-------------------
+CachedFunc:[0]
+AlivedFunc:[0]
+DeadFunc:  [0]
+-------------------
+TotalVal:  [588]
+DeadVal:   [588]
+-------------------
+TotalLoc:  [0]
+TotalEmmy: [10]
+
+[2020-12-19 20:51:47.254][debug]: [script.service:973]test memory: 	0.001
+[2020-12-19 20:51:47.255][debug]: [script.service:125]clearDiagnostics	file:///home/doc/.config/nvim/lua/myplugins/async_make.lua
+[2020-12-19 20:52:16.302][info]: [script.method.shutdown:2]Server shutdown.
+[2020-12-19 20:52:16.303][info]: [script.method.exit:2]Server exited.

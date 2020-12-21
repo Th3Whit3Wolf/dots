@@ -1,0 +1,16 @@
+#screenshare workaround
+exec /usr/lib/xdg-desktop-portal -r &; /usr/lib/xdg-desktop-portal-wlr
+
+#exec /usr/bin/gnome-keyring-daemon -r -d --components=pkcs11,secrets,ssh
+exec autotiling-rs
+exec mako >/tmp/mako.log 2>&1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec kanshi >/tmp/kanshi.log 2>&1
+exec poweralertd
+exec avizo-service
+exec systemd-notify --ready
+
+#exec ~/.config/sway/scripts/ssh-agent.sh
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+

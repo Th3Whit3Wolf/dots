@@ -1,0 +1,115 @@
+{
+  "scopeName": "source.ron",
+  "patterns": [
+    { "include": "#expression" }
+  ],
+  "repository": {
+    "expression": {
+      "patterns": [
+        { "include": "#array" },
+        { "include": "#block_comment" },
+        { "include": "#constant" },
+        { "include": "#dictionary" },
+        { "include": "#line_comment" },
+        { "include": "#number" },
+        { "include": "#object-name" },
+        { "include": "#object" },
+        { "include": "#string" },
+        { "include": "#tag-name" }
+      ]
+    },
+    "array": {
+      "begin": "\\[",
+      "end": "\\]",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.array.begin.ron" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.section.array.end.ron" }
+      },
+      "patterns": [
+        { "include": "#value" },
+        { "include": "#object-name" },
+        { "meta_scope": "meta.structure.array.ron" }
+      ]
+    },
+    "block_comment": {
+      "name": "comment.block.ron",
+      "begin": "/\\*",
+      "end": "\\*/"
+    },
+    "constant": {
+      "match": "\\b(true|false)\\b",
+      "name": "constant.language.ron"
+    },
+    "dictionary": {
+      "begin": "\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.dictionary.begin.ron" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.section.dictionary.end.ron" }
+      },
+      "patterns": [
+        { "include": "#value" },
+        { "include": "#object-name" },
+        { "include": "#object" },
+        { "include": "#tag-name" },
+        { "match": ",", "name": "punctuation.separator.dictionary.ron" },
+        { "match": ":", "name": "punctuation.separator.dictionary.key-value.ron" }
+      ]
+    },
+    "line_comment": {
+      "name": "comment.line.double-slash.ron",
+      "begin": "//",
+      "end": "$"
+    },
+    "tag-name": {
+      "match": "[a-z_][A-Za-z_0-9]*",
+      "name": "entity.name.tag.ron"
+    },
+    "object-name": {
+      "match": "[A-Za-z_][A-Za-z_0-9]*",
+      "name": "entity.name.class.ron"
+    },
+    "object": {
+      "begin": "\\(",
+      "end":  "\\)",
+      "beginCaptures": {
+        "0": { "name": "punctuation.section.dictionary.begin.ron" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.section.dictionary.end.ron" }
+      },
+      "patterns": [
+        { "include": "#value" },
+        { "include": "#dictionary" },
+        { "include": "#tag-name" },
+        { "include": "#object-name" },
+        { "include": "#object" }
+      ]
+    },
+    "number": {
+      "match": "(?x:-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?)",
+      "name": "constant.numeric.ron"
+    },
+    "string": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "string.quoted.double"
+    },
+    "value": {
+      "patterns": [
+        { "include": "#array" },
+        { "include": "#block_comment" },
+        { "include": "#constant" },
+        { "include": "#dictionary" },
+        { "include": "#line_comment" },
+        { "include": "#number" },
+        { "include": "#object" },
+        { "include": "#string" }
+      ]
+    }
+  }
+}

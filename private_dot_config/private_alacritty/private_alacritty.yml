@@ -1,0 +1,190 @@
+# Font configuration
+font:
+  # The size to use.
+  size: 12
+  normal:
+    family: JetBrainsMono Nerd Font Mono
+    style: Regular
+  bold:
+    family: JetBrainsMono Nerd Font Mono
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font Mono
+    style: Italic
+    # Point size
+  #size: 11.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
+  #offset:
+  #  x: 0
+  #  y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
+
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: false
+
+# Colors (Spacemacs)
+schemes:
+  spacemacs_light: &light
+    primary:
+      foreground: '#655370'
+      background: '#fbf8ef'
+
+    cursor:
+      cursor:     '#100a14'
+      text:       '#efeae9'
+    normal:
+      black:      '#d2ceda'
+      red:        '#f2241f'
+      green:      '#67b11d'
+      yellow:     '#b1951d'
+      blue:       '#3a81c3'
+      magenta:    '#a31db1'
+      cyan:       '#21b8c7'
+      white:      '#655370'
+
+  bright:
+    black:      '#efeae9'
+    red:        '#DF201C'
+    green:      '#29A0AD'
+    yellow:     '#DB742E'
+    blue:       '#3980C2'
+    magenta:    '#2C9473'
+    cyan:       '#6B3062'
+    white:      '#a094a2'
+  spacemacs_dark: &dark
+    primary:
+      foreground: '#b2b2b2'
+      background: '#292b2e'
+
+    cursor:
+      cursor:     '#e3dedd'
+      text:       '#212026'
+    normal:
+      black:      '#0a0814'
+      red:        '#f2241f'
+      green:      '#67b11d'
+      yellow:     '#b1951d'
+      blue:       '#3a81c3'
+      magenta:    '#a31db1'
+      cyan:       '#21b8c7'
+      white:      '#b2b2b2'
+
+  bright:
+    black:      '#42444a'
+    red:        '#DF201C'
+    green:      '#29A0AD'
+    yellow:     '#DB742E'
+    blue:       '#3980C2'
+    magenta:    '#2C9473'
+    cyan:       '#6B3062'
+    white:      '#686868'
+
+colors: *light
+
+
+# Bell
+#
+# The bell is rung every time the BEL control character is received.
+#bell:
+  # Visual Bell Animation
+  #
+  # Animation effect for flashing the screen when the visual bell is rung.
+  #
+  # Values for `animation`:
+  #   - Ease
+  #   - EaseOut
+  #   - EaseOutSine
+  #   - EaseOutQuad
+  #   - EaseOutCubic
+  #   - EaseOutQuart
+  #   - EaseOutQuint
+  #   - EaseOutExpo
+  #   - EaseOutCirc
+  #   - Linear
+  #animation: EaseOutExpo
+
+  # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
+  # disable the visual bell animation.
+  #duration: 0
+
+  # Visual bell animation color.
+  #color: '#ffffff'
+
+  # Bell Command
+  #
+  # This program is executed whenever the bell is rung.
+  #
+  # When set to `command: None`, no command will be executed.
+  #
+  # Example:
+  #   command:
+  #     program: notify-send
+  #     args: ["Hello, World!"]
+  #
+  #command: None
+
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.7
+
+#selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  #save_to_clipboard: false
+
+#cursor:
+  # Cursor style
+  #style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    #shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    #blinking: Off
+
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  #vi_mode_style: None
+
+  # Cursor blinking interval in milliseconds.
+  #blink_interval: 750
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  #unfocused_hollow: true
+
+  # Thickness of the cursor relative to the cell width as floating point number
+  # from `0.0` to `1.0`.
+  #thickness: 0.15
+
+# Live config reload (changes require restart)
+live_config_reload: true
+

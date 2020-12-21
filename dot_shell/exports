@@ -1,0 +1,42 @@
+# vim: set filetype=sh :
+
+#export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+#export JAVA_OPTIONS="$JAVA_OPTIONS -DsocksProxyHost=localhost -DsocksProxyPort=9050"
+#export CPPFLAGS="-D_FORTIFY_SOURCE=2"
+#export CFLAGS="-march=native -mtune=skylake -Ofast -pipe -fstack-protector-strong --param=ssp-buffer-size=4 -fno-plt -fopenmp -Wno-error -w" #
+#export CXXFLAGS="$CFLAGS"
+#export LDFLAGS="-Wl,-O4,--sort-common,--as-needed,-z,relro,-z,now,-lgomp"
+#-- Make Flags: change this for DistCC/SMP systems
+#MAKEFLAGS="-j2"
+#-- Debugging flags
+#export DEBUG_CFLAGS="-g -fvar-tracking-assignments"
+#export DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
+#export DEBUG_MAKEFLAGS="-j1 --debug=bvij"
+#-- CMAKE flags
+#export CMAKE_C_COMPILER="command gcc $CFLAGS"
+#export CMAKE_CXX_COMPILER="command g++ $CXXFLAGS"
+#export CMAKE_LINKER="command ld $LDFLAGS"
+
+# Colorful Man Pages
+export PAGER=less
+export LESS_TERMCAP_mb=$'\E[01;31m'         # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'    # begin bold
+export LESS_TERMCAP_me=$'\E[0m'             # end mode
+export LESS_TERMCAP_se=$'\E[0m'             # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'      # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'             # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m'   # begin underline
+
+# XDG directories
+#export XDG_CONFIG_HOME="$HOME/.config"
+#export XDG_CACHE_HOME="$HOME/.cache"
+#export XDG_DATA_HOME="$HOME/.local/share"
+#export XDG_DESKTOP_DIR="$HOME/Desk"
+#export XDG_DOCUMENTS_DIR="$HOME/Docs"
+#export XDG_DOWNLOAD_DIR="$HOME/Downs"
+#export XDG_GIT_DIR="$HOME/Gits"
+#export XDG_MUSIC_DIR="$HOME/Tunes"
+#export XDG_PICTURES_DIR="$HOME/Pics"
+#export XDG_PUBLICSHARE_DIR="$HOME/Pub"
+#export XDG_VIDEOS_DIR="$HOME/Vids"
+#export SSH_KEY_PATH="~/.ssh/rsa_id"

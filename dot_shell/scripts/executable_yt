@@ -1,0 +1,9 @@
+yt() {
+    url="$*";
+
+    if [[ $url =~ .*playlist.* ]];then
+        youtube-dl --config-location $HOME/.config/youtube-dl/playlist $url
+    else
+        youtube-dl --config-location $HOME/.config/youtube-dl/config $url
+    fi
+}

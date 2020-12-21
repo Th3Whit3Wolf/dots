@@ -1,0 +1,36 @@
+default_orientation auto
+default_border pixel
+hide_edge_borders smart
+smart_borders on
+gaps inner 12
+gaps outer 5
+
+output * bg $wallpaper fill
+
+font pango:$font_family $font_size
+# class                 border bg   text indicator child_border
+client.focused          $bg    $bg  $fg  $bga      $bg
+client.focused_inactive $bg    $bg  $fgi $bg       $bg
+client.unfocused        $bg    $bg  $fgu $bg       $bg
+
+bar {
+   swaybar_command waybar
+}
+                         
+exec_always {
+    gsettings set $gnome-schema gtk-theme $gtk_theme
+    gsettings set $gnome-schema icon-theme $icon_theme
+    gsettings set $gnome-schema cursor-theme $cursor_theme
+    gsettings set $gnome-schema cursor-theme $cursor_theme
+    gsettings set $gnome-schema cursor-size $cursor_size
+    gsettings set $gnome-schema monospace-font-name $font_mono
+    gsettings set $gnome-schema document-font-name $font
+    gsettings set $gnome-schema font-name $font
+}
+
+exec swayidle -w \
+	timeout 0 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep '$lock -f'
+
+seat seat0 xcursor_theme $cursor_theme $cursor_size

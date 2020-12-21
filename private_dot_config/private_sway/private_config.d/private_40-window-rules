@@ -1,0 +1,23 @@
+# Windows Rules 
+for_window [class="(?i)mpv"] floating enable
+for_window [app_id="imv"] floating enable
+#for_window [title=".+[Ss]haring (Indicator|your screen)"] floating enable, move to scratchpad
+#for_window [title="Copying"] floating enable
+#for_window [title="Authenticate"] resize set height 210px
+#for_window [title="Discord Updater"] floating enable
+#for_window [title="File Already Exist"] floating enable
+#for_window [workspace="4"] layout tabbed
+#for_window [workspace="5"] layout tabbed
+for_window [app_id="^launcher$"] floating enable, border none
+for_window [app_id="mpv"] sticky enable
+for_window [floating] border csd
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable, border none
+for_window [title=".*"] title_format %title (class=%class app_id=%app_id instance=%instance shell=%shell)
+
+
+for_window [app_id="avizo-service"] floating enable, border none
+
+# Opacity
+for_window [class=".*"] opacity $opacity
+for_window [app_id=".*"] opacity $opacity
+for_window [app_id="mpv"] opacity 1
