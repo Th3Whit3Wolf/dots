@@ -2,17 +2,9 @@
 # to add other keys to this hash, see: man 5 terminfo
 typeset -g -A key
 
-if [[ -d ~/.shell/scripts ]]; then
-    fpath=(~/.shell/scripts $fpath)
-    for function_file in ~/.shell/scripts/*
-    do
-        autoload -Uz ${function_file##*/}
-    done
-    unset function_file
-	autoload -Uz compinit
-fi
+fpath=(~/.shell/scripts "${fpath[@]}")
+autoload -Uz $fpath[1]/*(.:t) compinit up-line-or-beginning-search down-line-or-beginning-search add-zsh-hook
 
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search add-zsh-hook
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
@@ -74,15 +66,6 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 # enabling autocompletion of privileged environments in privileged commands
 #zstyle ':completion::complete:*' gain-privileges 1
 #zstyle ':urlglobber' url-other-schema
-
-# Source alliases, exports, etc
-[[ -f ~/.shell/aliasrc ]] && . ~/.shell/aliasrc
-[[ -f ~/.shell/distro ]] && . ~/.shell/distro
-[[ -f ~/.shell/misc ]] && . ~/.shell/misc
-[[ -f ~/.shell/sys ]] && . ~/.shell/sys
-[[ -f ~/.shell/typos ]] && . ~/.shell/typos
-[[ -f ~/.zsh_plugins.sh ]] && . ~/.zsh_plugins.sh
-[[ -f /opt/git/git-subrepo/.rc ]] && . /opt/git/git-subrepo/.rc
 zmodload -i zsh/complist
 
 ################################################
@@ -133,7 +116,6 @@ fi
 #                    ALIASES                   #
 ################################################
 alias ali='alias | bat --style=numbers,grid -l cpp'
-alias antibupdate='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 ################################################
 #                 ENVIRONMENT                  #
 ################################################
@@ -158,9 +140,20 @@ setopt correct_all          # autocorrect commands
 setopt interactive_comments # allow comments in interactive shells
 setopt complete_aliases
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Source alliases, exports, and plugins
+source ~/.shell/aliasrc
+source ~/.shell/distro
+source ~/.shell/misc
+source ~/.shell/sys
+source ~/.shell/typos
+source ~/.zsh_plugins.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.local/share/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.local/share/zsh/yarn-completion/yarn-completion.plugin.zsh
+source ~/.local/share/zsh/zsh-better-npm-completion/zsh-better-npm-completion.plugin.zsh
+source ~/.local/share/zsh/zsh-rustup-completion/rustup.plugin.zsh
+[[ -f /opt/git/git-subrepo/.rc ]] && . /opt/git/git-subrepo/.rc
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
