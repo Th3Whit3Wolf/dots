@@ -1,0 +1,327 @@
+[advice]
+	pushNonFastForward = false
+	statusHints = false
+
+[alias]
+	a  = add
+	ap = add -p
+	b = branch
+	bm = branch --merged
+	bnm = branch --no-merged
+	c = clone
+	ca = commit --amend
+	cane = commit --amend --no-edit
+	cf = commit --fixup
+	cm = commit --message
+	co = checkout
+	cob = checkout -b
+	com = checkout master
+	cp = cherry-pick
+	d = diff --patience
+	dc = diff --cached
+	dom = diff origin/master
+	fo = fetch origin
+	g = grep --line-number
+	mbhom = merge-base HEAD origin/master
+	mff = merge --ff-only
+	ol = log --pretty=oneline
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	p = push
+	pf = push --force-with-release
+	prb = pull --rebase
+	r = restore
+	ra = rebase --abort
+	rc = rebase --continue
+	ri = rebase --interactive
+	rl = reflog
+	riom = rebase --interactive origin/master
+	rpo = remote prune origin
+	s = status -sb
+	ss = commit --message snapshot --no-gpg-sign
+	su = submodule update
+	wd = diff --patience --word-diff
+	# https://golang.org/doc/contribute.html
+	change = codereview change
+	gofmt = codereview gofmt
+	mail = codereview mail
+	pending = codereview pending
+	submit = codereview submit
+	sync = codereview sync
+
+# Push a new branch
+	do-push-branch = push -u origin HEAD
+	push-branch = "!master=$(git main-branch); if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" = \"$master\" ]; then echo \"$master is not a branch\" 1>&2; exit 1; fi; git do-push-branch"
+
+# These are extremely nice
+	ignore = "!f() { for arg in \"$@\"; do echo \"$arg\" >> .gitignore; done; git add .gitignore 2>/dev/null; }; f"
+	exclude = "!f() { for arg in \"$@\"; do echo \"$arg\" >> \"$(git rev-parse --git-dir)/info/exclude\"; done; }; f"
+
+# The incantation to list ignored files is terrible
+# (but maybe I should use git status --ignored?)
+	ignored = ls-files --others -i --exclude-standard
+
+# I like bzr whoami
+# NB: a better implementation is at https://github.com/petere/git-whoami/blob/master/git-whoami
+	whoami = !git var GIT_COMMITTER_IDENT | sed 's/ [0-9]\\+ [-+0-9]\\+$//'
+
+# I like hg incoming/hg outgoing; they make perfect sense to me
+# NB: starting with git 1.7.0 I can use @{u} to refer to origin
+# see also http://stackoverflow.com/questions/231211/using-git-how-do-i-find-modified-files-between-local-and-remote/6389348#6389348
+# NB: starting with git 2.5.0 I can use @{push} to support triangular workflows (thanks Seveas from #git for the tip!)
+	outgoing = log --oneline @{u}..
+	incoming = !git fetch && git log --oneline ..@{u}
+
+# From https://git.wiki.kernel.org/index.php/Aliases
+# (I had to fix alias by adding "" so the # wouldn't truncate the command)
+	alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || [ $# = 1 ] && git config --global alias.\"$1\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+
+# When you git pull and want to see what you've just pulled in, do git new [branch] [git log options]
+# inspired by https://git.wiki.kernel.org/index.php/Aliases
+	new = "!f() { case \"$1\" in -*|\"\") b=;; *) b=$1; shift;; esac; git log $b@{1}..$b@{0} \"$@\"; }; f"
+
+# cd'ing to the right directory is sometimes a pain, but these are cumbersome to use so I generally don't
+# but anyway these should make things like `git ladd /root/Changelog && git lcommit /root` work
+	ladd = local add
+	lci = local ci
+	lcommit = local commit
+	ldiff = local diff
+	lst = local st
+	lstatus = local status
+	lpush = local push
+	local = "!f() { command=$1; shift; file=$1; if [ -d $file ]; then dir=$file; shift; else dir=$(dirname $file); fi; echo + cd $dir; cd $dir && git $command \"$@\"; }; f"
+
+# creating new projects on fridge: git push-to-fridge [path/repo.git]
+	push-to-fridge = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh mg@fridge.pov.lt git init --bare $repo && git remote add origin mg@fridge.pov.lt:$repo && git push -u origin HEAD; }; f"
+
+# creating new projects on plato: git push-to-plato [path/repo.git]
+	push-to-plato = "!f() { repo=${1:-git/$(basename $(pwd)).git} && ssh mg@plato.gedmin.as git init --bare $repo && git remote add origin mg@plato.gedmin.as:$repo && git push -u origin HEAD; }; f"
+
+# list all roots (commits without a parent)
+	roots = log --all --oneline --decorate --max-parents=0
+
+# show tag name of the last release tag on current branch
+	last-release = describe --tags --abbrev=0 --exclude=last*
+	penultimate-release = !git describe --tags --abbrev=0 --exclude=last* --exclude=$(git last-release)
+
+# show commits after the last release
+	unreleased = !git shortlog $(git last-release)..
+	unreleased-log = !git log $(git last-release)..
+
+# show diff since the last release
+	unreleased-diff = !git diff $(git last-release)
+
+# git changelog-filename [name] -- get or set the filename of the changelog file (default: CHANGES.rst)
+# used by other aliases such as 'git unreleased-changelog'
+	changelog-filename = "!f() { git config alias.changelog.filename \"$@\" || echo CHANGES.rst; }; f"
+
+# show changelog since the last release
+	unreleased-changelog = !git diff $(git last-release) -- $(git changelog-filename)
+
+# managing many git checkouts (these are great!)
+# configure with git config alias.all.dirs '/foo /bar ~/baz*'
+# extra sets configured with git config alias.all.FOO '...' and used with git all --FOO ...
+	all = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed s,^$HOME,~,)\"; cd $d && git \"$@\" || rc=1; fi; done; exit $rc; }; f"
+	all-quiet = "!f() { unset GIT_WORK_TREE; w=dirs; case \"$1\" in --*) w=${1#--}; shift;; esac; c=$(tput setaf 5); r=$(tput sgr0); rc=0; for d in $(eval \"echo $(git config alias.all.$w)\"); do if [ -e $d/.git ]; then prefix=\"$(printf \"$c+ %s$r\\n\" \"$(printf %s $d|sed s,^$HOME,~,)\")\"; cd $d && output=\"$(git \"$@\" 2>&1)\" || rc=1; test -z \"$output\" || printf %s \"$prefix\n$output\n\"; fi; done; exit $rc; }; f"
+	whatsmodified = !git wm
+	wm = "!f() { git all \"$@\" short-status-with-branch-info; }; f"
+	wmq = "!f() { git all-quiet \"$@\" short-status-with-branch-info; }; f"
+	wmqa = !git wmq --all
+	short-status-with-branch-info = "!f() { o=$(git -c color.status=always status -bsu --ignore-submodules=none \"$@\"); rc=$?; printf \"%s\" \"$o\" | grep -v '## [^ ]*$'; exit $rc; }; f"
+
+# fetch pull requests from github so you can 'git checkout pull/123' and test it locally
+# you can pass a number to fetch just one
+	fetch-pull-requests = "!f() { a=${1:-*}; git fetch origin \"+refs/pull/$a/head:refs/remotes/origin/pull/$a\"; }; f"
+# NB: do NOT 'git push' these, they'll create new branches called "pull/*".
+
+# fetch and check out one pull request
+	pr = "!f() { a=${1:?usage: git pr NNN}; git fetch-pull-requests $a; git checkout origin/pull/$a; }; f"
+
+# clean pull request branches
+	clean-pull-requests = "!f() { git for-each-ref \"refs/heads/pull/*\" --format \"%(refname:short)\" | xargs -r git branch -D; }; f"
+
+# use git ci --fixup <HASH>/git ci --squash <HASH> and then git autosquash
+# NB: --autosquash doesn't work without -i :/
+	autosquash = rebase -i --autosquash -r
+
+# show me the commit I'm rebasing
+# (the other v. useful command is git diff :{1,2}path/to/file-I'm-editing)
+	show-original-commit = !git show $(cat .git/rebase-apply/original-commit .git/rebase-merge/stopped-sha 2>/dev/null)
+
+# 'bzr uncommit' wasn't bad, really, sometimes.  You can undo the uncommit with
+# git commit -C ORIG_HEAD.
+# XXX I can't pre-populate COMMIT_EDITMSG this way :(
+##	uncommit = "!git log -1 --format=format:\"%s%n%n%b\" > .git/COMMIT_EDITMSG; git reset HEAD^"
+	uncommit = reset HEAD^
+
+# git undo, for unding an accidental git amend/reword/commit; use with care
+	undo = reset HEAD@{1}
+
+# git archive-branch branchname renames it to archived/branchname
+# alternative naming schemes available with git archive-branch --applied/--abandoned
+	archive-branch = "!f() { p=archived; case \"$1\" in --archived|--applied|--abandoned) p=\"${1#--}\"; shift;; --*) printf \"unrecognized argument: %s\\n\" \"$1\"; exit 1;; esac; b=\"$1\"; git branch -m \"$b\" \"$p/$b\"; }; f"
+
+# git tags lists all tags
+	tags = tag -l
+
+# git branches lists all interesting branches
+	branches = "!f() { git branch --color=always \"$@\" | grep -v -e applied/ -e archived/ -e abandoned/; }; f"
+
+# git rename-current-branch NAME renames the current branch
+	rename-current-branch = branch -m
+
+# git main-branch [name] -- get or set the name of the default branch (usually 'master')
+# used by other aliases such as 'git list-merged-branches' or 'git up'
+	main-branch = "!f() { git config alias.main-branch.name \"$@\" || echo master; }; f"
+
+# git list-merged-branches shows branches that have been merged to master
+	list-merged-branches = "!f() { git branch --merged $(git main-branch) | grep -v -E '^[^ ]|^  (master|staging|live)$'; true; }; f"
+
+# git clean-merged-branches deletes all merged branches, except for special names like 'master', 'devel', 'staging', 'live', ...
+	clean-merged-branches = !git list-merged-branches | xargs -r git branch -d
+
+# git update pulls latest stuff from upstream and cleans merged branches
+	up = !git update
+	update = !git checkout-if-not-already-on $(git main-branch) && git pull --ff-only && git clean-merged-branches
+
+# git checkout-if-not-already-on BRANCH lets me git up twice without breaking git co -
+	checkout-if-not-already-on = "!f() { branch=$1; if [ \"$(git symbolic-ref --short HEAD 2>/dev/null)\" != $branch ]; then git checkout $branch; fi; }; f"
+
+# git sync-target [name] -- get or set the name of the sync master remote (default 'mgedmin')
+# used by other aliases such as 'git sync'
+	sync-target = "!f() { git config alias.sync.target \"$@\" || echo mgedmin; }; f"
+#
+# git sync-source [name] -- get or set the name of the sync master remote (default 'origin')
+# used by other aliases such as 'git sync'
+	sync-source = "!f() { git config alias.sync.source \"$@\" || echo origin; }; f"
+
+# git sync synchronizes master from origin to some other remote
+	sync = !git fetch $(git sync-source) && git push $(git sync-target) $(git sync-source)/$(git main-branch):$(git main-branch)
+
+# splitting the last commit interactively (cumbersome; I rarely use it)
+	split-commit = "!git tag ORIG_MESSAGE && git reset HEAD^ && echo 'Now do git ci-split -p; git ci-split -p; git tag -d ORIG_MESSAGE'"
+	ci-split = !git ci -c ORIG_MESSAGE
+
+# ad-hoc sharing of git repos (https://joernhees.de/blog/2012/04/24/git-ad-hoc-sharing/)
+	serve = daemon --reuseaddr --base-path=. --export-all --verbose
+
+# testing merges (I rarely use these; I don't even remember how to use them!)
+	preview-merge = "!f() { b=origin/$1; git log --oneline master..$b && git merge --no-commit --no-ff $b; }; f"
+	branch-changes = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git diff $m^...$m^2 \"$@\"; }; f"
+#	branch-log = "!f() { b=origin/$1; m=$(git log --pretty=%H -1 --first-parent --merges --grep=\"^Merge branch '$1'\" master); shift; git log $m^..$m^2 \"$@\"; }; f"
+
+# show me a diff of all the changes made on this branch (useful after git pr or git mr)
+# (I do not understand why diff needs the third dot and log absolutely cannot accept the third dot)
+	branch-diff = !git diff $(git main-branch)@{u}...
+	branch-log = !git log $(git main-branch)@{u}..
+
+# print the name of the current branch
+	branch-name = symbolic-ref --short HEAD
+
+# let's do code review!
+	review = "!vim +'set ft=diff bt=nofile|exe \"0r !git branch-diff -p --stat\"|1|exe \"silent file\" escape(printf(\"git diff of the %s branch\", systemlist(\"git branch-name\")[0]), \" |\\\\\")'"
+
+# show current commit SHA; try also git sha --short and git sha [--short] somebranch
+	sha = "!f() { rev=HEAD; for a; do case \"$a\" in -*) ;; *) rev=;; esac; done; git rev-parse \"$@\" $rev; }; f"
+
+# find merge commit that landed a given commit to master
+# from https://stackoverflow.com/a/30998048/110151
+	find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+	show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+
+# print the remote URL
+# NB: I don't want to use git remote get-url origin because I don't want insteadOf expansion that
+# converts password-protected https:// links I can click on to ssh:// links that I can't.
+	url = config remote.origin.url
+
+# open the repository in a browser
+	open-url = !xdg-open $(git url)
+
+# make a second clone using the first one as a reference
+# (you will regret this, use git worktree add instead)
+	reclone = "!f() { a=$1; b=${2:?usage: git reclone dir1 dir2}; url=$(cd $a && git remote get-url origin); git clone $url --reference $a $b; }; f"
+
+# gitlab merge requests!
+# some setup is needed like pip3 install python-gitlab and a ~/.python-gitlab.cfg and a
+# git config gitlab.projectId 30
+	gitlab-project-id = "!f() { git config gitlab.projectId \"$@\" || { git config remote.origin.url | cut -d/ -f4- | sed 's|/|%2f|' ; }; }; f"
+	gitlab-project-list = "!f() { blue=$(tput setaf 4); reset=$(tput sgr0); gitlab -o json -f id,path_with_namespace project list --sort=asc \"$@\" | jq '.[] | \"'$blue'\\(.id)'$reset': \\(.path_with_namespace)\"' -r; }; f"
+	gitlab-project-list-starred = !git gitlab-project-list --starred yes
+	mr-list = "!red=$(tput setaf 1); blue=$(tput setaf 4); reset=$(tput sgr0); urlstart=$(printf '\\033]8;;'); urlmid=$(printf '\\a'); urlend=$urlstart$urlmid; gitlab -o json -f iid,title,source_branch,author,web_url project-merge-request list --state opened --project-id $(git gitlab-project-id) | jq '.[] | \"'$blue$urlstart'\\(.web_url)'$urlmid'\\(.iid)'$urlend$reset': \\(.title) ('$red'\\(.source_branch)'$reset') by '$blue'\\(.author.name)'$reset'\"' -r"
+	mr-branch = "!f() { id=${1:?usage: git mr-branch NNN}; gitlab -o yaml -f source_branch project-merge-request get --iid $id --project-id $(git gitlab-project-id) | cut -d' ' -f 2; }; f"
+	mr = "!f() { id=${1:?usage git mr NNN}; git fetch; git checkout $(git mr-branch $id); }; f"
+	open-gitlab = "!f() { url=$(gitlab -o json project get --id $(git gitlab-project-id) | jq -r '.web_url'); printf '%s\n' $url; xdg-open $url; }; f"
+	open-mr = "!f() { id=${1:?usage git open-mr NNN}; url=$(gitlab -o json project-merge-request get --iid $id --project-id $(git gitlab-project-id) | jq -r '.web_url'); printf '%s\n' $url; xdg-open $url; }; f"
+	review-mr = "!f() { git mr \"$@\" && git review; }; f"
+
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+
+[commit]
+	verbose = true
+	gpgSign = true
+
+[core]
+	editor = nvim
+	excludesfile = ~/.config/git/ignore
+	whitespace = trailing-space,space-before-tab
+	pager = delta
+
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret
+
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
+
+[diff]
+	renames = copies
+
+[fetch]
+	recurseSubmodules = on-demand
+	prune = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[gpg]
+	program = /usr/bin/gpg
+
+[init]
+	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
+
+[pull]
+	ff = true
+
+[rebase]
+	autosquash = true
+	autostash = true
+
+[receive]
+	fsckobjects = true
+
+[status]
+	submoduleSummary = true
+
+[tag]
+	gpgSign = true
+
+[transfer]
+	fsckobjects = true
+
+[trim]
+	bases = master,gh-pages
+
+[user]
+	email = the.white.wolf.is.1337@gmail.com
+	name = David Karrick
+	signingkey = 3836140DCB9D946A

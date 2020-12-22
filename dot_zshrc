@@ -146,13 +146,11 @@ source ~/.shell/distro
 source ~/.shell/misc
 source ~/.shell/sys
 source ~/.shell/typos
-source ~/.zsh_plugins.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.local/share/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.local/share/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.local/share/zsh/yarn-completion/yarn-completion.plugin.zsh
 source ~/.local/share/zsh/zsh-better-npm-completion/zsh-better-npm-completion.plugin.zsh
-source ~/.local/share/zsh/zsh-rustup-completion/rustup.plugin.zsh
 [[ -f /opt/git/git-subrepo/.rc ]] && . /opt/git/git-subrepo/.rc
 
 eval "$(starship init zsh)"

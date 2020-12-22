@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+
+[ -d ~/.local/share/chezmoi/private_dot_local/private_share/private_zsh ] ||  mkdir -p ~/.local/share/chezmoi/private_dot_local/private_share/private_zsh
+[ -d ~/.local/share/zsh/ ] ||  mkdir -p ~/.local/share/zsh
+
+# Plugins to install
+plugins=(
+	"zsh-users/zsh-autosuggestions"
+	"zdharma/fast-syntax-highlighting"
+	"zsh-users/zsh-history-substring-search"
+	"BuonOmo/yarn-completion"
+	"lukechilds/zsh-better-npm-completion"
+)
+
+for plugin in "${plugins[@]}"; do
+	name=$(echo $plugin | cut -d  '/' -f2 )
+	curl -s -L -o ${name}-master.tar.gz https://github.com/${plugin}/archive/master.tar.gz
+	chezmoi import --strip-components 1 --destination ${HOME}/.local/share/zsh/${name} ${name}-master.tar.gz
+done
