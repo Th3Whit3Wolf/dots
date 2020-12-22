@@ -1,0 +1,21 @@
+README.md
+Makefile
+install.sh
+*.tar.gz
+
+{{ if ne .chezmoi.os "linux" }}
+.hushlogin
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+Docs
+{{ else }}
+.bash_aliases
+.inputrc
+.ssh/GithubID
+.ssh/GithubID.pub
+.zshrc
+.zshenv
+.zprofile
+.zlogin
+{{ end }}
