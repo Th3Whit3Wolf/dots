@@ -1,0 +1,28 @@
+#!/bin/bash
+# CONVERT TO ISO
+to_iso () {
+	if [[ $# == 0 || $1 == "--help" || $1 == "-h" ]]; then
+		echo -e "Converts raw, bin, cue, ccd, img, mdf, nrg cd/dvd image files to ISO image file.\nUsage: to_iso file1 file2..."
+			fi
+			for i in $*; do
+				if [[ ! -f "$i" ]]; then
+					echo "'$i' is not a valid file; jumping it"
+				else
+					echo -n "converting $i..."
+						OUT=`echo $i | cut -d '.' -f 1`
+						case $i in
+						*.raw ) bchunk -v $i $OUT.iso;; #raw=bin #*.cue #*.bin
+						*.bin|*.cue ) bin2iso $i $OUT.iso;;
+	*.ccd|*.img ) ccd2iso $i $OUT.iso;; #Clone CD images
+		*.mdf ) mdf2iso $i $OUT.iso;; #Alcohol images
+		*.nrg ) nrg2iso $i $OUT.iso;; #nero images
+		* ) echo "to_iso don't know de extension of '$i'";;
+	esac
+		if [[ $? != 0 ]]; then
+			echo -e "${R}ERROR!${W}"
+		else
+			echo -e "${G}done!${W}"
+				fi
+				fi
+				done
+}

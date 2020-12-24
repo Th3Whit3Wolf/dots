@@ -1,0 +1,79 @@
+note () {
+  local notes_dir="$HOME/Docs/Notes"
+  local DB_notes_dir="$HOME/Docs/Dropbox/notes"
+  case "$1" in
+    c)
+      cd "$notes_dir"
+      ;;
+    d)
+      pushd "$DB_notes_dir"
+      popd
+      ;;
+    dp)
+      if [[ -f "$notes_dir/$1.md" ]]; then
+        if hash pandoc 2>/dev/null; then
+          pandoc "$notes_dir/$1.md" -o "$DB_notes_dir/$1.pdf"
+        else
+          cp "$notes_dir/$1.md" "$DB_notes_dir/$1.md"
+        fi
+      fi
+      ;;
+    g)
+      pushd "$notes_dir"
+      msg="Regenerated at $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
+      git add .
+      git commit -m "$msg"
+      git push origin master
+      popd
+      ;;
+    h)
+      echo 'c          Go to Notes Directory'
+      echo 'd          Sync to Dropbox'
+      echo 'g          Push Notes to Github'
+      echo 'h          help information'
+      echo 'l          List of Notes in directory'
+      echo 'no flag    Starts New Notes'
+      ;;
+    l)
+      pushd $notes_dir
+      if hash sk 2>/dev/null; then
+        if hash bat 2>/dev/null; then
+          fd --search-path=$notes_dir -x echo {/.} | sk --ansi --preview-window 'right:70%' --preview 'bat --color=always -l markdown --style=header,grid --line-range :300 {}.md'
+        else
+          fd --search-path=$notes_dir -x echo {/.} | sk--preview="cat {}.md" --preview-window=right:70%:wrap
+        fi
+      elif hash fzf 2>/dev/null; then
+        if hash bat 2>/dev/null; then
+          fd --search-path=$notes_dir -x echo {/.} | fzf --ansi --preview-window 'right:70%' --preview 'bat --color=always -l markdown --style=header,grid --line-range :300 {}.md'
+        else
+          fd --search-path=$notes_dir -x echo {/.} | fzf --preview="cat {}.md" --preview-window=right:70%:wrap
+        fi
+      else
+        ls "$notes_dir"
+      fi
+      popd $notes_dir
+      ;;
+    e)
+      pushd $notes_dir
+      if hash sk 2>/dev/null; then
+        if hash bat 2>/dev/null; then
+          nvim -c Goyo -c Limelight -c 'startinsert' -- $notes_dir/$(fd --search-path=$notes_dir -x echo {/.} | sk --ansi --preview-window 'right:70%' --preview 'bat --color=always -l markdown --style=header,grid --line-range :300 {}.md').md
+        else
+          nvim -c Goyo -c Limelight -c 'startinsert' -- $notes_dir/$(fd --search-path=$notes_dir -x echo {/.} | sk --preview="cat {}.md" --preview-window=right:70%:wrap).md
+        fi
+      elif hash fzf 2>/dev/null; then
+        if hash bat 2>/dev/null; then
+          nvim -c Goyo -c Limelight -c 'startinsert' -- $notes_dir/$(fd --search-path=$notes_dir -x echo {/.} | fzf --ansi --preview-window 'right:70%' --preview 'bat --color=always -l markdown --style=header,grid --line-range :300 {}.md').md
+        else
+          nvim -c Goyo -c Limelight -c 'startinsert' -- $notes_dir/$(fd --search-path=$notes_dir -x echo {/.} | fzf --preview="cat {}.md" --preview-window=right:70%:wrap).md
+        fi
+      else
+        ls "$notes_dir"
+      fi
+      popd $notes_dir
+      ;;
+    *)
+      nvim -c Goyo -c Limelight -c 'startinsert' -- $notes_dir/$1.md
+      ;;
+  esac
+}

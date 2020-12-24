@@ -1,0 +1,9 @@
+ply () {
+    File=$(fd --search-path $HOME/Vids -E $HOME/Vids/EM -E $HOME/Vids/shme.sh -E $HOME/Vids/Subs -e mp4 -e mkv -e mp3 -e webm -e m4v -e avi -j4 -x echo {} | cut -d '/' -f5-  | sk --reverse --header='What would you like to play?')
+    exit_status=$?
+    if [ $exit_status -eq 0 ]; then
+        mpv --gpu-context=wayland --hwdec=auto --fs --profile=gpu-hq "$HOME/Vids/$File"
+    else
+        return 0
+    fi
+}
