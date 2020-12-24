@@ -12,9 +12,10 @@ plugins=(
 	"lukechilds/zsh-better-npm-completion"
 )
 
-# Install all plugins
+# Install all plugins to ~/.local/share/zsh/plugins
 for plugin in "${plugins[@]}"; do
 	name=$(echo $plugin | cut -d  '/' -f2 )
 	curl -s -L -o ${name}-master.tar.gz https://github.com/${plugin}/archive/master.tar.gz
 	chezmoi import --strip-components 1 --destination ${HOME}/.local/share/zsh/plugins/${name} ${name}-master.tar.gz
 done
+
