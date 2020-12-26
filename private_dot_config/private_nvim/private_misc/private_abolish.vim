@@ -42,53 +42,7 @@ if !v:shell_error
 endif
 
 
-Abolish accordingto	according to
-Abolish acheiv{e,ed,ing}	achiev{}
-Abolish aquisition{,s}	acquisition{}
-Abolish accross	across
-Abolish adequit{,e}	adequate
-Abolish advanage	advantage
-Abolish asdvertising	advertising
-Abolish affraid	afraid
-Abolish afterthe	after the
-Abolish afterword{,s}                         afterward{}
-Abolish aganist	against
-Abolish againstt he	against the
-Abolish agreem{,ee}n{,e}t	agreement
-Abolish agreem{,ee}n{,e}ts	agreements
-Abolish alr{aedy,eayd,eday}	already
-Abolish Ameria	America
-Abolish adn	and
-Abolish anbd	and
-Abolish andone	and one
-Abolish andt{eh,he}	and the
-Abolish adn                                   and
-Abolish anual	annual
-Abolish anomol{y,ies}                         anomal{}
-Abolish anothe	another
-Abolish appartment                            apartment
-Abolish appar{ant,rent}	apparent
-Abolish appearence	appearance
-Abolish appeares	appears
-Abolish appndind appending
-Abolish applicaiton{,s}	application{}
-Abolish applyed	applied
-Abolish appointiment	appointment
-Abolish approrp{r,}iate	appropriate
-Abolish achive archive
-Abolish arguement	argument
-Abolish arguements	arguments
-Abolish arond	around
-Abolish {c,m}arraige{,s}                      {}arriage{}
-Abolish artic{a,e}l	article
-Abolish asthe	as the
-Abolish aswell                                as well
-Abolish assignemtn assignment
-Abolish assistent	assistant
-Abolish atthe	at the
-Abolish atmospher	atmosphere
-Abolish aud{ei,ia}nce	audience
-Abolish austrail{a,an,ia,ian}                 austral{ia,ian}
+
 Abolish b{akc,cak}	back
 Abolish bal{e,la}nce	balance
 Abolish bve	be
