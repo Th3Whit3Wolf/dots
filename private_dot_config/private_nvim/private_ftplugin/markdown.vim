@@ -1,0 +1,16 @@
+iabbrev <silent> <buffer> dont don't
+iabbrev <silent> <buffer> wasnt wasn't
+iabbrev <silent> <buffer> isnt isn't
+iabbrev <silent> <buffer> vim Vim
+iabbrev <silent> <buffer> ruby Ruby
+iabbrev <silent> <buffer> thurday Thursday
+iabbrev <silent> <buffer> monday Monday
+iabbrev <silent> <buffer> tuesday Tuesday
+iabbrev <silent> <buffer> wednesday Wednesday
+iabbrev <silent> <buffer> thursday Thursday
+iabbrev <silent> <buffer> friday Friday
+iabbrev <silent> <buffer> saturday Saturday
+iabbrev <silent> <buffer> sunday Sunday
+iabbrev <silent> <buffer> mac Mac
+iabbrev <silent> <buffer> haskell Haskell
+iabbrev <silent> <buffer> google Google

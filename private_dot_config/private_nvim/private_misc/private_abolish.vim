@@ -41,89 +41,22 @@ if !v:shell_error
     endif
 endif
 
-augroup abbreviationGroup
-    autocmd!
-    autocmd FileType mkd :Abolish -buffer dont don't
-    autocmd FileType mkd :Abolish -buffer wasnt wasn't
-    autocmd FileType mkd :Abolish -buffer isnt isn't
-    autocmd FileType mkd :Abolish -buffer vim Vim
-    autocmd FileType mkd :Abolish -buffer ruby Ruby
-    autocmd FileType mkd :Abolish -buffer thurday Thursday
-    autocmd FileType mkd :Abolish -buffer monday Monday
-    autocmd FileType mkd :Abolish -buffer tuesday Tuesday
-    autocmd FileType mkd :Abolish -buffer wednesday Wednesday
-    autocmd FileType mkd :Abolish -buffer thursday Thursday
-    autocmd FileType mkd :Abolish -buffer friday Friday
-    autocmd FileType mkd :Abolish -buffer saturday Saturday
-    autocmd FileType mkd :Abolish -buffer sunday Sunday
-    autocmd FileType mkd :Abolish -buffer mac Mac
-    autocmd FileType mkd :Abolish -buffer haskell Haskell
-    autocmd FileType mkd :Abolish -buffer google Google
-augroup END
 
-Abolish Tqbf        The quick, brown fox jumps over the lazy dog
-Abolish Lidsa       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-Abolish scflead     supercalifragilisticexpialidocious
-imap ;date %d %b %Y
-imap ;ea each arm
-imap ;atm at the moment
-Abolish btw by the way
-Abolish ily I love you ❤️
-imap ;rx [runx]
-
-" From
-" https://github.com/davidpdrsn/dotfiles/blob/master/nvim/after/plugin/abolish.vim
-" https://github.com/jdelkins/vim-correction
-" https://github.com/panozzaj/vim-autocorrect
-" Some of my own
-
-Abolish alot	a lot
-Abolish abbout	about
-Abolish abotu	about
-Abolish abouta	about a
-Abolish aboutit	about it
-Abolish aboutthe	about the
-Abolish baout	about
-Abolish abreviat{ed,ion} abbreviat{}
-Abolish abscence	absence
-Abolish accesories	accessories
-Abolish accidant	accident
-Abolish accomodat{e,ed,es,ing,ion,ions}	 accommodat{}
-Abolish accommodat{e,ed,es,ing,ion,ions} accommodat{}
-Abolish accomdat{e,ed,es,ing,ion,ions}	 accommodat{}
-Abolish accomadat{e,ed,es,ing,ion,ions}	 accommodat{}
-Abolish accommadat{e,ed,es,ing,ion,ions} accommodat{}
 Abolish accordingto	according to
 Abolish acheiv{e,ed,ing}	achiev{}
 Abolish aquisition{,s}	acquisition{}
 Abolish accross	across
-Abolish actualyl	actually
-Abolish acutally actually
-Abolish additinal	additional
-Abolish addtional	additional
 Abolish adequit{,e}	adequate
 Abolish advanage	advantage
 Abolish asdvertising	advertising
 Abolish affraid	afraid
 Abolish afterthe	after the
 Abolish afterword{,s}                         afterward{}
-Abolish agian	again
-Abolish agaon again
 Abolish aganist	against
 Abolish againstt he	against the
-Abolish aggresive	aggressive
-Abolish agressive	aggressive
 Abolish agreem{,ee}n{,e}t	agreement
 Abolish agreem{,ee}n{,e}ts	agreements
-Abolish alm{ots,sot}	almost
-Abolish alomst	almost
 Abolish alr{aedy,eayd,eday}	already
-Abolish allwasy	always
-Abolish allwyas	always
-Abolish alwasy	always
-Abolish alwats	always
-Abolish alway	always
-Abolish alwyas	always
 Abolish Ameria	America
 Abolish adn	and
 Abolish anbd	and
@@ -154,14 +87,8 @@ Abolish assignemtn assignment
 Abolish assistent	assistant
 Abolish atthe	at the
 Abolish atmospher	atmosphere
-Abolish atention	attention
-Abolish attentioin	attention
 Abolish aud{ei,ia}nce	audience
 Abolish austrail{a,an,ia,ian}                 austral{ia,ian}
-Abolish availalbe	available
-Abolish availible available
-Abolish awya	away
-Abolish aywa	away
 Abolish b{akc,cak}	back
 Abolish bal{e,la}nce	balance
 Abolish bve	be
