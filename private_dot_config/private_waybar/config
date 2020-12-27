@@ -29,7 +29,7 @@
     },
     "temperature": {
         "critical-threshold": 80,
-        "format": "{icon} {temperatureC}",
+        "format": "{icon} {temperatureC}°",
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat0": {
@@ -38,15 +38,16 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity} {icon}",
-        "format-charging": "{capacity} \uf0e7",
+        "interval": 30,
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% \uf0e7",
         "format-plugged":  "",
         "format-alt":      "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}",
+        "format": "{icon} {volume}%",
         "format-bluetooth": "{icon} {volume} ",
         "format-bluetooth-muted": "{icon}  ",
         "format-muted": "",
@@ -64,14 +65,15 @@
         "on-click": "pavucontrol"
     },
     "cpu": {
-        "format": " {usage}",
+        "format": " {}%",
         "tooltip": true,
 	"interval": 2,
 	"on-click": "alacritty -e htop"
     },
     "memory": {
-        "format": " {}",
+        "format": " {used:0.2f}GB / {total:0.0f}GB",
 	"interval": 2,
+    "max-length": 16,
 	"on-click": "alacritty -e htop"
     },
     "custom/kblayout": {

@@ -22,28 +22,39 @@
 }
 
 window#waybar {
-  background-color: @bg2;
-  opacity: 1;
-  border-top: 1px @bg1 solid;
-  color: @baseDim;
-  transition-property: background-color;
-  transition-duration: .5s;
-  padding-bottom: 2px;
-  text-shadow: 0px 0px @bg1;
+  background-color: transparent;
+  opacity: 0.8;
 }
 
+window#waybar:first-child > box {
+  margin-top: 8px;
+  margin-left: 21px;
+  margin-right: 21px;
+  border-radius: 290486px;
+  background-color: #212026;
+  border-bottom: 0;
+}
+
+#custom-start {
+  padding: 5px 21px;
+  margin-right: 5px;
+  margin-left: -1px;
+  border-radius: 290486px;
+  background-color: @act2;
+  color: @base;
+}
 
 #workspaces button {
   padding: 0 0px;
-  margin: 4px 4px;
-  border-radius: 12px;
+  margin: 3px 5px;
+  border-radius: 13px;
   border: 1px rgba(66, 68, 64, 0.5) solid;
   background-color: transparent;
   min-width: 24px;
 }
 
 window#waybar.hidden {
-  opacity: 0.2;
+  opacity: 0.21;
 }
 
 #waybar {
@@ -102,6 +113,7 @@ window#waybar.hidden {
     min-width: 40px;
     color:     @base;
 }
+
 #clock {
   padding: 0 4px;
   margin: 0 4px;
@@ -109,20 +121,9 @@ window#waybar.hidden {
   font-family: SFMono Nerd Font Mono;
 }
 
-#custom-start {
-  padding-bottom: calc(0.3em - 1px);
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: calc(0.3em - 1px);
-  background-color: @act2;
-  border-radius: 12px;
-  color: @base;
-  font-size: 15px;
-}
-
 #custom-powermenu {
   padding: 0 1px;
-  margin:  0 8px 0 2px;
+  margin-right: 8px;
 }
 
 @keyframes blink {
