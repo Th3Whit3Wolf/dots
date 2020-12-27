@@ -1,0 +1,105 @@
+{
+    "layer": "top",	
+    "position": "top",
+    "height": 21,
+    "modules-center": ["sway/workspaces"],
+    "modules-right":  ["tray", "clock","custom/powermenu"],
+    "modules-left": [
+    "custom/start", 
+	"battery#bat0",
+	"temperature",
+	"pulseaudio",
+	"memory",
+	"cpu", 
+	//"custom/memory",
+	//"custom/cpu",
+	"custom/kblayout" ],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 24,
+        "spacing": 6
+    },
+    "clock": {
+	"interval":	  10,
+	"format":         "{:<b>%a %d %b|%H:%M</b>}",
+        "tooltip-format": "<big><b>{:%Y %B}</b></big>\n<span font_desc='Hack 10'>{calendar}</span>",
+        "format-alt":     "{:%Y-%m-%d}"
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat0": {
+	"bat": "BATT",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity} {icon}",
+        "format-charging": "{capacity} \uf0e7",
+        "format-plugged":  "",
+        "format-alt":      "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}",
+        "format-bluetooth": "{icon} {volume} ",
+        "format-bluetooth-muted": "{icon}  ",
+        "format-muted": "",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "cpu": {
+        "format": " {usage}",
+        "tooltip": true,
+	"interval": 2,
+	"on-click": "alacritty -e htop"
+    },
+    "memory": {
+        "format": " {}",
+	"interval": 2,
+	"on-click": "alacritty -e htop"
+    },
+    "custom/kblayout": {
+	"format": " <b>{}</b>",
+	"exec": "sway-kbd-indicator",
+	"tooltip": false
+    },
+    "custom/start": {
+	"format": "<big></big>",
+	"on-click": "nwggrid -wm sway",
+	"tooltip": false
+    },
+    "custom/powermenu": {
+	"format": "<big></big>",
+	"on-click": "nwgbar -wm sway",
+	"tooltip": false
+    },
+    "custom/cpu": {
+	"format": " <span background='#686868'>{}</span>",
+	"return-type": "json",
+	"exec":	  "sleep 1 && cpu_bar",
+	"tooltip": false,
+	"on-click": "kitty --class=htop -e htop"
+    },
+    "custom/memory": {
+	"format": " <span background='#686868'>{}</span>",
+	"exec": "mem_bar",
+	"tooltip": false
+    }
+
+}

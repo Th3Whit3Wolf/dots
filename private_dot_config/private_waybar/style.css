@@ -1,0 +1,151 @@
+@define-color act1 #222226;
+@define-color act2 #5d4d7a;
+@define-color base #b2b2b2;
+@define-color baseDim #686868;
+@define-color bg1 #292b2e;
+@define-color bg2 #212026;
+@define-color bg3 #100a14;
+@define-color bg4 #0a0814;
+@define-color cursor #e3dedd;
+@define-color war #dc752f;
+@define-color highli #444155;
+@define-color highliDim #3b314d;
+@define-color cyan #28def0;
+@define-color bgAlt #42444a;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Font Awesome 5 Free", SFMono Nerd Font Mono, Arial, sans-serif;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @bg2;
+  opacity: 1;
+  border-top: 1px @bg1 solid;
+  color: @baseDim;
+  transition-property: background-color;
+  transition-duration: .5s;
+  padding-bottom: 2px;
+  text-shadow: 0px 0px @bg1;
+}
+
+
+#workspaces button {
+  padding: 0 0px;
+  margin: 4px 4px;
+  border-radius: 12px;
+  border: 1px rgba(66, 68, 64, 0.5) solid;
+  background-color: transparent;
+  min-width: 24px;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#waybar {
+  color: @base;
+  background: @bg2;
+}
+
+#workspaces {
+  margin: 0 2px;
+}
+
+#workspaces button {
+  margin: 3px 2px;
+  padding: 3 5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: @cursor;
+  background-color: @bg1;
+  font-family: SFMono Nerd Font Mono
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+  background:rgba(66, 68, 64, 0.2);
+  box-shadow: inherit;
+}
+
+#workspaces button.focused {
+  background-color: rgba(66, 68, 64, 0.4);
+  /*color: #2e3440;*/
+}
+
+#workspaces button.urgent {
+  background-color: @war;
+}
+
+#mode {
+  background-color: @war;
+  border-bottom: 0px;
+}
+
+#battery,
+#temperature,
+#pulseaudio,
+#tray,
+#mode,
+#window,
+#memory,
+#cpu,
+#custom-todo,
+#custom-cpu,
+#custom-memory,
+#custom-kblayout {
+    padding:   0 4px;
+    margin:    0 4px;
+    min-width: 40px;
+    color:     @base;
+}
+#clock {
+  padding: 0 4px;
+  margin: 0 4px;
+  color: @base;
+  font-family: SFMono Nerd Font Mono;
+}
+
+#custom-start {
+  padding-bottom: calc(0.3em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.3em - 1px);
+  background-color: @act2;
+  border-radius: 12px;
+  color: @base;
+  font-size: 15px;
+}
+
+#custom-powermenu {
+  padding: 0 1px;
+  margin:  0 8px 0 2px;
+}
+
+@keyframes blink {
+  to {
+      background-color: @bg2;
+      color: @base;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: @war;
+  color: @base;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+label:focus {
+  background-color: @bg2;
+}
+
+#temperature.critical {
+  color: @war;
+}
