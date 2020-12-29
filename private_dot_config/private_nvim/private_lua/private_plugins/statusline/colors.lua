@@ -21,14 +21,10 @@ local colors = {
     blue = "#0087d7",
     red = "#ec5f67",
     comments = "#2aa1ae",
-    head1 = "#4f97d7"
+    head1 = "#4f97d7",
+    error = "#FC5C94",
+    warning = "#F3EA98",
+    info = "#8DE6F7"
 }
-
---[[
-spaceline flycheck
-error   #FC5C94
-warning #F3EA98
-info    #8DE6F7
---]]
 
 return colors

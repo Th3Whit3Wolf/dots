@@ -1,41 +1,17 @@
 local gl = require("galaxyline")
 local gls = gl.section
 gl.short_line_list = {"LuaTree", "vista", "dbui"}
+local diagnostic = require("plugins.statusline.providers.diagnostic")
+local vcs = require("plugins.statusline.providers.vcs")
 
 local i = require("plugins.statusline.icons")
 local c = require("plugins.statusline.colors")
 
-local buffer_not_empty = function()
-    if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
-        return true
-    end
-    return false
-end
-
-function os.capture(cmd, raw)
-    local f = assert(io.popen(cmd, "r"))
-    local s = assert(f:read("*a"))
-    f:close()
-    if raw then
-        return s
-    end
-    s = string.gsub(s, "^%s+", "")
-    s = string.gsub(s, "%s+$", "")
-    s = string.gsub(s, "[\n\r]+", " ")
-    return s
-end
-
-local pybang = function()
-    local b = vim.fn.getline(1)
-    if b:sub(-7) == "python3" then
-        return "Python3"
-    elseif b:sub(-7) == "python2" then
-        return "Python2"
-    else
-        return os.capture("python --version")
-    end
-end
-
+local fg, bg = "fg", "bg"
+DiagnosticError = diagnostic.get_diagnostic_error
+DiagnosticWarn = diagnostic.get_diagnostic_warn
+DiagnosticInfo = diagnostic.get_diagnostic_info
+GitBranch = vcs.get_git_branch
 local num = {
     "❶",
     "❷",
@@ -58,6 +34,74 @@ local num = {
     "⓳",
     "⓴"
 }
+
+function os.capture(cmd, raw)
+    local f = assert(io.popen(cmd, "r"))
+    local s = assert(f:read("*a"))
+    f:close()
+    if raw then
+        return s
+    end
+    s = string.gsub(s, "^%s+", "")
+    s = string.gsub(s, "%s+$", "")
+    s = string.gsub(s, "[\n\r]+", " ")
+    return s
+end
+
+local pybang = function()
+    local b = vim.fn.getline(1)
+    if b:sub(-7) == "python3" then
+        return "Python 3"
+    elseif b:sub(-7) == "python2" then
+        return "Python 2"
+    else
+        return os.capture("python --version")
+    end
+end
+
+local shellbang = function()
+    local b = (function()
+        if vim.fn.getline(1):sub(-2) == "sh" then
+            return os.capture("readlink /usr/bin/sh")
+        else
+            return vim.fn.getline(1)
+        end
+    end)()
+    if b:sub(-4) == "bash" then
+        return "Bourne Again SHell"
+    elseif b:sub(-4) == "dash" then
+        return "Debian Almquist SHell"
+    elseif b:sub(-3) == "csh" or b:sub(-4) == "tcsh" then
+        return "C SHell"
+    elseif b:sub(-3) == "ksh" or b:sub(-4) == "mksh" or b:sub(-5) == "pdksh" then
+        return "Korn SHell"
+    elseif b:sub(-3) == "zsh" then
+        return "Z SHell"
+    elseif b:sub(-3) == "ash" then
+        return "Almquist SHell"
+    else
+        return "Shell"
+    end
+end
+
+function GalaxyHi(item, g, color)
+    vim.api.nvim_command("hi Galaxy" .. item .. " gui" .. g .. "=" .. color)
+end
+
+local buffer_not_empty = function()
+    if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
+        return true
+    end
+    return false
+end
+
+local checkwidth = function()
+    local squeeze_width = vim.fn.winwidth(0) / 2
+    if squeeze_width > 40 then
+        return true
+    end
+    return false
+end
 
 gls.left[1] = {
     ViMode = {
@@ -94,7 +138,7 @@ gls.left[1] = {
             end)()
 
             local vimMode = mode[vim.fn.mode()]
-            vim.api.nvim_command("hi GalaxyViMode guibg=" .. vimMode[2])
+            GalaxyHi("ViMode", "bg", vimMode[2])
             return vimMode[1] .. " | " .. n .. " "
         end,
         highlight = {c.act1, c.DarkGoldenrod2}
@@ -125,14 +169,11 @@ gls.left[2] = {
                 ["!"] = c.plum3,
                 t = c.plum3
             }
-            if not buffer_not_empty() then
-                vim.api.nvim_command("hi GalaxyFileIcon guifg=" .. c.purple)
-            else
-                vim.api.nvim_command("hi GalaxyFileIcon guifg=" .. mode_color[vim.fn.mode()])
-            end
+
+            GalaxyHi("FileIcon", fg, mode_color[vim.fn.mode()])
+
             return i.slant.Right
         end,
-        condition = buffer_not_empty,
         highlight = {
             c.comments,
             function()
@@ -183,48 +224,106 @@ gls.left[4] = {
 }
 
 gls.left[5] = {
-    GitIcon = {
+    FileType = {
         provider = function()
             local ft = vim.bo.filetype
-            if ft == "python" then
-                return pybang()
-            else
-                return (ft:gsub("^%l", string.upper))
-            end
+            local filetype = (function()
+                if ft == "python" then
+                    return pybang()
+                elseif ft == "sh" then
+                    return shellbang()
+                else
+                    return (ft:gsub("^%l", string.upper))
+                end
+            end)()
+            return " " .. filetype .. " "
         end,
         condition = buffer_not_empty,
         highlight = {c.white, c.purple}
     }
 }
 
---[[
-gls.left[5] = {
-    GitIcon = {
+gls.left[6] = {
+    FiletTypeSeperatorRight = {
         provider = function()
-            return i.git
+            if not diagnostic.has_diagnostics() and not vcs.check_git_workspace() then
+                return ""
+            else
+                return i.slant.Right
+            end
         end,
         condition = buffer_not_empty,
-        highlight = {c.orange, c.purple}
+        highlight = {c.purple, c.bg2}
     }
 }
---]]
-gls.left[6] = {
+
+gls.left[8] = {
+    DiagnosticError = {
+        provider = DiagnosticError,
+        icon = " " .. i.diagnostic.error,
+        highlight = {c.error, c.bg2}
+    }
+}
+
+gls.left[9] = {
+    DiagnosticWarn = {
+        provider = DiagnosticWarn,
+        icon = " " .. i.diagnostic.warn,
+        highlight = {c.warning, c.bg2}
+    }
+}
+
+gls.left[10] = {
+    DiagnosticInfo = {
+        provider = DiagnosticInfo,
+        icon = " " .. i.diagnostic.info,
+        highlight = {c.info, c.bg2}
+    }
+}
+
+gls.left[11] = {
+    DiagnosticEndSpace = {
+        provider = function()
+            if not diagnostic.has_diagnostics() then
+                return ""
+            else
+                return " "
+            end
+        end,
+        highlight = {c.bg2, c.bg2}
+    }
+}
+
+gls.left[12] = {
+    DiagnosticSeperatorRight = {
+        provider = function()
+            if not diagnostic.has_diagnostics() then
+                return ""
+            else
+                return i.slant.Left
+            end
+        end,
+        highlight = {c.purple, c.bg2}
+    }
+}
+
+gls.left[13] = {
     GitBranch = {
-        provider = "GitBranch",
+        provider = function()
+            if diagnostic.has_diagnostics() then
+                GalaxyHi("GitBranch", bg, c.purple)
+            else
+                GalaxyHi("GitBranch", bg, c.bg2)
+            end
+            return vcs.get_git_branch()
+        end,
+        icon = " " .. i.git .. " ",
         condition = buffer_not_empty,
         highlight = {c.base, c.purple}
     }
 }
 
-local checkwidth = function()
-    local squeeze_width = vim.fn.winwidth(0) / 2
-    if squeeze_width > 40 then
-        return true
-    end
-    return false
-end
-
-gls.left[7] = {
+gls.left[14] = {
     DiffAdd = {
         provider = "DiffAdd",
         condition = checkwidth,
@@ -232,7 +331,7 @@ gls.left[7] = {
         highlight = {c.green, c.purple}
     }
 }
-gls.left[8] = {
+gls.left[15] = {
     DiffModified = {
         provider = "DiffModified",
         condition = checkwidth,
@@ -240,7 +339,7 @@ gls.left[8] = {
         highlight = {c.orange, c.purple}
     }
 }
-gls.left[9] = {
+gls.left[16] = {
     DiffRemove = {
         provider = "DiffRemove",
         condition = checkwidth,
@@ -248,42 +347,33 @@ gls.left[9] = {
         highlight = {c.red, c.purple}
     }
 }
-gls.left[10] = {
-    LeftEnd = {
+
+gls.left[17] = {
+    GiteSeperatorRight = {
         provider = function()
-            return i.slant.Right
+            if not diagnostic.has_diagnostics() then
+                return i.slant.Left
+            else
+                return ""
+            end
         end,
-        separator = i.slant.Right,
-        separator_highlight = {c.purple, c.bg},
-        highlight = {c.purple, c.purple}
+        condition = buffer_not_empty,
+        highlight = {c.purple, c.bg2}
     }
 }
-gls.left[11] = {
-    DiagnosticError = {
-        provider = "DiagnosticError",
-        icon = i.diagnostic.error,
-        highlight = {c.red, c.bg}
-    }
-}
-gls.left[12] = {
+
+gls.left[18] = {
     Space = {
         provider = function()
             return " "
-        end
+        end,
+        highlight = {c.blue, c.purple}
     }
 }
-gls.left[13] = {
-    DiagnosticWarn = {
-        provider = "DiagnosticWarn",
-        icon = i.diagnostic.warn,
-        highlight = {c.blue, c.bg}
-    }
-}
+
 gls.right[1] = {
     FileFormat = {
         provider = "FileFormat",
-        separator = i.slant.Right,
-        separator_highlight = {c.bg, c.purple},
         highlight = {c.base, c.purple}
     }
 }
@@ -291,7 +381,7 @@ gls.right[2] = {
     LineInfo = {
         provider = "LineColumn",
         separator = " | ",
-        separator_highlight = {c.bg2, c.purple},
+        separator_highlight = {c.base, c.purple},
         highlight = {c.base, c.purple}
     }
 }
