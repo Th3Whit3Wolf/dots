@@ -138,19 +138,12 @@ setopt inc_append_history   # save history entries as soon as they are entered
 setopt share_history        # share history between different instances
 setopt correct_all          # autocorrect commands
 setopt interactive_comments # allow comments in interactive shells
-setopt complete_aliases
+setopt complete_aliases     # autocomplete for aliases
 
-# Source alliases, exports, and plugins
-source ~/.shell/aliasrc
-source ~/.shell/distro
-source ~/.shell/misc
-source ~/.shell/sys
-source ~/.shell/typos
-source ~/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.local/share/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.local/share/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.local/share/zsh/yarn-completion/yarn-completion.plugin.zsh
-source ~/.local/share/zsh/zsh-better-npm-completion/zsh-better-npm-completion.plugin.zsh
+# Source aliases, exports, and plugins
+
+for f in ~/.local/share/zsh/conf.d/*.zsh;do source $f; done
+for f in ~/.local/share/zsh/plugins/**/*.plugin.zsh; do source $f;done
 [[ -f /opt/git/git-subrepo/.rc ]] && . /opt/git/git-subrepo/.rc
 
 eval "$(starship init zsh)"
