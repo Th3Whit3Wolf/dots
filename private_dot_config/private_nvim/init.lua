@@ -3,7 +3,7 @@ local G = require "global"
 require "setup"
 require "autocmd"
 require "mapping"
-
+require "typing"
 local vim = vim
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
@@ -18,7 +18,6 @@ end
 local function command(name, exec)
     api.nvim_command("command! " .. name .. " " .. exec)
 end
-
 -------------------- VARIABLES ----------------------------
 if G.isdir(G.python3 .. "bin") then
     g["python3_host_prog"] = G.python3 .. "bin" .. G.path_sep .. "python"
@@ -64,6 +63,9 @@ g["db_ui_save_location"] = G.cache_dir .. "db_ui_queries"
 
 -- Vsnip snippet directories
 g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
+
+-- Endwise No default mapping
+g["endwise_no_mappings"] = 1
 
 -- Set map leader
 g["mapleader"] = " "
@@ -214,7 +216,17 @@ opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
 
 cmd "colorscheme space-nvim-theme"
-
+---- Plugin
+require("indent_guides").setup(
+    {
+        even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
+        odd_colors = {fg = "#434548", bg = "#434548"},
+        indent_space_guides = true,
+        indent_tab_guides = true,
+        indent_guide_size = 4
+    }
+)
+require('indent_guides').indent_guides_enable()
 -------------------- COMMANDS ------------------------------
 --- Only install missing plugins
 command(
@@ -243,4 +255,3 @@ command(
 )
 --- Check if lsp is installed for current filetype
 command("CheckLSP", "lua require('myplugins/lsp_install_prompt').check_lsp_installed()")
-
