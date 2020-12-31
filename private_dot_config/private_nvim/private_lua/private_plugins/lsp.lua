@@ -153,6 +153,7 @@ local simple_lsp = {
     'vuels',
     'yamlls'
 }
+
 -- List of installed LSP servers
 local installed_lsp = vim.fn.systemlist('ls ~/.cache/nvim/nvim_lsp')
 for k, _ in pairs(installed_lsp) do
@@ -245,11 +246,11 @@ for k, _ in pairs(installed_lsp) do
     end
 end
 
-if vim.fn.executable('ccls') then
+if vim.fn.executable('ccls') > 0 then
     lspconfig.ccls.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('clangd') then
+elseif vim.fn.executable('clangd') > 0 then
     lspconfig.clangd.setup {
         cmd = {
             'clangd',
@@ -269,13 +270,13 @@ elseif vim.fn.executable('clangd') then
     }
 end
 
-if vim.fn.executable('clojure-lsp') then
+if vim.fn.executable('clojure-lsp') > 0 then
     lspconfig.clojure_lsp.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('cmake-language-server') then
+if vim.fn.executable('cmake-language-server') > 0 then
     lspconfig.cmake.setup {
         on_attach = on_attach
     }
@@ -292,45 +293,45 @@ if G.exists('/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot') then
     }
 end
 
-if vim.fn.executable('fortls') then
+if vim.fn.executable('fortls') > 0 then
     lspconfig.fortls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('nc') then
+if vim.fn.executable('nc') > 0 then
     lspconfig.gdscript.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('hie-wrapper') then
+if vim.fn.executable('hie-wrapper') > 0 then
     lspconfig.hie.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('ghcide') then
+elseif vim.fn.executable('ghcide') > 0 then
     lspconfig.ghcide.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('haskell-language-server-wrapper') then
+elseif vim.fn.executable('haskell-language-server-wrapper') > 0 then
     lspconfig.hls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('gopls') then
+if vim.fn.executable('gopls') > 0 then
     lspconfig.gopls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('kotlin-language-server') then
+if vim.fn.executable('kotlin-language-server') > 0 then
     lspconfig.kotlin_language_server.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('lean-language-server') then
+if vim.fn.executable('lean-language-server') > 0 then
     lspconfig.leanls.setup {
         on_attach = on_attach
     }
@@ -361,47 +362,47 @@ if vim.fn.executable(G.python3 .. 'bin' .. G.path_sep ..'pyls') then
     }
 end
 
-if vim.fn.executable('R') then
+if vim.fn.executable('R') > 0 then
     lspconfig.r_language_server.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('rust_analyzer') then
+if vim.fn.executable('rust_analyzer') > 0 then
     lspconfig.rust_analyzer.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('rls') then
+elseif vim.fn.executable('rls') > 0 then
     lspconfig.rls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('scry') then
+if vim.fn.executable('scry') > 0 then
     lspconfig.scry.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('solargraph') then
+if vim.fn.executable('solargraph') > 0 then
     lspconfig.solargraph.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('sourcekit') then
+if vim.fn.executable('sourcekit') > 0 then
     lspconfig.sourcekit.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('terraform-ls') then
+if vim.fn.executable('terraform-ls') > 0 then
     lspconfig.terraformls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('texlab') then
+if vim.fn.executable('texlab') > 0 then
     lspconfig.texlab.setup {
         on_attach = on_attach
     }
