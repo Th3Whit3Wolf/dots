@@ -149,7 +149,7 @@ end
 function mapping:load_plugin_define()
     self.plugin = {
         -- Autocompletion and snippets
-        ["i|<TAB>"]      = Map_cmd([[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()<Plug>DiscretionaryEnd]]):with_expr():with_silent(),
+        ["i|<TAB>"]      = Map_cmd([[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
         ["i|<S-TAB>"]    = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
         ["i|<CR>"]       = Map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
         -- Plugin vim-operator-surround
