@@ -5,7 +5,8 @@ local icons = {
     },
     diagnostic = {
         error = "",
-        warn = ""
+        warn = "",
+        info = "!"
     },
     diff = {
         Add = "",
@@ -21,7 +22,8 @@ local icons = {
         s = "🅢",
         t = "🅣",
         v = "🅥"
-    }
+    },
+    bullet = "•"
 }
 
 return icons

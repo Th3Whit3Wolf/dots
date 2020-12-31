@@ -95,7 +95,7 @@ gls.left[6] = {
 gls.left[8] = {
     DiagnosticError = {
         provider = DiagnosticError,
-        icon = " " .. i.diagnostic.error,
+        icon = " " .. i.bullet,
         highlight = {c.error, c.bg2}
     }
 }
@@ -103,7 +103,7 @@ gls.left[8] = {
 gls.left[9] = {
     DiagnosticWarn = {
         provider = DiagnosticWarn,
-        icon = " " .. i.diagnostic.warn,
+        icon = " " .. i.bullet,
         highlight = {c.warning, c.bg2}
     }
 }
@@ -111,7 +111,7 @@ gls.left[9] = {
 gls.left[10] = {
     DiagnosticInfo = {
         provider = DiagnosticInfo,
-        icon = " " .. i.diagnostic.info,
+        icon = " " .. i.bullet,
         highlight = {c.info, c.bg2}
     }
 }
