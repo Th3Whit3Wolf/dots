@@ -14,7 +14,7 @@ function G.load_variables()
     G.path_sep = path_sep
     G.home = home
     G.local_nvim = home .. path_sep .. '.local' .. path_sep .. 'share' .. path_sep .. 'nvim' .. path_sep
-    G.plugins = home .. path_sep .. '.local' .. path_sep .. 'share' .. path_sep .. 'nvim' .. path_sep .. 'site' .. path_sep .. 'pack' .. path_sep .. 'packer' .. path_sep
+    G.plugins = home .. path_sep .. '.local' .. path_sep .. 'share' .. path_sep .. 'nvim' .. path_sep .. 'site' .. path_sep .. 'pack' .. path_sep
 end
 
 --- Check if a file or directory exists in this path

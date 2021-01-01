@@ -4,6 +4,7 @@ require "setup"
 require "autocmd"
 require "mapping"
 require "typing"
+require 'plugins'
 local vim = vim
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
@@ -55,17 +56,6 @@ g["loaded_ruby_provider"] = 0
 g["loaded_perl_provider"] = 0
 
 g["rg_derive_root"] = true
-
--- DB UI
-g["db_ui_env_variable_url"] = "DATABASE_URL"
-g["db_ui_env_variable_name"] = "DATABASE_NAME"
-g["db_ui_save_location"] = G.cache_dir .. "db_ui_queries"
-
--- Vsnip snippet directories
-g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
-
--- Endwise No default mapping
-g["endwise_no_mappings"] = 1
 
 -- Set map leader
 g["mapleader"] = " "
@@ -216,42 +206,55 @@ opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
 
 cmd "colorscheme space-nvim-theme"
----- Plugin
-require("indent_guides").setup(
-    {
-        even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
-        odd_colors = {fg = "#434548", bg = "#434548"},
-        indent_space_guides = true,
-        indent_tab_guides = true,
-        indent_guide_size = 4
-    }
-)
-require('indent_guides').indent_guides_enable()
 -------------------- COMMANDS ------------------------------
+--  Install all packages
+command(
+    "PaqInstall",
+    "lua require('plug_paq').install()"
+)
+
+-- Update all packages 
+command(
+    "PaqClean",
+    "lua require('plug_paq').clean()"
+)
+
+-- Remove all packages
+command(
+    "PaqUpdate",
+    "lua require('plug_paq').update()"
+)
+
+--- Check if lsp is installed for current filetype
+command("CheckLSP", "lua require('myplugins/lsp_install_prompt').check_lsp_installed()")
+
+-- Get highlight group name and it's
+-- foreground and background color
+command("GetHi", "lua require('utils').GetHi()")
+--[[
 --- Only install missing plugins
 command(
     "PlugInstall",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').install()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').install()"
 )
 --- Update and install plugins
 command(
     "PlugUpdate",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').update()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').update()"
 )
 --- Remove any disabled or unused plugins
 command(
     "PlugClean",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').clean()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').clean()"
 )
 --- Recompiles lazy loaded plugins
 command(
     "PlugCompile",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').compile()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').compile()"
 )
 --- Performs `PlugClean` and then `PlugUpdate`
 command(
     "PlugSync",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').sync()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').sync()"
 )
---- Check if lsp is installed for current filetype
-command("CheckLSP", "lua require('myplugins/lsp_install_prompt').check_lsp_installed()")
+--]]
