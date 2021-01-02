@@ -1,5 +1,7 @@
 packadd vim-closetag
 packadd bracey.vim
+packadd vim-graphql
+packadd vim-jsx-pretty
 
 function! RunMyCode()
     if executable('node')

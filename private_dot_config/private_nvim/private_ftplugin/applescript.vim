@@ -1,3 +1,5 @@
+packadd vim-applescript
+
 function s:shellbang() abort
     let options  = [
         \ 'ash',

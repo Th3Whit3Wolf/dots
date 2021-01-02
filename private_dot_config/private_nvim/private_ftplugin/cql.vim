@@ -1,0 +1,1 @@
+packadd cql-vim

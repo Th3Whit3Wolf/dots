@@ -1,0 +1,1 @@
+packadd gnuplot-syntax-highlighting

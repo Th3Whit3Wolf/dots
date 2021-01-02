@@ -1,6 +1,7 @@
 packadd committia.vim
 packadd vim-pencil
 packadd vim-lexical
+packadd vim-git
 
 call pencil#init({'wrap': 'soft', 'textwidth': 72})
 

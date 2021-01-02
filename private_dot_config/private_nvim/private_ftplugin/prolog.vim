@@ -1,0 +1,1 @@
+packadd prolog.vim

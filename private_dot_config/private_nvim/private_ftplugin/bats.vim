@@ -1,0 +1,1 @@
+packadd bats.vim

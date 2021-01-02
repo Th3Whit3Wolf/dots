@@ -1,3 +1,4 @@
+packadd vim-go
 let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_methods = 1

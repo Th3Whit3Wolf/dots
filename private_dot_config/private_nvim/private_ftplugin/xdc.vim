@@ -1,0 +1,1 @@
+packadd vim-xdc-syntax

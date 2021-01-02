@@ -1,0 +1,1 @@
+packadd qmake-syntax-vim

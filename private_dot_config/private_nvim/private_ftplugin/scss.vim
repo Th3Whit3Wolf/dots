@@ -1,3 +1,5 @@
+packadd scss-syntax.vim
+
 function! CompileMyCode()
     if executable('scssc')
         call Run("scssc  % > %:t:r.css")

@@ -1,0 +1,1 @@
+packadd swift.vim

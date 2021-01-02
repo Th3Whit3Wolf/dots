@@ -1,0 +1,1 @@
+packadd json5.vim

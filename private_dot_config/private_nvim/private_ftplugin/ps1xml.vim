@@ -1,0 +1,1 @@
+packadd vim-ps1

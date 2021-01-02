@@ -1,0 +1,1 @@
+packadd icalendar.vim

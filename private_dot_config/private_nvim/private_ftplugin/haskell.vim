@@ -1,3 +1,5 @@
+packadd haskell-vim
+
 let b:endwise_addition = '#endif'
 let b:endwise_words = 'if,ifdef,ifndef'
 let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\>'

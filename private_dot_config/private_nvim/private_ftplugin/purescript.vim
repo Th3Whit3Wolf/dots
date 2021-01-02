@@ -1,0 +1,1 @@
+packadd purescript-vim
