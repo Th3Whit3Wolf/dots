@@ -1,3 +1,6 @@
+packadd vim-dotenv
+packadd vim-dadbod
+
 setlocal commentstring=--\ %s
 let g:completion_trigger_character = ['.', '\"']
 

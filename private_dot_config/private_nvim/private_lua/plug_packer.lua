@@ -80,6 +80,12 @@ local function init()
   -- vim-vsnip integrations to other plugins
   use {"hrsh7th/vim-vsnip-integ"}
 
+  -- plugin for interacting with databases
+  use {"tpope/vim-dadbod"}
+
+  -- Like pgadmin but for vim
+  use {"kristijanhusak/vim-dadbod-ui"}
+
   --use "nvim-treesitter/completion-treesitter"
   use "kristijanhusak/vim-dadbod-completion"
 

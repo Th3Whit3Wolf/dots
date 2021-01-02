@@ -6,6 +6,7 @@ local function createDirs()
     -- Install python virtualenv and language server
     local data_dir = {
         G.cache_dir .. "backup",
+        G.cache_dir .. "dadbod_queries",
         G.cache_dir .. "session",
         G.cache_dir .. "swap",
         G.cache_dir .. "tags",
@@ -44,21 +45,36 @@ local function nodeHostInit()
 end
 
 local function packerInit()
-    if not G.isdir(G.plugins .. "opt" .. G.path_sep .. "packer.nvim") then
+    if not G.isdir(G.plugins .. "packer" .. G.path_sep .. "opt" .. G.path_sep .. "packer.nvim") then
         fn.mkdir(G.plugins .. "opt", "p")
         local out =
             fn.system(
             string.format(
                 "git clone %s %s",
                 "https://github.com/wbthomason/packer.nvim",
-                G.plugins .. "opt" .. G.path_sep .. "packer.nvim"
+                G.plugins .. "packer" .. G.path_sep .. "opt" .. G.path_sep .. "packer.nvim"
             )
         )
         print(out)
         print("Downloading packer.nvim...")
         cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "packer.nvim")
-        require "plug".install()
     end
+    if not G.isdir(G.plugins .. "paqs" .. G.path_sep .. "opt" .. G.path_sep .. "paq-nvim") then
+        fn.mkdir(G.plugins .. "opt", "p")
+        local out =
+            fn.system(
+            string.format(
+                "git clone %s %s",
+                "https://github.com/savq/paq-nvim",
+                G.plugins .. "paqs" .. G.path_sep .. "opt" .. G.path_sep .. "paq-nvim"
+            )
+        )
+        print(out)
+        print("Downloading paq...")
+        cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "paq-nvim")
+    end
+    require "plug_paq"
+    require'paq-nvim'.install()
 end
 
 local function quoteGenerator()

@@ -48,6 +48,12 @@ local function plugins()
     -- vim-vsnip integrations to other plugins
     paq "hrsh7th/vim-vsnip-integ"
 
+    -- plugin for interacting with databases
+    paq {'tpope/vim-dadbod'}
+
+    -- Like pgadmin but for vim
+    paq {'kristijanhusak/vim-dadbod-ui'}
+
     --use "nvim-treesitter/completion-treesitter"
     paq "kristijanhusak/vim-dadbod-completion"
 
