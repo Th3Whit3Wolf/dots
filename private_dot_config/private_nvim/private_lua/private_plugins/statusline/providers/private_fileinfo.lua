@@ -3,7 +3,7 @@ local i = require("plugins.statusline.icons")
 local c = require("plugins.statusline.colors")
 local u = require("plugins.statusline.utils")
 local diagnostic = require("plugins.statusline.providers.diagnostic")
-local vcs = require("plugins.statusline.providers.vcs")
+local git = require("myplugins.vcs.git")
 
 local M = {}
 
@@ -61,9 +61,29 @@ local shellbang = function()
     return "Z SHell"
   elseif b:sub(-3) == "ash" or b == "ash" then
     return "Almquist SHell"
+  elseif b:sub(-3) == "ion" or b == "ion" then
+    return "Ion"
+  elseif b:sub(-4) == "fish" or b == "fish" then
+    return "Friendly Interactive SHell"
   else
     return "Shell"
   end
+end
+
+local bangcheck = function()
+  local b = vim.fn.getline(1)
+  if b:sub(3) == "#!/"then
+    if b:sub(-4) == "bash" or b:sub(-4) == "dash" or b:sub(-4) == "tcsh" or b:sub(-3) == "csh" or b:sub(-3) == "ksh" or b:sub(-4) == "mksh" or b:sub(-5) == "pdksh" or b:sub(-3) == "zsh" or b:sub(-3) == "ash" or b:sub(-3) == "ion" or b:sub(-4) == "fish" or b:sub(-2) == "sh" then
+      return shellbang()
+    elseif b:sub(-7) == "python3" or b:sub(-7) == "python2" or b:sub(-6) == "python" then
+      return pybang()
+    else
+      return "FT?"
+    end
+  else
+      return "FT?"
+  end
+
 end
 
 -- get current file name
@@ -250,6 +270,10 @@ function M.get_file_type()
       return "Tom's Obvious, Minimal Language"
     elseif ft == "yaml" then
       return "Yet Another Markup Language"
+    elseif ft == "zsh" then
+      return "Z SHell"
+    elseif ft == "" or ft == nil then
+      return bangcheck()
     else
       return (ft:gsub("^%l", string.upper))
     end
@@ -258,7 +282,7 @@ function M.get_file_type()
 end
 
 function M.filetype_seperator()
-  if not diagnostic.has_diagnostics() and not vcs.check_git_workspace() then
+  if not diagnostic.has_diagnostics() and not git.check_workspace() or vim.bo.filetype == '' then
     u.GalaxyHi("FiletTypeSeperator", c.bg2, c.purple)
     return ""
   else
