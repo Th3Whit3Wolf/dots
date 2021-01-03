@@ -181,7 +181,7 @@ function mapping:load_plugin_define()
         ["n|<Leader>fh"] = Map_cu("DashboardFindHistory"):with_noremap():with_silent(),
         ["n|<Leader>fl"] = Map_cu("Telescope loclist"):with_noremap():with_silent(),
         ["n|<Leader>fc"] = Map_cu("Telescope git_commits"):with_noremap():with_silent(),
-        ["n|<c>p"] = Map_cu("Telescope fd"):with_noremap():with_silent()
+        ["n|<C-p>"] = Map_cu("Telescope fd"):with_noremap():with_silent()
     }
 end
 
