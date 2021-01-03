@@ -69,9 +69,16 @@ local definitions = {
     yank = {
         {"TextYankPost", "*", [[ silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}
     },
-
     plugins = {
-        {"BufEnter", "*", "lua require('completion').on_attach()"}
+        {"BufEnter", "*", "lua require('completion').on_attach()"},
+        {"CursorHold,CursorHoldI" , "*.rs", [[ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}} ]]}
+    },
+    lsp_installer = {
+        {
+            "FileType",
+            "ada,cs,css,Dockerfile,yaml.docker-compose,elixir,elm,html,java,javascript,javascriptreact,json,json5,julia,less,lua,mysql,nim,nix,ocaml,php,purescript,reason,sass,scala,scss,sql,sh,typescript,typescriptreact,vb,vim,vue,yaml,zsh",
+            "lua require('myplugins/lsp_install_prompt').lsp_installed()"
+        }
     }
 }
 
