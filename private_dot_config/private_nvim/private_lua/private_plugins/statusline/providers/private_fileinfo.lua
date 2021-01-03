@@ -266,6 +266,8 @@ function M.get_file_type()
       return "Objective C++"
     elseif ft == "json" then
       return "JavaScript Object Notation"
+    elseif ft == "ron" then
+      return "Rusty Object Notation"
     elseif ft == "toml" then
       return "Tom's Obvious, Minimal Language"
     elseif ft == "yaml" then
