@@ -1295,6 +1295,12 @@ local function init()
     ft = "tomdoc"
   }
 
+  -- TOML
+  use {
+    "cespare/vim-toml",
+    opt = true
+  }
+
   -- TPTP
   use {
     "c-cube/vim-tptp",

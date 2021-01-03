@@ -50,7 +50,7 @@ local function plugins()
 
     -- An implementation of the Popup API from vim in Neovim
     paq "nvim-lua/popup.nvim"
-    
+
     -- Snippet plugin for vim/nvim that supports LSP/VSCode's snippet forma
     paq "hrsh7th/vim-vsnip"
 
@@ -1133,6 +1133,12 @@ local function plugins()
     -- TomDoc
     paq {
         "wellbredgrapefruit/tomdoc.vim",
+        opt = true
+    }
+
+    -- TOML
+    paq {
+        "cespare/vim-toml",
         opt = true
     }
 
