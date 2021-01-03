@@ -112,6 +112,7 @@ local function init()
     opt = true
   }
 
+  -- Auto pair plugin
   use {
     "Raimondi/delimitMate",
     event = "InsertEnter *"

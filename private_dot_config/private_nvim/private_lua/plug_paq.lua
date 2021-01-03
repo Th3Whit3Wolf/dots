@@ -83,6 +83,7 @@ local function plugins()
         opt = true
     }
 
+    -- Auto pair plugin
     paq {
         "Raimondi/delimitMate",
         opt = true

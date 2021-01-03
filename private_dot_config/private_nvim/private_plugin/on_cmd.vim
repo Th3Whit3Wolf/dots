@@ -4,7 +4,7 @@ if isdirectory(expand(($XDG_DATA_HOME ? $XDG_DATA_HOME : '~/.local/share') . '/n
     endfunction
     augroup Pack
         " Rainbow Parentheses & Vim Abolish
-        autocmd InsertEnter * packadd rainbow_parentheses.vim | RainbowParentheses
+        autocmd InsertEnter * packadd rainbow_parentheses.vim | RainbowParentheses | packadd delimitMate
         " Eunuch Vim
         command! -nargs=* -range -bang Delete    packadd vim-eunuch | call s:do_cmd('Delete'   , "<bang>", <line1>, <line2>, <q-args>)
         command! -nargs=* -range -bang Unlink    packadd vim-eunuch | call s:do_cmd('Unlink'   , "<bang>", <line1>, <line2>, <q-args>)
