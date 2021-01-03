@@ -23,3 +23,10 @@ require('indent_guides').setup(
     }
 )
 require('indent_guides').indent_guides_enable()
+require"toggleterm".setup{
+    size = 12,
+    open_mapping = [[<a-t>]],
+    shade_terminals = true,
+    persist_size = true,
+    direction = 'horizontal'
+  }

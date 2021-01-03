@@ -104,6 +104,8 @@ local function init()
     opt = true
   }
 
+  use "akinsho/nvim-toggleterm.lua"
+
   -- A surround text object plugin for neovim, written in lua.
   use {
     "blackcauldron7/surround.nvim",

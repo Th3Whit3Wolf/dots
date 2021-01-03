@@ -42,6 +42,15 @@ local function plugins()
     -- bunch of info & extension callbacks for built-in LSP (provides inlay hints)
     paq "tjdevries/lsp_extensions.nvim"
 
+    -- elescope is a highly extendable fuzzy finder over lists. Items are shown in a popup with a prompt to search over.
+    paq "nvim-lua/telescope.nvim"
+
+    -- All the lua functions I don't want to write twice.
+    paq "nvim-lua/plenary.nvim"
+
+    -- An implementation of the Popup API from vim in Neovim
+    paq "nvim-lua/popup.nvim"
+    
     -- Snippet plugin for vim/nvim that supports LSP/VSCode's snippet forma
     paq "hrsh7th/vim-vsnip"
 
@@ -49,10 +58,10 @@ local function plugins()
     paq "hrsh7th/vim-vsnip-integ"
 
     -- plugin for interacting with databases
-    paq {'tpope/vim-dadbod'}
+    paq {"tpope/vim-dadbod"}
 
     -- Like pgadmin but for vim
-    paq {'kristijanhusak/vim-dadbod-ui'}
+    paq {"kristijanhusak/vim-dadbod-ui"}
 
     --use "nvim-treesitter/completion-treesitter"
     paq "kristijanhusak/vim-dadbod-completion"
@@ -65,6 +74,8 @@ local function plugins()
         "norcalli/nvim-colorizer.lua",
         opt = true
     }
+
+    paq "akinsho/nvim-toggleterm.lua"
 
     -- A surround text object plugin for neovim, written in lua.
     paq {
