@@ -72,8 +72,17 @@ end
 
 local bangcheck = function()
   local b = vim.fn.getline(1)
-  if b:sub(3) == "#!/"then
-    if b:sub(-4) == "bash" or b:sub(-4) == "dash" or b:sub(-4) == "tcsh" or b:sub(-3) == "csh" or b:sub(-3) == "ksh" or b:sub(-4) == "mksh" or b:sub(-5) == "pdksh" or b:sub(-3) == "zsh" or b:sub(-3) == "ash" or b:sub(-3) == "ion" or b:sub(-4) == "fish" or b:sub(-2) == "sh" then
+  if b:sub(3) == "#!/" then
+    if
+      b:sub(-4) == "bash" or b:sub(-4) == "dash" or b:sub(-4) == "tcsh" or b:sub(-3) == "csh" or b:sub(-3) == "ksh" or
+        b:sub(-4) == "mksh" or
+        b:sub(-5) == "pdksh" or
+        b:sub(-3) == "zsh" or
+        b:sub(-3) == "ash" or
+        b:sub(-3) == "ion" or
+        b:sub(-4) == "fish" or
+        b:sub(-2) == "sh"
+     then
       return shellbang()
     elseif b:sub(-7) == "python3" or b:sub(-7) == "python2" or b:sub(-6) == "python" then
       return pybang()
@@ -81,9 +90,8 @@ local bangcheck = function()
       return "FT?"
     end
   else
-      return "FT?"
+    return "FT?"
   end
-
 end
 
 -- get current file name
@@ -258,16 +266,30 @@ function M.get_file_type()
       return "C++"
     elseif ft == "cs" then
       return "C#"
+    elseif ft == "css" then
+      return "Cascading Style Sheets"
     elseif ft == "fish" then
       return "Friendly Interactive SHell"
+    elseif ft == "haml" then
+      return "HTML Abstraction Markup Language"
+    elseif ft == "html" then
+      return "HyperText Markup Langauge"
+    elseif ft == "json" then
+      return "JavaScript Object Notation"
+    elseif ft == "less" then
+      return "LEaner Style Sheets"
     elseif ft == "objc" then
       return "Objective C"
     elseif ft == "objcpp" then
       return "Objective C++"
-    elseif ft == "json" then
-      return "JavaScript Object Notation"
+    elseif ft == "php" then
+      return "PHP Hypertext Processor"
     elseif ft == "ron" then
       return "Rusty Object Notation"
+    elseif ft == "sass" then
+      return "Syntastically Awesome Style Sheets"
+    elseif ft == "scss" then
+      return "Sassy Cascading Style Sheets"
     elseif ft == "toml" then
       return "Tom's Obvious, Minimal Language"
     elseif ft == "yaml" then
@@ -284,7 +306,7 @@ function M.get_file_type()
 end
 
 function M.filetype_seperator()
-  if not diagnostic.has_diagnostics() and not git.check_workspace() or vim.bo.filetype == '' then
+  if not diagnostic.has_diagnostics() and not git.check_workspace() or vim.bo.filetype == "" then
     u.GalaxyHi("FiletTypeSeperator", c.bg2, c.purple)
     return ""
   else
