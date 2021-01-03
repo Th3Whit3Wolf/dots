@@ -149,22 +149,39 @@ end
 function mapping:load_plugin_define()
     self.plugin = {
         -- Autocompletion and snippets
-        ["i|<TAB>"]      = Map_cmd([[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
-        ["i|<S-TAB>"]    = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
-        ["i|<CR>"]       = Map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
+        ["i|<TAB>"] = Map_cmd(
+            [[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]
+        ):with_expr():with_silent(),
+        ["i|<S-TAB>"] = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
+        ["i|<CR>"] = Map_cmd(
+            [[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]
+        ):with_expr(),
         -- Plugin vim-operator-surround
         ["n|sa"] = Map_cmd("<Plug>(operator-surround-append)"):with_silent(),
         ["n|sd"] = Map_cmd("<Plug>(operator-surround-delete)"):with_silent(),
         ["n|sr"] = Map_cmd("<Plug>(operator-surround-replace)"):with_silent(),
         -- kyazdani42/nvim-tree.lua
-        ["n|<space>tf"] = Map_cr("NvimTreeToggle"):with_noremap():with_silent(),
-        ["n|<space>rf"] = Map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
-        ["n|<space>ff"] = Map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
+        ["n|<leader>tf"] = Map_cr("NvimTreeToggle"):with_noremap():with_silent(),
+        ["n|<leader>rf"] = Map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
+        ["n|<leader>ff"] = Map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
         -- Plugin Vista
-        ["n|<space>tv"] = Map_cmd('<cmd>Vista!!<CR>'):with_noremap():with_silent(),
+        ["n|<space>tv"] = Map_cmd("<cmd>Vista!!<CR>"):with_noremap():with_silent(),
         -- Vim Easy Align
-        ["n|<space>a"] = Map_cmd("<Plug>(EasyAlign)"):with_silent(),
-        ["v|<space>a"] = Map_cmd("<Plug>(EasyAlign)"):with_silent(),
+        ["n|<leader>a"] = Map_cmd("<Plug>(EasyAlign)"):with_silent(),
+        ["v|<leader>a"] = Map_cmd("<Plug>(EasyAlign)"):with_silent(),
+        -- Plugin DadbodUI
+        ["n|<Leader>od"] = Map_cr("DBUIToggle"):with_noremap():with_silent(),
+        -- Telescope
+        ["n|<Leader>bb"] = Map_cu("Telescope buffers"):with_noremap():with_silent(),
+        ["n|<Leader>fa"] = Map_cu("DashboardFindWord"):with_noremap():with_silent(),
+        ["n|<Leader>fb"] = Map_cu("DashboardJumpMark"):with_noremap():with_silent(),
+        ["n|<Leader>ff"] = Map_cu("DashboardFindFile"):with_noremap():with_silent(),
+        ["n|<Leader>fg"] = Map_cu("Telescope git_files"):with_noremap():with_silent(),
+        ["n|<Leader>fw"] = Map_cu("Telescope grep_string"):with_noremap():with_silent(),
+        ["n|<Leader>fh"] = Map_cu("DashboardFindHistory"):with_noremap():with_silent(),
+        ["n|<Leader>fl"] = Map_cu("Telescope loclist"):with_noremap():with_silent(),
+        ["n|<Leader>fc"] = Map_cu("Telescope git_commits"):with_noremap():with_silent(),
+        ["n|<c>p"] = Map_cu("Telescope fd"):with_noremap():with_silent()
     }
 end
 
@@ -176,8 +193,6 @@ local function load_mapping()
 end
 
 load_mapping()
-
-vim.g.completion_confirm_key = ""
 
 -- <Tab> to navigate the completion menu
 --map("i", "<S-Tab>", 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
