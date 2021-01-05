@@ -89,6 +89,9 @@ local function plugins()
         opt = true
     }
 
+    --  commentary.vim: comment stuff out
+    paq "tpope/vim-commentary"
+
     -- uses the sign column to indicate added, modified and removed lines in a file that is managed by a version control system
     paq {
         "mhinz/vim-signify",

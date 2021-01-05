@@ -118,6 +118,9 @@ local function init()
     event = "InsertEnter *"
   }
 
+  --  commentary.vim: comment stuff out
+  use "tpope/vim-commentary"
+
   ----------
   -- Lazy --
   ----------
