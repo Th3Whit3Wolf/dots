@@ -11,6 +11,7 @@ g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
 -- Endwise No default mapping
 
 g["endwise_no_mappings"] = 1
+g["ditto_dir"] = G.cache_dir .. "Ditto"
 require 'plugins.lsp'
 require 'plugins.statusline'
 require('indent_guides').setup(
@@ -30,3 +31,4 @@ require"toggleterm".setup{
     persist_size = true,
     direction = 'horizontal'
   }
+
