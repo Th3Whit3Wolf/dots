@@ -17,6 +17,9 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/workspaces": {
+        "format": "{name}",
+    },
     "tray": {
         "icon-size": 24,
         "spacing": 6
@@ -68,13 +71,13 @@
         "format": " {}%",
         "tooltip": true,
 	"interval": 2,
-	"on-click": "alacritty -e htop"
+	"on-click": "alacritty -e btm"
     },
     "memory": {
         "format": " {used:0.2f}GB / {total:0.0f}GB",
 	"interval": 2,
     "max-length": 16,
-	"on-click": "alacritty -e htop"
+	"on-click": "alacritty -e btm"
     },
     "custom/kblayout": {
 	"format": " <b>{}</b>",
