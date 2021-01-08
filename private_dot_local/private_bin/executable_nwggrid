@@ -1,0 +1,14 @@
+#!/bin/bash
+
+H=$(date  "+%k")
+DAWN=7
+DUSK=19
+
+# If time is between 7AM & 7PM
+if (( DAWN <= H && DUSK > H )); then
+    # Light theme
+    /usr/bin/nwggrid -wm sway -n 8 -b e7e5eb -c space-light.css 
+else
+    # Dark theme
+    /usr/bin/nwggrid -wm sway -n 8 -b 222226 -c space-dark.css
+fi
