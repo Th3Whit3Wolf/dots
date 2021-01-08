@@ -1,0 +1,51 @@
+* {
+	font-family: SF Pro Display;
+    font-size: 16px;
+}
+
+button, label, image {
+    background: none;
+    border-style: none;
+    box-shadow: none;
+    color: #100a14;
+}
+
+button {
+    box-shadow: 0 0 6 5 #fbf8ef;
+    background-color: #efeae9;
+    color: #655370;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 10px;
+}
+/*ttip*/
+button:hover {
+    background-color: #8c799f;
+}
+
+button:focus {
+    background-color: rgba(140,121,159,0.7);
+}
+
+#searchbox {
+    border: none;
+    background-color: #fbf8ef;
+    border-radius: 5px;
+    padding: 10px;
+    border-color: #b3b9be;
+    color: #b2b2b2;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+#separator {
+    background-color: #e2e0ea;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+#description {
+    margin-bottom: 20px;
+}
