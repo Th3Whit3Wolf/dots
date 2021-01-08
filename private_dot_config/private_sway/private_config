@@ -26,12 +26,12 @@ set $lock swaylock \
 	--fade-in 0.2
 
 set $gnome-schema org.gnome.desktop.interface
-set $font_family SF Pro Display
+set $font_family 'SF Pro Display'
 set $font_size 13
 set $cursor_theme breeze_cursors
 set $cursor_size 24
-set $gtk_theme Space-Materia
-set $icon_theme oomox-Space-Materia
+set $gtk_theme Space-Dark
+set $icon_theme Space-Dark
 set $font 'SF Pro Display'
 set $font_mono 'Monaco'
 
@@ -44,4 +44,3 @@ set $btf #000000
     
 include ~/.config/sway/config.d/*
 include /etc/sway/config.d/*
-exec autotiling-rs
