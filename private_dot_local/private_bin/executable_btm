@@ -1,0 +1,14 @@
+#!/bin/bash
+
+H=$(date  "+%k")
+DAWN=7
+DUSK=19
+
+# If time is between 7AM & 7PM
+if (( DAWN <= H && DUSK > H )); then
+    # Light theme
+    /usr/bin/btm -C ~/.config/bottom/space_light.toml
+else
+    # Dark theme
+    /usr/bin/btm -C ~/.config/bottom/space_dark.toml
+fi
