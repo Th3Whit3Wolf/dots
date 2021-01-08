@@ -2,8 +2,9 @@
 exec /usr/lib/xdg-desktop-portal -r &; /usr/lib/xdg-desktop-portal-wlr
 
 #exec /usr/bin/gnome-keyring-daemon -r -d --components=pkcs11,secrets,ssh
-exec persway -a -w
-exec sway-alttab
+exec ~/.cargo/bin/persway -a -w
+exec /usr/bin/sway-alttab
+exec ~/.cargo/bin/sway-colord
 exec mako >/tmp/mako.log 2>&1
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec kanshi >/tmp/kanshi.log 2>&1
