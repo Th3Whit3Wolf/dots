@@ -1,23 +1,63 @@
-@define-color act1 #222226;
-@define-color act2 #5d4d7a;
-@define-color base #b2b2b2;
-@define-color baseDim #686868;
-@define-color bg1 #292b2e;
-@define-color bg2 #212026;
-@define-color bg3 #100a14;
-@define-color bg4 #0a0814;
-@define-color cursor #e3dedd;
-@define-color war #dc752f;
-@define-color highli #444155;
-@define-color highliDim #3b314d;
-@define-color cyan #28def0;
-@define-color bgAlt #42444a;
+/*
+// Light
+button_bg_color #efeae9
+dark_bg_color #e7e5eb
+dark_fg_color #655370
+header_button_bg_color #efeae9
+osd_base #e7e5eb;
+theme_base_color #FBF8EF
+theme_bg_color #FBF8EF
+theme_fg_color #655370
+theme_text_color #655370
+theme_tooltip_bg_color #FBF8EF
+theme_selected_bg_color #655370
+theme_selected_fg_color #d3d3e7
+theme_tooltip_fg_color #655370
+theme_unfocused_selected_fg_color #d3d3e7
 
+titlebar_fg_unfocused mix(#655370,#FBF8EF,0.4);
+borders mix(#FBF8EF,#655370,0.1);
+unfocused_borders mix(#FBF8EF,mix(#FBF8EF,#655370,0.1),0.9);
+insensitive_bg_color mix(#FBF8EF,#FBF8EF,0.6);
+insensitive_fg_color mix(#655370,#FBF8EF,0.5);
+osd_insensitive_bg_color mix(#655370,rgba(231, 229, 235, 0.8),0.5);
+osd_insensitive_fg_color mix(#655370,#e7e5eb,0.6);
+theme_unfocused_fg_color mix(#655370,#FBF8EF,0.5);
+wm_title_unfocused mix(#655370,#FBF8EF,0.4);
+wm_icons_unfocused mix(#655370,#FBF8EF,0.4);
+
+// Dark
+button_bg_color #212026
+dark_bg_color #222226
+dark_fg_color #CBC1D5
+header_button_bg_color #212026
+osd_base #222226
+theme_base_color #292b2e
+theme_bg_color #292b2e
+theme_fg_color #b2b2b2
+theme_text_color #b2b2b2
+theme_tooltip_bg_color #292b2e
+theme_selected_bg_color #5d4d7a
+theme_selected_fg_color #CBC1D5
+theme_tooltip_fg_color #b2b2b2
+theme_unfocused_selected_fg_color #CBC1D5
+
+titlebar_fg_unfocused mix(#b2b2b2,#292b2e,0.4);
+borders mix(#292b2e,#b2b2b2,0.18);
+unfocused_borders mix(#292b2e,mix(#292b2e,#b2b2b2,0.18),0.9);
+insensitive_bg_color mix(#292b2e,#292b2e,0.6);
+insensitive_fg_color mix(#b2b2b2,#292b2e,0.5);
+osd_insensitive_bg_color mix(#CBC1D5,rgba(34, 34, 38, 0.8),0.5);
+osd_insensitive_fg_color mix(#CBC1D5,#222226,0.6);
+theme_unfocused_fg_color mix(#b2b2b2,#292b2e,0.5);
+wm_title_unfocused mix(#b2b2b2,#292b2e,0.4);
+wm_icons_unfocused mix(#b2b2b2,#292b2e,0.4);
+*/
 * {
   border: none;
   border-radius: 0;
   font-family: "Font Awesome 5 Free", SFMono Nerd Font Mono, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   min-height: 0;
 }
 
@@ -31,26 +71,25 @@ window#waybar:first-child > box {
   margin-left: 21px;
   margin-right: 21px;
   border-radius: 290486px;
-  background-color: #212026;
+  background-color: @dark_bg_color;
   border-bottom: 0;
 }
 
-#custom-start {
+#custom-start, #custom-powermenu {
   padding: 5px 21px;
-  margin-right: 5px;
-  margin-left: -1px;
   border-radius: 290486px;
-  background-color: @act2;
-  color: @base;
+  background-color: @theme_selected_bg_color;
+  color: @theme_unfocused_selected_fg_color;
 }
 
-#workspaces button {
-  padding: 0 0px;
-  margin: 3px 5px;
-  border-radius: 13px;
-  border: 1px rgba(66, 68, 64, 0.5) solid;
-  background-color: transparent;
-  min-width: 24px;
+#custom-start {
+  margin-right: 5px;
+  margin-left: -1px;
+}
+
+#custom-powermenu {
+  margin-right: -1px;
+  margin-left: 5px;
 }
 
 window#waybar.hidden {
@@ -58,8 +97,8 @@ window#waybar.hidden {
 }
 
 #waybar {
-  color: @base;
-  background: @bg2;
+  color: @theme_fg_color;
+  background: @button_bg_color;
 }
 
 #workspaces {
@@ -71,28 +110,29 @@ window#waybar.hidden {
   padding: 3 5px;
   border: 1px solid transparent;
   border-radius: 8px;
-  color: @cursor;
-  background-color: @bg1;
-  font-family: SFMono Nerd Font Mono
+  color: @theme_fg_color;
+  background-color: @osd_insensitive_fg_color;
+  font-family: SFMono Nerd Font Mono;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-  background:rgba(66, 68, 64, 0.2);
+  color: @theme_selected_fg_color;
+  background: @theme_selected_bg_color;
   box-shadow: inherit;
 }
 
 #workspaces button.focused {
-  background-color: rgba(66, 68, 64, 0.4);
-  /*color: #2e3440;*/
+  color: @theme_selected_fg_color;
+  background-color: @theme_selected_bg_color;
 }
 
 #workspaces button.urgent {
-  background-color: @war;
+  background-color: @error_color;
 }
 
 #mode {
-  background-color: @war;
+  background-color: @error_color;
   border-bottom: 0px;
 }
 
@@ -111,31 +151,26 @@ window#waybar.hidden {
     padding:   0 4px;
     margin:    0 4px;
     min-width: 40px;
-    color:     @base;
+    color:     @dark_fg_color;
 }
 
 #clock {
   padding: 0 4px;
   margin: 0 4px;
-  color: @base;
+  color: @theme_fg_color;
   font-family: SFMono Nerd Font Mono;
-}
-
-#custom-powermenu {
-  padding: 0 1px;
-  margin-right: 8px;
 }
 
 @keyframes blink {
   to {
-      background-color: @bg2;
-      color: @base;
+      background-color: @button_bg_color;
+      color: @theme_fg_color;
   }
 }
 
 #battery.critical:not(.charging) {
-  background-color: @war;
-  color: @base;
+  background-color: @error_color;
+  color: @theme_fg_color;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -144,9 +179,9 @@ window#waybar.hidden {
 }
 
 label:focus {
-  background-color: @bg2;
+  background-color: @button_bg_color;
 }
 
 #temperature.critical {
-  color: @war;
+  color: @error_color;
 }
