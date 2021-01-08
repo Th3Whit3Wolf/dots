@@ -86,12 +86,12 @@
     },
     "custom/start": {
 	"format": "<big></big>",
-	"on-click": "nwggrid -wm sway",
+	"on-click": "~/.local/bin/nwggrid",
 	"tooltip": false
     },
     "custom/powermenu": {
 	"format": "<big></big>",
-	"on-click": "nwgbar -wm sway",
+	"on-click": "~/.local/bin/nwgbar",
 	"tooltip": false
     },
     "custom/cpu": {
