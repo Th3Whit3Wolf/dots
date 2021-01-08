@@ -1,5 +1,5 @@
 set $mod Mod4
-set $term alacritty --live-config-reload
+set $term alacritty 
 set $browser MOZ_ENABLE_WAYLAND=1 firefox
 set $menu ~/.local/bin/wofi 
 set $files nautilus
