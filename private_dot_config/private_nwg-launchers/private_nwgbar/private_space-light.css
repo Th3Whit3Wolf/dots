@@ -1,0 +1,46 @@
+#bar {
+    margin: 30px; /* affects top/bottom & left/right alignment */
+    font-size: 16px;
+    font-family: SF Pro Display;
+    animation: fadeIn;
+    animation-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+image {
+    border-style: none;
+    box-shadow: none;
+    background: none;
+}
+
+button {
+    background: #fbf8ef;
+    border: none;
+    box-shadow: none;
+    color:#a094a2;
+    padding: calc(0.5em - 1px);
+    margin: 5px;
+    border-radius: 12px;
+}
+
+
+button:hover {
+    background-color: #d3d3e7;
+}
+
+button:focus {
+    background-color: #d3d3e7;
+}
+
+grid {
+    background-color: #e7e5eb;
+    border-radius: 12px;
+    padding: calc(0.5em - 1px);
+    box-shadow: 0 0 5px #b3b9be;
+    /* e.g. for common background to all buttons */
+}
+
