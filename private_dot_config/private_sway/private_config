@@ -1,10 +1,12 @@
 set $mod Mod4
 set $term alacritty --live-config-reload
 set $browser MOZ_ENABLE_WAYLAND=1 firefox
-set $menu wofi -c ~/.config/wofi/config -I 
+set $menu ~/.local/bin/wofi 
 set $files nautilus
 set $editor code-oss 
 set $laptop eDP-1
+set $sway_shots ~/Pics/screenshots/$(date +%Y%m%d_%Hh%Mm%Ss)_grim.png
+set $grim grimshot --notify
 
 set $opacity 0.9
 set $wallpaper ~/.cache/wallpaper 

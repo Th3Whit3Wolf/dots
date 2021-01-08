@@ -24,4 +24,15 @@ bindsym $mod+Alt+q exit
 bindsym $mod+Alt+p exec systemctl poweroff
 bindsym $mod+Alt+s exec systemctl suspend
 
+# Lockscsreen
 bindsym $mod+Alt+l exec $lock
+
+# Screenshot whole screen
+bindsym Print exec grim $screenshot_dir/$(date +%Y%m%d_%Hh%Mm%Ss)_grim.png
+
+# Screenshot current window
+bindsym $mod+Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" $screenshot_dir/$(date +%Y%m%d_%Hh%Mm%Ss)_grim.png
+
+# Screenshot region
+bindsym Shift+Print exec grim -g "$(slurp -b '#AFAFAFAF' -c '#FF3F3FAF' -s '#00000000' -w 3 -d)" $screenshot_dir/$(date +%Y%m%d_%Hh%Mm%Ss)_grim.png
+
