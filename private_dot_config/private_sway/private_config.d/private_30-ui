@@ -18,9 +18,6 @@ bar {
 }
                          
 exec_always {
-    gsettings set $gnome-schema gtk-theme $gtk_theme
-    gsettings set $gnome-schema icon-theme $icon_theme
-    gsettings set $gnome-schema cursor-theme $cursor_theme
     gsettings set $gnome-schema cursor-theme $cursor_theme
     gsettings set $gnome-schema cursor-size $cursor_size
     gsettings set $gnome-schema monospace-font-name $font_mono
