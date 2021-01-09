@@ -58,31 +58,19 @@ M.light = {
     info = "#8DE6F7"
 }
 
-function M.is_dark()
-    if vim.o.background ~= nil and vim.o.background == "light" then
-        return false
-    elseif vim.o.background ~= nil and vim.o.background == "dark" then
-        return true
-    else
-        return false
-    end
-end
-
-function M.is_light()
-    if vim.o.background ~= nil and vim.o.background == "light" then
-        return true
-    elseif vim.o.background ~= nil and vim.o.background == "dark" then
-        return false
-    else
-        return false
-    end
-end
-
 function M.color(val)
-    if M.is_light then
+    if vim.o.background ~= nil and vim.o.background == "light" then
         return M.light[val]
-    else
+    elseif vim.o.background ~= nil and vim.o.background == "dark" then
         return M.dark[val]
+    else
+        local hours = tonumber(os.date("%H"))
+        if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
+            return M.light[val]
+        else
+            return M.dark[val]
+        end
     end
 end
+
 return M
