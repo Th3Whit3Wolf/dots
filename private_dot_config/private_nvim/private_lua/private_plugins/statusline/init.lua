@@ -41,7 +41,7 @@ ViModeSeperator = vimode.seperator
 gls.left[1] = {
     ViMode = {
         provider = ViMode,
-        highlight = {c.act1, c.DarkGoldenrod2}
+        highlight = {c.color('act1'), c.color('DarkGoldenrod2')}
     }
 }
 
@@ -49,12 +49,12 @@ gls.left[2] = {
     ViModeSeperator = {
         provider = ViModeSeperator,
         highlight = {
-            c.comments,
+            c.color('comments'),
             function()
-                if not u.buffer_not_empty() then
-                    return c.purple
+                if not u.buffer_not_empty() or vim.bo.filetype == 'dashboard' then
+                    return c.color('purple')
                 end
-                return c.bg2
+                return c.color('bg2')
             end
         }
     }
@@ -64,7 +64,7 @@ gls.left[3] = {
     FileSize = {
         provider = FileSize,
         condition = u.buffer_not_empty,
-        highlight = {c.white, c.bg2}
+        highlight = {c.color('white'), c.color('bg2')}
     }
 }
 
@@ -73,8 +73,8 @@ gls.left[4] = {
         provider = FileName,
         condition = u.buffer_not_empty,
         separator = i.slant.Left,
-        separator_highlight = {c.purple, c.bg2},
-        highlight = {c.comp, c.bg2, "bold"}
+        separator_highlight = {c.color('purple'), c.color('bg2')},
+        highlight = {c.color('comp'), c.color('bg2'), "bold"}
     }
 }
 
@@ -82,7 +82,7 @@ gls.left[5] = {
     FileType = {
         provider = FileType,
         condition = u.buffer_not_empty,
-        highlight = {c.white, c.purple}
+        highlight = {c.color('white'), c.color('purple')}
     }
 }
 
@@ -96,7 +96,7 @@ gls.left[8] = {
     DiagnosticError = {
         provider = DiagnosticError,
         icon = " " .. i.bullet,
-        highlight = {c.error, c.bg2}
+        highlight = {c.color('error'), c.color('bg2')}
     }
 }
 
@@ -104,7 +104,7 @@ gls.left[9] = {
     DiagnosticWarn = {
         provider = DiagnosticWarn,
         icon = " " .. i.bullet,
-        highlight = {c.warning, c.bg2}
+        highlight = {c.color('warning'), c.color('bg2')}
     }
 }
 
@@ -112,21 +112,21 @@ gls.left[10] = {
     DiagnosticInfo = {
         provider = DiagnosticInfo,
         icon = " " .. i.bullet,
-        highlight = {c.info, c.bg2}
+        highlight = {c.color('info'), c.color('bg2')}
     }
 }
 
 gls.left[11] = {
     DiagnosticEndSpace = {
         provider = DiagnosticEndSpace,
-        highlight = {c.bg2, c.bg2}
+        highlight = {c.color('bg2'), c.color('bg2')}
     }
 }
 
 gls.left[12] = {
     DiagnosticSeperator = {
         provider = DiagnosticSeperator,
-        highlight = {c.purple, c.bg2}
+        highlight = {c.color('purple'), c.color('bg2')}
     }
 }
 
@@ -135,7 +135,7 @@ gls.left[13] = {
         provider = GitBranch,
         icon = " " .. i.git .. " ",
         condition = u.buffer_not_empty,
-        highlight = {c.base, c.purple}
+        highlight = {c.color('base'), c.color('purple')}
     }
 }
 
@@ -144,7 +144,7 @@ gls.left[14] = {
         provider = DiffAdd,
         condition = u.checkwidth,
         icon = i.diff.Add,
-        highlight = {c.green, c.purple}
+        highlight = {c.color('green'), c.color('purple')}
     }
 }
 gls.left[15] = {
@@ -152,7 +152,7 @@ gls.left[15] = {
         provider = DiffModified,
         condition = u.checkwidth,
         icon = i.diff.Modified,
-        highlight = {c.orange, c.purple}
+        highlight = {c.color('orange'), c.color('purple')}
     }
 }
 gls.left[16] = {
@@ -160,7 +160,7 @@ gls.left[16] = {
         provider = DiffRemove,
         condition = u.checkwidth,
         icon = i.diff.Remove,
-        highlight = {c.red, c.purple}
+        highlight = {c.color('red'), c.color('purple')}
     }
 }
 
@@ -168,43 +168,43 @@ gls.left[17] = {
     GitSeperator = {
         provider = GitSeperator,
         condition = u.buffer_not_empty,
-        highlight = {c.purple, c.bg2}
+        highlight = {c.color('purple'), c.color('bg2')}
     }
 }
 
 gls.left[18] = {
     Space = {
         provider = Space,
-        highlight = {c.blue, c.purple}
+        highlight = {c.color('blue'), c.color('purple')}
     }
 }
 
 gls.right[1] = {
     FileFormat = {
         provider = FileFormat,
-        highlight = {c.base, c.purple}
+        highlight = {c.color('base'), c.color('purple')}
     }
 }
 gls.right[2] = {
     LineInfo = {
         provider = LineColumn,
         separator = " | ",
-        separator_highlight = {c.base, c.purple},
-        highlight = {c.base, c.purple}
+        separator_highlight = {c.color('base'), c.color('purple')},
+        highlight = {c.color('base'), c.color('purple')}
     }
 }
 gls.right[3] = {
     PerCent = {
         provider = LinePercent,
         separator = i.slant.Left,
-        separator_highlight = {c.bg2, c.purple},
-        highlight = {c.base, c.bg2}
+        separator_highlight = {c.color('bg2'), c.color('purple')},
+        highlight = {c.color('base'), c.color('bg2')}
     }
 }
 gls.right[4] = {
     ScrollBar = {
         provider = ScrollBar,
-        highlight = {c.yellow, c.purple}
+        highlight = {c.color('yellow'), c.color('purple')}
     }
 }
 
@@ -212,8 +212,8 @@ gls.short_line_left[1] = {
     BufferType = {
         provider = FileTypeName,
         separator = i.slant.Right,
-        separator_highlight = {c.purple, c.bg},
-        highlight = {c.base, c.purple}
+        separator_highlight = {c.color('purple'), c.color('bg')},
+        highlight = {c.color('base'), c.color('purple')}
     }
 }
 
@@ -221,7 +221,7 @@ gls.short_line_right[1] = {
     BufferIcon = {
         provider = BufferIcon,
         separator = i.slant.Left,
-        separator_highlight = {c.purple, c.bg},
-        highlight = {c.base, c.purple}
+        separator_highlight = {c.color('purple'), c.color('bg')},
+        highlight = {c.color('base'), c.color('purple')}
     }
 }

@@ -1,13 +1,9 @@
 -------------------- HELPERS -------------------------------
-local G = require "global"
-require "setup"
-require "autocmd"
-require "mapping"
-require "typing"
-require 'plugins'
 local vim = vim
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+local G = require "global"
+require "setup"
 
 local function opt(scope, key, value)
     scopes[scope][key] = value
@@ -19,6 +15,10 @@ end
 local function command(name, exec)
     api.nvim_command("command! " .. name .. " " .. exec)
 end
+
+-- Set map leader (needs to be set before mappings)
+g["mapleader"] = " "
+g["completion_confirm_key"] = ""
 -------------------- VARIABLES ----------------------------
 if G.isdir(G.python3 .. "bin") then
     g["python3_host_prog"] = G.python3 .. "bin" .. G.path_sep .. "python"
@@ -56,9 +56,6 @@ g["loaded_ruby_provider"] = 0
 g["loaded_perl_provider"] = 0
 
 g["rg_derive_root"] = true
-
--- Set map leader
-g["mapleader"] = " "
 -------------------- OPTIONS -------------------------------
 opt("o", "mouse", "a") -- Enable mouse
 opt("o", "report", 2) -- 2 for telescope --0 Automatically setting options from modelines
@@ -205,7 +202,13 @@ opt("o", "foldenable", true)
 opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
 
-cmd "colorscheme space-nvim-theme"
+vim.o.background = 'light'
+cmd "colorscheme space-nvim"
+
+require "autocmd"
+require "mapping"
+require "typing"
+require 'plugins'
 -------------------- COMMANDS ------------------------------
 --  Install all packages
 command(
@@ -258,3 +261,4 @@ command(
     "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').sync()"
 )
 --]]
+
