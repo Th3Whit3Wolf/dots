@@ -8,7 +8,13 @@ local function plugins()
 
     -- My spacemacs colorscheme
     paq {
-        "Th3Whit3Wolf/space-nvim-theme",
+        "Th3Whit3Wolf/space-nvim",
+        branch = "main"
+    }
+
+    -- Automatically change colorscheme based on time
+    paq {
+        "Th3Whit3Wolf/Dusk-til-Dawn.nvim",
         branch = "main"
     }
 
