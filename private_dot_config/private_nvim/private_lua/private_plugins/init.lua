@@ -9,9 +9,15 @@ g["db_ui_save_location"] = G.cache_dir .. "dadbod_queries"
 g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
 
 -- Endwise No default mapping
-
 g["endwise_no_mappings"] = 1
 g["ditto_dir"] = G.cache_dir .. "Ditto"
+
+-- Set Colortheme
+g["dusk_til_dawn_light_theme"] = "space-nvim"
+g["dusk_til_dawn_dark_theme"] = "space-nvim"
+
+require'Dusk-til-Dawn'
+
 require 'plugins.lsp'
 require 'plugins.statusline'
 require('indent_guides').setup(
