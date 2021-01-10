@@ -28,6 +28,11 @@ local definitions = {
             "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
             "setlocal noswapfile noundofile nobackup nowritebackup viminfo= shada="
         },
+        {
+            "BufWritePost",
+            "bash,c,cs,slojure,cpp,css,dart,erlang,fennel,gdscript3,go,graphql,html,java,javascript,javascriptreact,jsdoc,julia,kotlin.lua,nix,ocaml,php,python,ql,rst,ruby,rust,scala,sparql,teal,toml,turtle,typescript,typescriptreact, verilog",
+            "edit | TSBufEnable highlight"
+        },
         {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
         {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
         {"BufWritePre", "*.tmp", "setlocal noundofile"},
@@ -71,13 +76,10 @@ local definitions = {
     },
     plugins = {
         {"BufEnter", "*", "lua require('completion').on_attach()"},
-        {"CursorHold,CursorHoldI" , "*.rs", [[ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}} ]]}
-    },
-    lsp_installer = {
         {
-            "FileType",
-            "ada,cs,css,Dockerfile,yaml.docker-compose,elixir,elm,html,java,javascript,javascriptreact,json,json5,julia,less,lua,mysql,nim,nix,ocaml,php,purescript,reason,sass,scala,scss,sql,sh,typescript,typescriptreact,vb,vim,vue,yaml,zsh",
-            "lua require('myplugins/lsp_install_prompt').lsp_installed()"
+            "InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost",
+            "*.rs",
+            [[ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}} ]]
         }
     }
 }

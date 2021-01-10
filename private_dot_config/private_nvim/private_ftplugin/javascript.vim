@@ -1,7 +1,5 @@
 packadd vim-closetag
 packadd bracey.vim
-packadd vim-graphql
-packadd vim-jsx-pretty
 
 function! RunMyCode()
     if executable('node')
@@ -10,4 +8,8 @@ function! RunMyCode()
         echo 'Node is not installed!'
     endif
 endfunction
+
+lua require 'plugins.tree_sitter'
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 

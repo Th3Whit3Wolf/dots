@@ -10,7 +10,6 @@ setlocal spell nofoldenable
 
 call lexical#init()
 call pencil#init({'wrap': 'hard'})
-call LazySource('gutentags')
 
 let &makeprg='proselint %'
 

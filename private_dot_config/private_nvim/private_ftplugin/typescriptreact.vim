@@ -1,2 +1,4 @@
-packadd vim-graphql
-packadd vim-jsx-pretty
+lua require 'plugins.tree_sitter'
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+

@@ -1,10 +1,19 @@
-packadd rust.vim
+packad rust-vim
 
 let g:rustfmt_autosave = 1
-let g:rust_fold = 1
 
 set colorcolumn=9999
 setlocal tags=./rusty-tags.vi;/
+
+" Code formatting on save
+augroup rustPreWrite
+    autocmd!
+    autocmd BufWritePost *.rs silent! call Rustfmt_PreWrite() | TSBufEnable highlight
+augroup END
+
+function! InCargoProject(...)
+	return filereadable("Cargo.toml") || filereadable("../Cargo.toml") || filereadable("../../Cargo.toml") || filereadable("../../../Cargo.toml")
+endfunction
 
 function! CompileMyCode() abort
     if InCargoProject()
@@ -50,6 +59,7 @@ function! TestMyCode()
     endif
 endfunction!
 
-" Enable type inlay hints
-"autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-"\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+
+lua require 'plugins.tree_sitter'
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()

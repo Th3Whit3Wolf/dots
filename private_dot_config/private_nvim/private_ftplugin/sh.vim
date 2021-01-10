@@ -26,7 +26,9 @@ function s:shellbang() abort
         \ + map(copy(options), '"[".(v:key+1)."] ".v:val'))
 
     if choice >= 1 && choice <= (len(copy(options)) - 2)
-        if choice == 5
+        if choice == 2
+            set ft=bash
+        elseif choice == 5
             set ft=fish
         elseif choice == 7
             set ft=ion

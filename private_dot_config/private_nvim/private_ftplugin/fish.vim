@@ -29,7 +29,9 @@ function s:shellbang() abort
         \ + map(copy(options), '"[".(v:key+1)."] ".v:val'))
 
     if choice >= 1 && choice <= (len(copy(options)) - 2)
-        if choice == 7
+        if choice == 2
+            set ft=bash
+        elseif choice == 7
             set ft=ion
         elseif choice == 12
             set ft=zsh

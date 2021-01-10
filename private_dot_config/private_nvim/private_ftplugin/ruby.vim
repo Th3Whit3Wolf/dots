@@ -6,6 +6,10 @@ let b:endwise_words='module,class,def,if,unless,case,while,until,begin,do'
 let b:endwise_pattern='^\(.*=\)\?\s*\%(private\s\+\|protected\s\+\|public\s\+\|module_function\s\+\)*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$'
 let b:endwise_syngroups='rubyModule,rubyClass,rubyDefine,rubyControl,rubyConditional,rubyRepeat'
 
+function! InRailsApp(...)
+	return filereadable("app/controllers/application_controller.rb")
+endfunction
+
 function! RunMyCode()
     if InRailsApp()
         if executable('rails')
@@ -27,3 +31,7 @@ if !stridx(&rtp, resolve(expand('~/.config/nvim/lazy/vim-endwise.vim'))) == 0
 endif
 
 imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
+
+lua require 'plugins.tree_sitter'
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()

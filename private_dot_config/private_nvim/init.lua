@@ -202,9 +202,6 @@ opt("o", "foldenable", true)
 opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
 
-vim.o.background = 'light'
-cmd "colorscheme space-nvim"
-
 require "autocmd"
 require "mapping"
 require "typing"
@@ -227,9 +224,6 @@ command(
     "PaqUpdate",
     "lua require('plug_paq').update()"
 )
-
---- Check if lsp is installed for current filetype
-command("CheckLSP", "lua require('myplugins/lsp_install_prompt').check_lsp_installed()")
 
 -- Get highlight group name and it's
 -- foreground and background color
@@ -261,4 +255,3 @@ command(
     "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').sync()"
 )
 --]]
-

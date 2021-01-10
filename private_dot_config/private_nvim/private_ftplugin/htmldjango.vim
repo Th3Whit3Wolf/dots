@@ -2,10 +2,6 @@ let b:endwise_addition = '{% end& %}'
 let b:endwise_words = 'autoescape,block,blocktrans,cache,comment,filter,for,if,ifchanged,ifequal,ifnotequal,language,spaceless,verbatim,with'
 let b:endwise_syngroups = 'djangoTagBlock,djangoStatement'
 
-lua << EOF
-require('myplugins/lsp_install_prompt').lsp_installed()
-EOF
-
 if !stridx(&rtp, resolve(expand('~/.config/nvim/lazy/vim-endwise.vim'))) == 0
     execute 'source' fnameescape(resolve(expand('~/.config/nvim/lazy/vim-endwise.vim')))
 endif

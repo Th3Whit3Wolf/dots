@@ -20,3 +20,9 @@ function! RunMyCode()
 	let g:bracey_refresh_on_save = 1
 	Bracey
 endfunction
+
+lua require 'plugins.tree_sitter'
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+

@@ -487,16 +487,6 @@ local function init()
     ft = "crystal"
   }
 
-  -- CSS
-  use {
-    "hail2u/vim-css3-syntax",
-    ft = "css"
-    --config = function()
-    --    vim.bo = vim.api.nvim_get_option('iskeyword') .. ',-'
-    --    vim.cmd('setlocal iskeyword+=-')
-    --end
-  }
-
   -- CSV
   use {
     "chrisbra/csv.vim",
@@ -672,19 +662,6 @@ local function init()
     ft = "groovy"
   }
 
-  -- GraphQL
-  use {
-    "jparise/vim-graphql",
-    ft = {
-      "graphql",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue"
-    }
-  }
-
   -- Hack
   use {
     "hhvm/vim-hack",
@@ -791,17 +768,6 @@ local function init()
   use {
     "briancollins/vim-jst",
     ft = "jst"
-  }
-
-  -- JSX
-  use {
-    "maxmellon/vim-jsx-pretty",
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact"
-    }
   }
 
   -- Jenkins
@@ -1295,12 +1261,6 @@ local function init()
   use {
     "wellbredgrapefruit/tomdoc.vim",
     ft = "tomdoc"
-  }
-
-  -- TOML
-  use {
-    "cespare/vim-toml",
-    opt = true
   }
 
   -- TPTP

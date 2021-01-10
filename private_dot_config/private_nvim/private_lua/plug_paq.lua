@@ -75,6 +75,18 @@ local function plugins()
     -- Completion for buffers word.
     paq "steelsojka/completion-buffers"
 
+ -- Treesitter configurations and abstraction layer for Neovim.
+    paq {
+	"nvim-treesitter/nvim-treesitter",
+	run = ":TSUpdate"
+    }
+
+    -- Show code context
+    paq 'romgrk/nvim-treesitter-context'
+
+    -- Get autocompletion from treesitter
+    paq 'nvim-treesitter/completion-treesitter'
+
     -- high-performance color highlighter for Neovim
     paq {
         "norcalli/nvim-colorizer.lua",
@@ -403,12 +415,6 @@ local function plugins()
         opt = true
     }
 
-    -- CSS
-    paq {
-        "hail2u/vim-css3-syntax",
-        opt = true
-    }
-
     -- CSV
     paq {
         "chrisbra/csv.vim",
@@ -564,12 +570,6 @@ local function plugins()
         opt = true
     }
 
-    -- GraphQL
-    paq {
-        "jparise/vim-graphql",
-        opt = true
-    }
-
     -- Hack
     paq {
         "hhvm/vim-hack",
@@ -669,12 +669,6 @@ local function plugins()
     -- JST
     paq {
         "briancollins/vim-jst",
-        opt = true
-    }
-
-    -- JSX
-    paq {
-        "maxmellon/vim-jsx-pretty",
         opt = true
     }
 
@@ -984,12 +978,6 @@ local function plugins()
         opt = true
     }
 
-    -- reStructuredText
-    paq {
-        "marshallward/vim-restructuredtext",
-        opt = true
-    }
-
     -- RSpec
     paq {
         "keith/rspec.vim",
@@ -1143,12 +1131,6 @@ local function plugins()
     -- TomDoc
     paq {
         "wellbredgrapefruit/tomdoc.vim",
-        opt = true
-    }
-
-    -- TOML
-    paq {
-        "cespare/vim-toml",
         opt = true
     }
 
