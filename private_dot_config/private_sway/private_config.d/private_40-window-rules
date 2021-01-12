@@ -18,6 +18,6 @@ for_window [title=".*"] title_format %title (class=%class app_id=%app_id instanc
 for_window [app_id="avizo-service"] floating enable, border none
 
 # Opacity
-for_window [class=".*"] opacity $opacity
-for_window [app_id=".*"] opacity $opacity
-for_window [app_id="mpv"] opacity 1
+#for_window [class=".*"] opacity $opacity
+#for_window [app_id=".*"] opacity $opacity
+#for_window [app_id="mpv"] opacity 1
