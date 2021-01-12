@@ -1,0 +1,41 @@
+# Open terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Open launcher
+bindsym $mod+Space exec $menu
+
+# Start Web Browser
+bindsym $mod+Shift+w exec $browser
+
+# Open File Manager
+bindsym $mod+t exec $files
+
+# Open Visual Editor
+bindsym $mod+c exec $editor
+
+# reload the configuration file
+bindsym $mod+Alt+c reload
+
+# exit sway
+bindsym $mod+Alt+q exit
+bindsym $mod+Alt+p exec systemctl poweroff
+bindsym $mod+Alt+s exec systemctl suspend
+
+# Lockscsreen
+bindsym $mod+Alt+l exec $lock
+
+# Screenshot whole screen
+bindsym Print exec $grim save output $sway_shots
+
+# Screenshot current window
+bindsym $mod+Print exec $grim save active $sway_shots
+
+# Screenshot region
+bindsym Shift+Print exec $grim save area $sway_shots
+
+# Copy screenshot to clipboard 
+bindsym Alt+Print $grim copy
+
