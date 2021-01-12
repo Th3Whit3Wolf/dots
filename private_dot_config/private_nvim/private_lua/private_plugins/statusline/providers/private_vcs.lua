@@ -1,6 +1,5 @@
 local vim = vim
 local i = require("plugins.statusline.icons")
-local c = require("plugins.statusline.colors")
 local u = require("plugins.statusline.utils")
 local git = require("myplugins.vcs.git")
 local diagnostic = require("plugins.statusline.providers.diagnostic")
@@ -53,9 +52,9 @@ end
 
 function M.get_git_branch_formatted()
   if diagnostic.has_diagnostics() then
-    u.GalaxyBG("GitBranch", c.purple)
+    u.GalaxyBG("GitBranch", 'purple')
   else
-    u.GalaxyBG("GitBranch", c.bg2)
+    u.GalaxyBG("GitBranch", 'bg2')
   end
   return git.get_branch()
 end

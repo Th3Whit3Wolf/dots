@@ -1,46 +1,57 @@
-local lspconfig = require('lspconfig')
-local completion = require('completion')
-local G = require('global')
+local lspconfig = require("lspconfig")
+local completion = require("completion")
+local G = require("global")
 local vim = vim
 
 -- Configure the completion chains
 local chain_complete_list = {
-    default = {{
-        complete_items = {
-            'lsp',
-            'ts',
-            'snippet',
-            'buffers'
+    default = {
+        {
+            complete_items = {
+                "lsp",
+                --    'ts',
+                "snippet",
+                "buffers"
+            }
+        },
+        {
+            complete_items = {"path"},
+            triggered_only = {"/"}
+        },
+        {
+            complete_items = {"buffers"}
         }
-    }, {
-        complete_items = {'path'},
-        triggered_only = {'/'}
-    }, {
-        complete_items = {'buffers'}
-    }},
-    string = {{
-        complete_items = {'path'},
-        triggered_only = {'/'}
-    }},
+    },
+    string = {
+        {
+            complete_items = {"path"},
+            triggered_only = {"/"}
+        }
+    },
     comment = {},
-    sql = {{
-        complete_items = {
-            'vim-dadbod-completion',
-            'lsp'
+    sql = {
+        {
+            complete_items = {
+                "vim-dadbod-completion",
+                "lsp"
+            }
         }
-    }},
-    vim = {{
-        complete_items = {'snippet'}
-    }, {
-        mode = {'cmd'}
-    }}
+    },
+    vim = {
+        {
+            complete_items = {"snippet"}
+        },
+        {
+            mode = {"cmd"}
+        }
+    }
 }
 
 -- Completion Nvim settings
 -- Fix for completion with other plugins mapped to enter
 vim.g.completion_confirm_key = ""
 -- Use snippets.nvim for snippet completion
-vim.g.completion_enable_snippet = 'vim-vsnip'
+vim.g.completion_enable_snippet = "vim-vsnip"
 -- Enable auto signature
 vim.g.completion_enable_auto_signature = 1
 -- Auto change completion source
@@ -78,21 +89,30 @@ vim.g.completion_customize_lsp_label = {
     Default = ""
 }
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-    underline = true
-  }
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        virtual_text = true,
+        signs = true,
+        update_in_insert = true,
+        underline = true
+    }
 )
 
 local on_attach = function(client)
-    completion.on_attach(client, {
-        sorting = 'alphabet',
-        matching_strategy_list = {'exact', 'fuzzy', 'substring'},
-        chain_complete_list = chain_complete_list
-    })
+    if client.config.flags then
+        client.config.flags.allow_incremental_sync = true
+    end
+
+    completion.on_attach(
+        client,
+        {
+            sorting = "alphabet",
+            matching_strategy_list = {"exact", "fuzzy", "substring"},
+            chain_complete_list = chain_complete_list
+        }
+    )
 
     -- Keybindings for LSPs
     -- Note these are in on_attach so that they don't override bindings in a non-LSP setting
@@ -101,10 +121,9 @@ local on_attach = function(client)
         silent = true
     }
 
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    --vim.api.nvim_buf_set_keymap(0, "n", "<leader>ch", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ch", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>ci", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>ct", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
@@ -114,60 +133,57 @@ local on_attach = function(client)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>csd", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>csw", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
 
+    vim.api.nvim_buf_set_keymap(0, "n", "gr", "Telescope lsp_references", opts)
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>fw", "Telescope lsp_workspace_symbols", opts)
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ca", "Telescope lsp_code_actions", opts)
+
     -- diagnostics-lsp
-    vim.fn.sign_define('LspDiagnosticsErrorSign', {text='✘', texthl='LspDiagnosticsError',linehl='', numhl=''})
-    vim.fn.sign_define('LspDiagnosticsWarningSign', {text='', texthl='LspDiagnosticsWarning', linehl='', numhl=''})
-    vim.fn.sign_define('LspDiagnosticsInformationSign', {text='', texthl='LspDiagnosticsInformation', linehl='', numhl=''})
-    vim.fn.sign_define('LspDiagnosticsHintSign', {text='ஐ', texthl='LspDiagnosticsHint', linehl='', numhl=''})
+    vim.fn.sign_define("LspDiagnosticsErrorSign", {text = "✘", texthl = "LspDiagnosticsError", linehl = "", numhl = ""})
+    vim.fn.sign_define(
+        "LspDiagnosticsWarningSign",
+        {text = "", texthl = "LspDiagnosticsWarning", linehl = "", numhl = ""}
+    )
+    vim.fn.sign_define(
+        "LspDiagnosticsInformationSign",
+        {text = "", texthl = "LspDiagnosticsInformation", linehl = "", numhl = ""}
+    )
+    vim.fn.sign_define("LspDiagnosticsHintSign", {text = "ஐ", texthl = "LspDiagnosticsHint", linehl = "", numhl = ""})
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>c]", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cd[", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>cdo", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-
-    if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
-    end
-
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_command('augroup lsp_aucmds')
-        vim.api.nvim_command('au!')
-        vim.api.nvim_command('au CursorHold <buffer> lua vim.lsp.buf.document_highlight()')
-        vim.api.nvim_command('au CursorMoved <buffer> lua vim.lsp.buf.clear_references()')
-        vim.api.nvim_command('augroup END')
-    end
-
 end
 
 -- List of servers where config = {on_attach = on_attach}
 local simple_lsp = {
-    'als',
-    'dockerls',
-    'elmls',
-    'html',
-    'jdtls',
-    'metals',
-    'ocamlls',
-    'purescriptls',
-    'rnix',
-    'sqlls',
-    'vimls',
-    'vuels',
-    'yamlls'
+    "als",
+    "dockerls",
+    "elmls",
+    "html",
+    "jdtls",
+    "metals",
+    "ocamlls",
+    "purescriptls",
+    "rnix",
+    "sqlls",
+    "vimls",
+    "vuels",
+    "yamlls"
 }
 
 -- List of installed LSP servers
-local installed_lsp = vim.fn.systemlist('ls ~/.cache/nvim/nvim_lsp')
+local installed_lsp = vim.fn.systemlist("ls ~/.cache/nvim/nvim_lsp")
 for k, _ in pairs(installed_lsp) do
     if installed_lsp[k] == "bashls" then
         lspconfig.bashls.setup {
             cmd = {
-                'bash-language-server',
-                'start'
+                "bash-language-server",
+                "start"
             },
             filetypes = {
-                'sh',
-                'zsh'
+                "sh",
+                "zsh"
             },
-            root_dir = lspconfig.util.root_pattern('.git'),
+            root_dir = lspconfig.util.root_pattern(".git"),
             on_attach = on_attach
         }
     elseif installed_lsp[k] == "cssls" then
@@ -178,17 +194,14 @@ for k, _ in pairs(installed_lsp) do
                 "sass",
                 "scss"
             },
-            root_dir = lspconfig.util.root_pattern(
-                "package.json",
-                ".git"
-            ),
+            root_dir = lspconfig.util.root_pattern("package.json", ".git"),
             on_attach = on_attach
         }
     elseif installed_lsp[k] == "jsonls" then
         lspconfig.jsonls.setup {
             cmd = {
-                'json-languageserver',
-                '--stdio'
+                "json-languageserver",
+                "--stdio"
             },
             on_attach = on_attach
         }
@@ -199,7 +212,7 @@ for k, _ in pairs(installed_lsp) do
                 Lua = {
                     runtime = {
                         version = "LuaJIT",
-                        path = vim.split(package.path, ';')
+                        path = vim.split(package.path, ";")
                     },
                     diagnostics = {
                         enable = true,
@@ -228,11 +241,7 @@ for k, _ in pairs(installed_lsp) do
                 "typescriptreact",
                 "typescript.tsx"
             },
-            root_dir = lspconfig.util.root_pattern(
-                'package.json',
-                'tsconfig.json',
-                '.git'
-            ),
+            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
             on_attach = on_attach
         }
     else
@@ -246,19 +255,19 @@ for k, _ in pairs(installed_lsp) do
     end
 end
 
-if vim.fn.executable('ccls') > 0 then
+if vim.fn.executable("ccls") > 0 then
     lspconfig.ccls.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('clangd') > 0 then
+elseif vim.fn.executable("clangd") > 0 then
     lspconfig.clangd.setup {
         cmd = {
-            'clangd',
-            '--clang-tidy',
-            '--completion-style=bundled',
-            '--header-insertion=iwyu',
-            '--suggest-missing-includes',
-            '--cross-file-rename'
+            "clangd",
+            "--clang-tidy",
+            "--completion-style=bundled",
+            "--header-insertion=iwyu",
+            "--suggest-missing-includes",
+            "--cross-file-rename"
         },
         init_options = {
             clangdFileStatus = true,
@@ -270,19 +279,19 @@ elseif vim.fn.executable('clangd') > 0 then
     }
 end
 
-if vim.fn.executable('clojure-lsp') > 0 then
+if vim.fn.executable("clojure-lsp") > 0 then
     lspconfig.clojure_lsp.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('cmake-language-server') > 0 then
+if vim.fn.executable("cmake-language-server") > 0 then
     lspconfig.cmake.setup {
         on_attach = on_attach
     }
 end
 
-if G.exists('/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot') then
+if G.exists("/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot") then
     lspconfig.dartls.setup {
         cmd = {
             "dart",
@@ -293,116 +302,120 @@ if G.exists('/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot') then
     }
 end
 
-if vim.fn.executable('fortls') > 0 then
+if vim.fn.executable("fortls") > 0 then
     lspconfig.fortls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('nc') > 0 then
+if vim.fn.executable("nc") > 0 then
     lspconfig.gdscript.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('hie-wrapper') > 0 then
+if vim.fn.executable("hie-wrapper") > 0 then
     lspconfig.hie.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('ghcide') > 0 then
+elseif vim.fn.executable("ghcide") > 0 then
     lspconfig.ghcide.setup {
         on_attach = on_attach
     }
-elseif vim.fn.executable('haskell-language-server-wrapper') > 0 then
+elseif vim.fn.executable("haskell-language-server-wrapper") > 0 then
     lspconfig.hls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('gopls') > 0 then
+if vim.fn.executable("gopls") > 0 then
     lspconfig.gopls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('kotlin-language-server') > 0 then
+if vim.fn.executable("kotlin-language-server") > 0 then
     lspconfig.kotlin_language_server.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('lean-language-server') > 0 then
+if vim.fn.executable("lean-language-server") > 0 then
     lspconfig.leanls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable(G.python3 .. 'bin' .. G.path_sep ..'pyls') then
+if vim.fn.executable(G.python3 .. "bin" .. G.path_sep .. "pyls") then
     lspconfig.pyls.setup {
-        cmd = {G.python3 .. 'bin' .. G.path_sep ..'pyls'},
+        cmd = {G.python3 .. "bin" .. G.path_sep .. "pyls"},
         settings = {
             pyls = {
-                executable = G.python3 .. 'bin' .. G.path_sep ..'pyls'
+                executable = G.python3 .. "bin" .. G.path_sep .. "pyls"
             }
         },
         on_attach = on_attach,
         root_dir = function(fname)
             return lspconfig.util.root_pattern(
-                'pyproject.toml',
-                'setup.py',
-                'setup.cfg',
-                'requirements.txt',
-                'mypy.ini',
-                '.pylintrc',
-                '.flake8rc',
-                '.gitignore'
-            )(fname)
-            or lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+                "pyproject.toml",
+                "setup.py",
+                "setup.cfg",
+                "requirements.txt",
+                "mypy.ini",
+                ".pylintrc",
+                ".flake8rc",
+                ".gitignore"
+            )(fname) or
+                lspconfig.util.find_git_ancestor(fname) or
+                vim.loop.os_homedir()
         end
     }
 end
 
-if vim.fn.executable('R') > 0 then
+if vim.fn.executable("R") > 0 then
     lspconfig.r_language_server.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('rust_analyzer') > 0 then
+if vim.fn.executable("rust-analyzer") > 0 then
     lspconfig.rust_analyzer.setup {
+        checkOnSave = {
+            command = "clippy"
+        },
         on_attach = on_attach
     }
-elseif vim.fn.executable('rls') > 0 then
+elseif vim.fn.executable("rls") > 0 then
     lspconfig.rls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('scry') > 0 then
+if vim.fn.executable("scry") > 0 then
     lspconfig.scry.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('solargraph') > 0 then
+if vim.fn.executable("solargraph") > 0 then
     lspconfig.solargraph.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('sourcekit') > 0 then
+if vim.fn.executable("sourcekit") > 0 then
     lspconfig.sourcekit.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('terraform-ls') > 0 then
+if vim.fn.executable("terraform-ls") > 0 then
     lspconfig.terraformls.setup {
         on_attach = on_attach
     }
 end
 
-if vim.fn.executable('texlab') > 0 then
+if vim.fn.executable("texlab") > 0 then
     lspconfig.texlab.setup {
         on_attach = on_attach
     }

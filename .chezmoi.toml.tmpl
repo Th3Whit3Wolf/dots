@@ -24,7 +24,7 @@
 remove = true
 [data]
   headless = {{ $headless }}
-  hostname = {{ $hostname | quote }}
+  hostname = {{ .chezmoi.hostname | quote }}
   transient = {{ $transient }}
   isovalent = {{ $isovalent }}
   kubernetes = {{ $kubernetes }}

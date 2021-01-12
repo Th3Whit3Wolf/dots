@@ -1,4 +1,4 @@
-local api = vim.api
+local api, fn, v, b = vim.api, vim.fn, vim.v, vim.b
 
 M = {}
 
@@ -14,7 +14,7 @@ local function strSplit(delim, str)
     return t
 end
 
-function M.fixSpell(abbrev, def) 
+function M.fixSpell(abbrev, def)
     for correct, incorrect_list in pairs(def) do
         for _, incorrect in ipairs(incorrect_list) do
             --local command = table.concat(vim.tbl_flatten {scope, def}, " ")
@@ -66,27 +66,37 @@ function M.abolish(str1, str2)
         end)()
 
         if occurence2 < 1 then
-            for _,word in pairs(mid_word1) do
+            for _, word in pairs(mid_word1) do
                 api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. word .. str2)
             end
         else
-        if string.sub(str2, 1) == "{" then
-            for _,word in pairs(mid_word1) do
-                api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. word .. str2:sub(3, -1))
-            end
-        elseif string.sub(str2, -1) == "}" then
-            for _,word in pairs(mid_word1) do
-                api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. str2:sub(1, -3) .. word)
-            end
-        else
-            local split_str = strSplit("{}", str2)
-            for _,word in pairs(mid_word1) do
-                api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. split_str[1] .. word .. split_str[2])
+            if string.sub(str2, 1) == "{" then
+                for _, word in pairs(mid_word1) do
+                    api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. word .. str2:sub(3, -1))
+                end
+            elseif string.sub(str2, -1) == "}" then
+                for _, word in pairs(mid_word1) do
+                    api.nvim_command("iab " .. begin_word1 .. word .. end_word1 .. " " .. str2:sub(1, -3) .. word)
+                end
+            else
+                local split_str = strSplit("{}", str2)
+                for _, word in pairs(mid_word1) do
+                    api.nvim_command(
+                        "iab " .. begin_word1 .. word .. end_word1 .. " " .. split_str[1] .. word .. split_str[2]
+                    )
+                end
             end
         end
     end
-    end
 end
 
+function M.GetHi()
+    local gp_nm = fn.synIDattr(fn.synID(fn.line("."), fn.col("."), 1), "name")
+    local fg = fn.synIDattr(fn.synIDtrans(fn.hlID(gp_nm)), "fg#")
+    local bg = fn.synIDattr(fn.synIDtrans(fn.hlID(gp_nm)), "bg#")
+    if fg == '' then fg = 'None' end
+    if bg == '' then bg = 'None' end
+    print(gp_nm .." (fg: " .. fg .. ", bg: " .. bg ..")")
+end
 
 return M

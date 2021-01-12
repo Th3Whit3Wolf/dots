@@ -32,15 +32,40 @@ local function pythonvenvInit()
                 G.python3 ..
                     "bin" ..
                         G.path_sep ..
-                            "pip3 install -U setuptools pynvim jedi 'python-language-server[all]' isort pyls-isort neovim-remote"
+                            "pip3 install -U setuptools pynvim jedi 'python-language-server[all]' isort pyls-isort neovim-remote fortran-language-server"
         )
     end
 end
 
 local function nodeHostInit()
-    if not G.exists(G.node) and fn.executable("npm") then
+    if fn.executable("npm") then
         -- install neovim node host
-        os.execute("npm install -g neovim")
+        if not G.exists(G.node) then
+            local needs_install = {
+                "neovim",
+                "vscode-css-languageserver-bin",
+                "dockerfile-language-server-nodejs",
+                "elm",
+                "elm-test",
+                "elm-format",
+                "@elm-tooling/elm-language-server",
+                "vscode-html-languageserver-bin",
+                "intelephense",
+                "vscode-json-languageserver",
+                "purescript-language-server",
+                "rome",
+                "svelte-language-server",
+                "typescript",
+                "typescript-language-server",
+                'vim-language-server',
+                'vls',
+                'yaml-language-server'
+            }
+            for _, v in pairs(needs_install) do
+                os.execute("npm install -g " .. v)
+            end
+            os.execute("npm install -g neovim")
+        end
     end
 end
 
@@ -74,7 +99,7 @@ local function packerInit()
         cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "paq-nvim")
     end
     require "plug_paq"
-    require'paq-nvim'.install()
+    require "paq-nvim".install()
 end
 
 local function quoteGenerator()

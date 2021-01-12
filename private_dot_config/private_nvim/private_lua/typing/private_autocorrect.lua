@@ -7,7 +7,13 @@ Abolish(
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
 )
 Abolish("scflead", "supercalifragilisticexpialidocious")
--- A
+--------------
+--     ___  --
+--    /   | --
+--   / /| | --
+--  / ___ | --
+-- /_/  |_| --
+--------------
 Abolish("alot", "a lot")
 Abolish("about{a,it,the}", "about {}")
 Abolish("abreviat{ed,ion}", "abbreviat{}")
@@ -66,7 +72,13 @@ Abolish("atmospher", "atmosphere")
 Abolish("aud{ei,ia}nce", "audience")
 Abolish("austrail{a,an,ia}", "australia")
 Abolish("austrailian", "australian")
--- B
+---------------
+--     ____  --
+--    / __ ) --
+--   / __  | --
+--  / /_/ /  --
+-- /_____/   --
+---------------
 Abolish("b{akc,cak}", "back")
 Abolish("bal{e,la}nce", "balance")
 Abolish("bve", "be")
@@ -93,7 +105,13 @@ Abolish("boroken", "broken")
 Abolish("buddah", "Buddha")
 Abolish("buddist", "Buddhist")
 Abolish("butthe", "but the")
--- C
+---------------
+--    ______ --
+--   / ____/ --
+--  / /      --
+-- / /___    --
+-- \____/    --
+---------------
 Abolish("cafe", "café")
 Abolish("cafeine", "caffeine")
 Abolish("cal{cul,u}lated", "calculated")
@@ -182,7 +200,13 @@ Abolish("couldnt", "couldn’t")
 Abolish("creme", "crème")
 Abolish("cu{sot,tso}mer", "customer")
 Abolish("cu{sot,tso}mers", "customers")
--- D
+---------------
+--     ____  --
+--    / __ \ --
+--   / / / / --
+--  / /_/ /  --
+-- /_____/   --
+---------------
 Abolish("danceing", "dancing")
 Abolish("dardenelles", "Dardanelles")
 Abolish("desi{c,s}ion", "decision")

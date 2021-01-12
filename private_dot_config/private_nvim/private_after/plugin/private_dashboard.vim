@@ -55,6 +55,9 @@ let g:dashboard_custom_section={
     \ 'book_marks'   :{
         \ 'description': ['    Jump to book marks                      SPC fm   '],
         \ 'command':function('dashboard#handler#book_marks')},
+    \ 'update_plugins'   :{
+        \ 'description': ['   Update Plugins                                     '],
+        \ 'command': 'lua require("plug_paq").update()'},
     \ }
 
 let quote = systemlist("~/.local/share/nvim/bin/pq")

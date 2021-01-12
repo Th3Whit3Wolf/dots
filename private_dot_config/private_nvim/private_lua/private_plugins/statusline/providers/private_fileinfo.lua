@@ -1,6 +1,5 @@
 local vim = vim
 local i = require("plugins.statusline.icons")
-local c = require("plugins.statusline.colors")
 local u = require("plugins.statusline.utils")
 local diagnostic = require("plugins.statusline.providers.diagnostic")
 local git = require("myplugins.vcs.git")
@@ -307,10 +306,10 @@ end
 
 function M.filetype_seperator()
   if not diagnostic.has_diagnostics() and not git.check_workspace() or vim.bo.filetype == "" then
-    u.GalaxyHi("FiletTypeSeperator", c.bg2, c.purple)
+    u.GalaxyHi("FiletTypeSeperator", 'bg2', 'purple')
     return ""
   else
-    u.GalaxyHi("FiletTypeSeperator", c.purple, c.bg2)
+    u.GalaxyHi("FiletTypeSeperator", 'purple', 'bg2')
     return i.slant.Right
   end
 end

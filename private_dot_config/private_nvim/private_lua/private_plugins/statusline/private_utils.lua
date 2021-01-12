@@ -10,8 +10,15 @@ function M.GalaxyBG(item, col)
     vim.api.nvim_command("hi Galaxy" .. item .. " guibg=" .. c.color(col))
 end
 function M.GalaxyHi(item, colorfg, colorbg)
-    M.GalaxyFG(item, colorfg)
-    M.GalaxyBG(item, colorbg)
+    vim.api.nvim_command(
+        "hi Galaxy" .. item .. " guifg=" .. c.color(colorfg) .. " guibg=" .. c.color(colorbg)
+    )
+end
+
+function M.GalaxyHiB(item, colorfg, colorbg)
+    vim.api.nvim_command(
+        "hi Galaxy" .. item .. " guifg=" .. c.color(colorfg) .. " guibg=" .. c.color(colorbg) .. " gui=bold"
+    )
 end
 
 function M.space()
