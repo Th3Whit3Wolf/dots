@@ -191,7 +191,12 @@ opt("o", "cmdwinheight", 5) -- Command-line lines
 opt("o", "equalalways", false) -- Don't resize windows on split or close
 opt("o", "colorcolumn", "100") -- Highlight the 100th character limit
 opt("o", "display", "lastline")
-opt("o", "termguicolors", true)
+if vim.env == "linux" then
+    opt("o", "termguicolors", false)
+else
+    opt("o", "termguicolors", true)
+end
+
 opt("o", "pumblend", 10)
 opt("o", "showbreak", "↳  ")
 opt("o", "conceallevel", 2)
