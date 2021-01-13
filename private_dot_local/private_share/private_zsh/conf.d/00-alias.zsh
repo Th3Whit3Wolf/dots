@@ -17,6 +17,7 @@ alias dots='chezmoi'
 alias find='fd'
 alias fcu='sudo compsize /btrfs'
 alias gt='cd $(fd -H -t d -j 12 | fzy -j 4)'
+alias ls='exa'
 alias play='mpv --hwdec=auto'
 alias ngr='sudo nginx -s reload'
 alias mem='free -h --si'
@@ -34,8 +35,8 @@ alias xsetkeyr='xset r rate 182 42'
 alias wininfo='swaymsg -t get_tree'
 
 alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
-alias aliasrc='nvim $XDG_DATA_HOME/zsh/conf.d/00-alias.zsh && source $XDG_DATA_HOME/zsh/conf.d/00-aliasrc' # Hide from ali
-alias distrorc='nvim $XDG_DATA_HOME/zsh/conf.d/01-distro-specifi.zsh && source $XDG_DATA_HOME/zsh/conf.d/01-distro-specifi.zsh' # Hide from ali
+alias aliasrc='nvim $XDG_DATA_HOME/zsh/conf.d/00-alias.zsh && source $XDG_DATA_HOME/zsh/conf.d/00-alias.zsh' # Hide from ali
+alias distrorc='nvim $XDG_DATA_HOME/zsh/conf.d/01-distro-specifi.zsh && source $XDG_DATA_HOME/zsh/conf.d/01-distro-specific.zsh' # Hide from ali
 alias sysrc='nvim $XDG_DATA_HOME/zsh/conf.d/02-system.zsh && source $XDG_DATA_HOME/zsh/conf.d/02-system.zsh' # Hide from ali
 alias typorc='nvim $XDG_DATA_HOME/zsh/conf.d/03-typo.zsh && source $XDG_DATA_HOME/zsh/conf.d/03-typo.zsh' # Hide from ali
 alias misc='nvim $XDG_DATA_HOME/zsh/conf.d/10-miscellanerous.zsh && $XDG_DATA_HOME/zsh/conf.d/10-miscellanerous.zsh' # Hide from ali
