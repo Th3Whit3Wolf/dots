@@ -1,3 +1,0 @@
-yta() {
-    mpv --ytdl-format=bestaudio ytdl://ytsearch:"$*"
-}
