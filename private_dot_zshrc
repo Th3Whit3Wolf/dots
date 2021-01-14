@@ -2,7 +2,7 @@
 # to add other keys to this hash, see: man 5 terminfo
 typeset -g -A key
 
-fpath=(~/.shell/scripts "${fpath[@]}")
+fpath=(~/.local/share/zsh/scripts "${fpath[@]}")
 autoload -Uz $fpath[1]/*(.:t) compinit up-line-or-beginning-search down-line-or-beginning-search add-zsh-hook
 
 zle -N up-line-or-beginning-search
