@@ -1,5 +1,6 @@
 {
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "window.menuBarVisibility": "toggle",
-    "workbench.colorTheme": "Spacemacs - light"
+    "workbench.colorTheme": "Spacemacs - light",
+    "editor.fontLigatures": true,
 }
