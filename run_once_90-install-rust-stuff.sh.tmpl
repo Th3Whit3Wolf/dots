@@ -22,7 +22,6 @@ plugins=(
 )
 rustup default stable
 rustup target add wasm32-unknown-unknown
-cargo install --git https://github.com/johnae/persway.git
 for plugin in ${plugins[@]}; do
     cargo install $plugin
 done
