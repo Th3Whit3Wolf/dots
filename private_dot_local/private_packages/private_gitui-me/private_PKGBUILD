@@ -1,0 +1,36 @@
+pkgname='gitui-mine'
+_pkgname="gitui"
+pkgver=0.11.0.1008.g0403c01
+pkgrel=1
+pkgdesc='Blazing fast terminal-ui for git written in Rust'
+arch=('i686' 'x86_64')
+url="https://github.com/Th3Whit3Wolf/gitui"
+license=('MIT')
+depends=('libgit2' 'libxcb')
+conflicts=('gitui-git' 'gitui-bin')
+makedepends=('rust' 'cargo' 'cmake' 'fontconfig' 'ncurses' 'desktop-file-utils' 'gdb' 'libxcb' 'git')
+provides=('gitui')
+source=("$_pkgname::git+https://github.com/Th3Whit3Wolf/$_pkgname.git")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd $_pkgname/
+	echo "$(grep '^version =' Cargo.toml|head -n1|cut -d\" -f2|cut -d\- -f1).$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
+}
+
+build(){
+  cd "$_pkgname"
+  env CARGO_INCREMENTAL=0 cargo build --release --locked
+}
+
+check(){
+  cd "$_pkgname"
+  env CARGO_INCREMENTAL=0 cargo test --release
+}
+
+
+package() {
+  install -Dm755 "$srcdir/$_pkgname/target/release/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+  install -Dm644 "$srcdir/$_pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+}
+

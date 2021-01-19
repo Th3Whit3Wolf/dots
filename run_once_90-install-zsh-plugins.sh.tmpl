@@ -10,6 +10,7 @@ plugins=(
 	"zdharma/fast-syntax-highlighting"
 	"BuonOmo/yarn-completion"
 	"lukechilds/zsh-better-npm-completion"
+	"larkery/zsh-histdb"
 )
 
 # Install all plugins to ~/.local/share/zsh/plugins
@@ -17,5 +18,6 @@ for plugin in "${plugins[@]}"; do
 	name=$(echo $plugin | cut -d  '/' -f2 )
 	curl -s -L -o ${name}-master.tar.gz https://github.com/${plugin}/archive/master.tar.gz
 	chezmoi import --strip-components 1 --destination ${HOME}/.local/share/zsh/plugins/${name} ${name}-master.tar.gz
+	rm ${name}-master.tar.gz
 done
 

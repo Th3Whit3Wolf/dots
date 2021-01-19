@@ -7,8 +7,8 @@ DUSK=19
 # If time is between 7AM & 7PM
 if (( DAWN <= H && DUSK > H )); then
     # Light theme
-    ~/.cargo/bin/gitui -t space_light.ron
+    gitui -t space_light.ron
 else
     # Dark theme
-     ~/.cargo/bin/gitui -t space_dark.ron
+    gitui -t space_dark.ron
 fi
