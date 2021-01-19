@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>name</key>
+    <string>Spacemacs</string>
+    <key>settings</key>
+    <array>
+      <dict>
+        <key>settings</key>
+        <dict>
+          <key>background</key>
+          <string>#292b2e</string>
+          <key>caret</key>
+          <string>#86dc2f</string>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+          <key>selection</key>
+          <string>#444155</string>
+          <key>lineHighlight</key>
+          <string>#212026</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Tag content</string>
+        <key>scope</key>
+        <string>token</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Tag delimiter</string>
+        <key>scope</key>
+        <string>punctuation.definition.meta.tag.end.html, punctuation.definition.meta.tag.begin.html
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Doctype</string>
+        <key>scope</key>
+        <string>token.storage.html, token.storage.content.html
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Comment</string>
+        <key>scope</key>
+        <string>token.comment.html</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Tag name</string>
+        <key>scope</key>
+        <string>token.entity.name.tag</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Attribute name</string>
+        <key>scope</key>
+        <string>token.entity.other.attribute-name.html, token.meta.tag.assign.html
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Attribute value</string>
+        <key>scope</key>
+        <string>token.string.html
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Links</string>
+        <key>scope</key>
+        <string>token.string.html.detected-link
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Braces</string>
+        <key>scope</key>
+        <string>token.begin.definition.dictionary.meta.punctuation.structure.json, token.definition.dictionary.end.meta.punctuation.structure.json, token.array.begin.definition.dictionary.meta.punctuation.structure.value.json, token.array.definition.dictionary.end.meta.punctuation.structure.value.json
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property Name</string>
+        <key>scope</key>
+        <string>token.begin.dictionary.meta.property-name.punctuation.structure.support.type.json, token.dictionary.meta.property-name.structure.support.type.json, token.dictionary.end.meta.property-name.punctuation.structure.support.type.json
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property Value (string)</string>
+        <key>scope</key>
+        <string>token.begin.definition.dictionary.double.meta.punctuation.quoted.string.structure.value.json, token.dictionary.double.meta.quoted.string.structure.value.json, token.definition.dictionary.double.end.meta.punctuation.quoted.string.structure.value.json
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2d9574</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property Value (number)</string>
+        <key>scope</key>
+        <string>token.constant.dictionary.meta.numeric.structure.value.json,</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property Value (language null/false)</string>
+        <key>scope</key>
+        <string>token.constant.dictionary.language.meta.structure.value.json
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Class name</string>
+        <key>scope</key>
+        <string>token.attribute-name.class.entity.meta.other.selector.css
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property name</string>
+        <key>scope</key>
+        <string>token.meta.property-list.property-name.support.type.css, token.meta.property-list.property-name.css
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#7590db</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property value</string>
+        <key>scope</key>
+        <string>token.constant.meta.numeric.property-list.property-value.css
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Comment</string>
+        <key>scope</key>
+        <string>token.block.comment.css
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>@import</string>
+        <key>scope</key>
+        <string>token.at-rule.control.css.import.keyword.meta.less, token.at-rule.control.css.definition.import.keyword.meta.punctuation.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Quoted string</string>
+        <key>scope</key>
+        <string>token.css.quoted.single.string.less token.at-rule.control.css.definition.import.keyword.meta.punctuation.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2d9574</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Class name</string>
+        <key>scope</key>
+        <string>token.attribute-name.class.css.entity.other.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property name</string>
+        <key>scope</key>
+        <string>token.css.property-name.support.type.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#7590db</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Property value</string>
+        <key>scope</key>
+        <string>token.constant.css.numeric.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Comment</string>
+        <key>scope</key>
+        <string>token comment definition.double-slash.line.punctuation.less, token.comment.double-slash.line.less, token.begin.block.comment.css.definition.punctuation.less, token.block.comment.css.less, token.block.comment.css.definition.end.punctuation.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Variable</string>
+        <key>scope</key>
+        <string>token.other.variable.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>String</string>
+        <key>scope</key>
+        <string>token.css.quoted.single.string.less, token.css.double.quoted.string.less
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2d9574</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Comment</string>
+        <key>scope</key>
+        <string>token.comment.line.ts.js, token.block.comment.ts.js
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Language keyword</string>
+        <key>scope</key>
+        <string>token.expr.meta.storage.ts.type.var.js, token.block.control.decl.expr, token.control.keyword.ts.js, token.block.decl.expr.function.keyword.meta.new
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Brace</string>
+        <key>scope</key>
+        <string>token.brace
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#b2b2b2</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Variables</string>
+        <key>scope</key>
+        <string>token.block.decl.expr.function.meta.ts.var.var-single-variable.variable.js, token.expr.meta.ts.var.var-single-variable.variable.js,
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#7590db</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Language values</string>
+        <key>scope</key>
+        <string>token.block.constant.decl.expr.function.language.meta.null, token.block.boolean.constant.decl.expr.function.language.meta.ts, token.block.constant.decl.expr.function.language.meta.ts.var.var-single-variable.js, token.block.element.expr.meta.template.ts.var.var-single-variable.js, token.element.expr.meta.template.ts.var.var-single-variable.js
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Strings</string>
+        <key>scope</key>
+        <string>token.block.decl.double.expr.function.meta.string, token.block.decl.expr.function.meta.single.string, token.double.string.ts.js.detected-link, token.children.meta.open.quoted.single.string.tag.ts.tsx.js, token.children.double.meta.open.quoted.string.tag.ts.tsx.js, token.expr.meta.single.string.ts.var.var-single-variable.js, token.double.expr.meta.string.ts.var.var-single-variable.js, token.expr.meta.string.template
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2d9574</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Function name</string>
+        <key>scope</key>
+        <string>token.entity.function.meta.name.ts.js
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>JSX prop name</string>
+        <key>scope</key>
+        <string>token.attribute-name.entity.meta.open.other.tag.ts.js
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Number constant</string>
+        <key>scope</key>
+        <string>token.constant.numeric.ts.js, token.block.constant.expr.member.meta.numeric.object, token.array.block.constant.expr.literal.member.meta.numeric.object
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Comments</string>
+        <key>scope</key>
+        <string>token.comment.definition.double-slash.js.line.punctuation.jsx, token.comment.double-slash.js.line.jsx, token.block.comment.js.jsx, token.block.comment.definition.js.punctuation.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2aa1ae</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Keywords</string>
+        <key>scope</key>
+        <string>token.arrow.function.js.meta.static.storage.type.jsx, token.asterisk.body.class.function.generator.js.keyword.meta.method.jsx, token.body.class.function.js.meta.method.storage.type.jsx, token.body.class.js.meta.modifier.storage.jsx, token.braces.conditional.control.curly.group.js.keyword.meta.jsx, token.braces.constructor.curly.group.instance.js.keyword.meta.new.operator.jsx, token.braces.control.curly.flow.group.js.keyword.meta.jsx, token.braces.control.curly.for.group.js.keyword.loop.meta.jsx, token.braces.control.curly.group.js.keyword.meta.trycatch.jsx, token.class.extends.js.meta.storage.type.jsx, token.class.js.meta.storage.type.jsx, token.control.for.js.keyword.loop.meta.jsx, token.control.js.keyword.module.jsx, token.flowtype.support.type.jsx, token.js.storage.type.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Variables</string>
+        <key>scope</key>
+        <string>token.accessor.class.element.entity.js.keyword.meta.operator.property.quasi.string.jsx, token.class.element.entity.js.meta.other.property.quasi.static.string.variable.jsx, token.class.element.entity.js.meta.other.property.quasi.string.variable.jsx, token.element.entity.js.other.quasi.readwrite.string.variable.jsx, token.js.other.readwrite.variable.jsx, token.flowtype.primitive.support.type.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#7590db</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Strings</string>
+        <key>scope</key>
+        <string>token.begin.definition.double.js.punctuation.quoted.string.jsx, token.begin.definition.js.punctuation.quasi.string.jsx, token.begin.definition.js.punctuation.quoted.single.string.jsx token.definition.double.end.js.punctuation.quoted.string.jsx, token.definition.end.js.punctuation.quasi.string.jsx, token.definition.end.js.punctuation.quoted.single.string.jsx, token.double.js.quoted.string.jsx, token.double.js.quoted.string.jsx, token.js.quasi.string.jsx, token.js.quoted.single.string.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#2d9574</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Values</string>
+        <key>scope</key>
+        <string>token.boolean.braces.constant.curly.false.group.js.language.meta.jsx, token.boolean.braces.constant.curly.true.group.js.language.meta.jsx, token.boolean.constant.js.language.false.jsx, token.boolean.constant.js.language.true.jsx, token.braces.constant.curly.group.js.language.meta.null.jsx, token.braces.constant.curly.group.js.language.meta.undefined.jsx, token.builtin.flowtype.primitive.support.type.jsx, token.constant.js.numeric.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Function name</string>
+        <key>scope</key>
+        <string>token.entity.function.js.meta.name.jsx, token.braces.curly.function.group.js.meta.mutator.support.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontStyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Function parameter</string>
+        <key>scope</key>
+        <string>token.function.js.meta.other.readwrite.variable.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#a45bad</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>DOM Object</string>
+        <key>scope</key>
+        <string>token.braces.curly.dom.group.js.meta.object.round.support.type.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#c56ec3</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Prototype</string>
+        <key>scope</key>
+        <string>token.access.js.language.meta.prototype.variable.jsx, token.arrow.function.js.language.meta.prototype.variable.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#4f97d7</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Object keys</string>
+        <key>scope</key>
+        <string>token.braces.constant.curly.group.js.key.meta.object.other.string.unquoted.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>foreground</key>
+          <string>#c56ec3</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>name</key>
+        <string>Class name</string>
+        <key>scope</key>
+        <string>token.class.entity.js.name.jsx
+</string>
+        <key>settings</key>
+        <dict>
+          <key>fontSyle</key>
+          <string>bold</string>
+          <key>foreground</key>
+          <string>#bc6ec5</string>
+        </dict>
+      </dict>
+    </array>
+  </dict>
+</plist>
