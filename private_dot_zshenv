@@ -41,7 +41,9 @@ export EDITOR=nvim
 export VISUAL=code-oss
 export GTK_USE_PORTAL=1
 
-export GPG_TTY=$(tty)
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+#export GPG_TTY=$(tty)
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
     
