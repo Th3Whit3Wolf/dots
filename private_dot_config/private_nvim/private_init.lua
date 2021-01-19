@@ -195,6 +195,8 @@ if vim.env == "linux" then
     opt("o", "termguicolors", false)
 else
     opt("o", "termguicolors", true)
+    g["dusk_til_dawn_light_theme"] = "space-nvim"
+    g["dusk_til_dawn_dark_theme"] = "space-nvim"
 end
 
 opt("o", "pumblend", 10)

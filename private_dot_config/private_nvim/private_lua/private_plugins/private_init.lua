@@ -5,22 +5,25 @@ local g =  vim.g
 g["db_ui_env_variable_url"] = "DATABASE_URL"
 g["db_ui_env_variable_name"] = "DATABASE_NAME"
 g["db_ui_save_location"] = G.cache_dir .. "dadbod_queries"
+
 -- Vsnip snippet directories
 g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
 
 -- Endwise No default mapping
 g["endwise_no_mappings"] = 1
-g["ditto_dir"] = G.cache_dir .. "Ditto"
 
--- Set Colortheme
-g["dusk_til_dawn_light_theme"] = "space-nvim"
-g["dusk_til_dawn_dark_theme"] = "space-nvim"
+-- Dusk til Dawn
 g["dusk_til_dawn_morning"] = 7
 g["dusk_til_dawn_night"] = 19
 
-require'Dusk-til-Dawn'.colorschemeManager()()
+-- Prose
+g["lexical#thesaurus"] = {'~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt'}
+g["lexical#dictionary"] = {'/usr/share/dict/words'}
+g["lexical#spellfile"] = {'~/.config/nvim/spell/en.utf-8.add'}
+g["lexical#thesaurus_key"] = '<leader>lt'
+g["lexical#dictionary_key"] = '<leader>ld'
+
 require 'plugins.lsp'
-require 'plugins.statusline'
 if vim.o.background ~= nil and vim.o.background == "light" then
     require('indent_guides').setup(
         {
@@ -78,3 +81,5 @@ require"toggleterm".setup{
     direction = 'horizontal'
   }
 
+require 'plugins.tree_sitter'
+require 'plugins.statusline'

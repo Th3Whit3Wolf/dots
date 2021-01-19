@@ -2,9 +2,6 @@ packadd vimtex
 packadd vim-latex-live-preview
 packadd vim-lexical
 packadd vim-pencil
-packadd vim-ditto
-
-DittoOn
 
 call lexical#init()
 call pencil#init()
@@ -13,12 +10,6 @@ let b:endwise_addition = '\="\\end" . matchstr(submatch(0), "{.\\{-}}")'
 let b:endwise_words = 'begin'
 let b:endwise_pattern = '\\begin{.\{-}}'
 let b:endwise_syngroups = 'texSection,texBeginEnd,texBeginEndName,texStatement'
-
-let g:lexical#thesaurus = ['~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt']
-let g:lexical#dictionary = ['/usr/share/dict/words']
-let g:lexical#spellfile = ['~/.config/nvim/spell/en.utf-8.add']
-let g:lexical#thesaurus_key = '<leader>lt'
-let g:lexical#dictionary_key = '<leader>ld'
 
 let g:tex_flavor="latex"
 let g:vimtex_quickfix_mode=0
