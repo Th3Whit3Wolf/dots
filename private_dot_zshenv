@@ -1,0 +1,57 @@
+typeset -U PATH path
+
+if [ -x "/usr/bin/go" ]; then
+    export GOPATH="$HOME/.local/share/go"
+fi
+
+if [ -x "/usr/bin/npm" ]; then
+    export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/.npm/npmrc"
+    node_modules="$PATH:$HOME/.local/lib/node_modules/bin:$PAH"
+fi
+
+if [ -x "usr/bin/cabal" ]; then
+    cabal="$HOME/.cabal/bin"
+fi
+
+if [ -x "opt/dart-sdk/bin/dart" ]; then
+    dart="$HOME/.pub/bin"
+fi
+
+path=("$HOME/.local/bin" "$GOPATH" "$node_modules" "$dart" "$cabal" "$HOME/.cargo/bin" "$path[@]")
+
+export PATH
+export npm_config_prefix=~/.node_modules
+
+# Colorful Man Pages
+export PAGER=less
+export LESS_TERMCAP_mb=$'\E[01;31m'         # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'    # begin bold
+export LESS_TERMCAP_me=$'\E[0m'             # end mode
+export LESS_TERMCAP_se=$'\E[0m'             # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'      # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'             # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m'   # begin underline
+
+# XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export EDITOR=nvim
+export VISUAL=code-oss
+export GTK_USE_PORTAL=1
+
+export GPG_TTY=$(tty)
+
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    export QT_WAYLAND_FORCE_DPI=96
+    export QT_QPA_PLATFORMTHEME="qt5ct"
+    export QT_QPA_PLATFORM=wayland
+    export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}"
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export NO_AT_BRIDGE=1
+    export BEMENU_BACKEND=wayland
+    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+fi
