@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+# Create array of directories in ~/.local/package
+packages=( $( fd . ~/.local/packages -d 1 -t d ) )
+cwd=$(pwd)
+# Install all plugins to ~/.local/share/zsh/plugins
+for pkg in "${packages[@]}"; do
+	cd $pkg
+	makepkg -si
+	cd $cwd
+done
+
