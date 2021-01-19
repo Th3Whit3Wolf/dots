@@ -1,0 +1,3 @@
+search_local_history() {
+    show_local_history 100 | rg "$1" | sed 's/|/ | /' | awk '{ $1=strftime("%A %d %B %Y %T",$1) } {print $0}'
+}
