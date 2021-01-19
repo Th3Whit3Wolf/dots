@@ -1,3 +1,4 @@
+{{ if (and (eq .chezmoi.os "darwin" "linux") (not .headless)) -}}
 #!/bin/bash
 
 set -eufo pipefail
@@ -11,4 +12,4 @@ for pkg in "${packages[@]}"; do
 	makepkg -si
 	cd $cwd
 done
-
+{{ end }}
