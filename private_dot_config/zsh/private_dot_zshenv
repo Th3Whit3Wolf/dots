@@ -1,0 +1,88 @@
+typeset -U PATH path
+
+if [ -x "/usr/bin/npm" ]; then
+    node_modules="$PATH:$HOME/.local/lib/node_modules/bin:$PAH"
+fi
+
+path=("$HOME/.local/bin" "$GOPATH" "$node_modules" "$dart" "$cabal" "$HOME/.local/share/cargo/bin" "$path[@]")
+
+export PATH
+export npm_config_prefix=~/.local/lib/node_modules
+
+# Colorful Man Pages
+export PAGER=less
+export BAT_PAGER="less -RFXi"
+
+# XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export EDITOR=nvim
+export VISUAL=code-oss
+export GTK_USE_PORTAL=1
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export GPG_TTY=$(tty)
+
+# Set XDG Base Directories
+# Atom
+export ATOM_HOME=$XDG_CONFIG_HOME/atom
+
+# Bazaar
+export BZRPATH=$XDG_CONFIG_HOME/bazaar
+export BZR_PLUGIN_PATH=$XDG_DATA_HOME/bazaar
+export BZR_HOME=$XDG_CACHE_HOME/bazaar
+
+# Cargo
+export CARGO_HOME="$XDG_DATA_HOME"/cargo 
+
+# CCache
+export CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache.config
+export CCACHE_DIR="$XDG_CACHE_HOME"/ccache
+
+# Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+
+# GO
+export GOPATH="$HOME/.local/share/go"
+
+# GPG
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+# Lastpass
+export LPASS_HOME=$XDG_CONFIG_HOME/lpass
+
+# Less
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+
+# MPlayer
+export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+
+# NPM
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+
+# Rustup
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup 
+
+# Subversion
+export SUBVERSION_HOME=$XDG_CONFIG_HOME/subversion
+
+# VSCode
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+
+# Wayland Settings
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    export QT_WAYLAND_FORCE_DPI=96
+    export QT_QPA_PLATFORMTHEME="qt5ct"
+    export QT_QPA_PLATFORM=wayland
+    export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}"
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export NO_AT_BRIDGE=1
+    export BEMENU_BACKEND=wayland
+    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+fi
