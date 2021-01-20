@@ -1,0 +1,14 @@
+# Save in ~/Videos
+-o ~/Tunes/Youtube/%(artist)s/%(track)s.%(ext)s
+
+# Uniform Format
+--prefer-ffmpeg
+
+# Get Best Video & Sound Quality
+-f bestaudio
+
+# No Part files
+--no-part
+
+# Add metadata to file
+--add-metadata

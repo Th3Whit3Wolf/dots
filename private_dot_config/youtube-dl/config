@@ -1,0 +1,20 @@
+# Save in ~/Videos
+-o ~/Vids/Youtube/%(uploader)s/%(title)s.%(ext)s
+
+# Uniform Format
+--prefer-ffmpeg
+--merge-output-format mkv
+
+# Get Best Video & Sound Quality
+-f bestvideo[height<=?1080]+bestaudio/best[ext=webm]
+# Automatically get subtitles (Youtube Only)
+--write-auto-sub
+--embed-subs
+
+# No Part files
+--no-part
+
+# Add metadata to file
+--add-metadata
+
+--no-playlist
