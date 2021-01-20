@@ -24,7 +24,9 @@ g["lexical#thesaurus_key"] = '<leader>lt'
 g["lexical#dictionary_key"] = '<leader>ld'
 
 require 'plugins.lsp'
-if vim.o.background ~= nil and vim.o.background == "light" then
+
+local hours = tonumber(os.date("%H"))
+if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
     require('indent_guides').setup(
         {
             even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
@@ -35,7 +37,7 @@ if vim.o.background ~= nil and vim.o.background == "light" then
         }
     )
     require('indent_guides').indent_guides_enable()
-elseif vim.o.background ~= nil and vim.o.background == "dark" then
+else
     require('indent_guides').setup(
         {
             even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
@@ -46,31 +48,6 @@ elseif vim.o.background ~= nil and vim.o.background == "dark" then
         }
     )
     require('indent_guides').indent_guides_enable()
-else
-    local hours = tonumber(os.date("%H"))
-    if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
-        require('indent_guides').setup(
-            {
-                even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
-                odd_colors = {fg = "#e7e5eb", bg = "#e7e5eb"},
-                indent_space_guides = true,
-                indent_tab_guides = true,
-                indent_guide_size = 4
-            }
-        )
-        require('indent_guides').indent_guides_enable()
-    else
-        require('indent_guides').setup(
-            {
-                even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
-                odd_colors = {fg = "#434548", bg = "#434548"},
-                indent_space_guides = true,
-                indent_tab_guides = true,
-                indent_guide_size = 4
-            }
-        )
-        require('indent_guides').indent_guides_enable()
-    end
 end
 
 require"toggleterm".setup{
@@ -81,5 +58,4 @@ require"toggleterm".setup{
     direction = 'horizontal'
   }
 
-require 'plugins.tree_sitter'
 require 'plugins.statusline'

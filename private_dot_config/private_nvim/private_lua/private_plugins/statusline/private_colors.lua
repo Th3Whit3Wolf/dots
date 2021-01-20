@@ -1,3 +1,4 @@
+
 M = {}
 
 M.dark = {
@@ -59,13 +60,9 @@ M.light = {
 }
 
 function M.color(val)
-    if vim.o.background ~= nil and vim.o.background == "light" then
-        return M.light[val]
-    elseif vim.o.background ~= nil and vim.o.background == "dark" then
-        return M.dark[val]
-    else
-        local hours = tonumber(os.date("%H"))
-        if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
+    local hours = tonumber(os.date("%H"))
+    if hours >= vim.g["dusk_til_dawn_morning"] then
+        if hours < vim.g["dusk_til_dawn_night"] then
             return M.light[val]
         else
             return M.dark[val]
