@@ -4,7 +4,7 @@ dawn=$(cat /tmp/sway-colord/dawn)
 dusk=$(cat /tmp/sway-colord/dusk)
 now=$(date +%H:%M)
 
-if [[ "$now" < "$dawn" ]] || [[ "$now" > "$dusk" ]];; then
+if [[ "$now" < "$dawn" ]] || [[ "$now" > "$dusk" ]]; then
     # Dark Theme
     /usr/bin/nwggrid -wm sway -n 8 -b 222226 -c space-dark.css
 else
