@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-H=$(date  "+%k")
-DAWN=7
-DUSK=19
+dawn=$(cat /tmp/sway-colord/dawn)
+dusk=$(cat /tmp/sway-colord/dusk)
+now=$(date +%H:%M)
 
-# If time is between 7AM & 7PM
-if (( DAWN <= H && DUSK > H )); then
-    # Light theme
-    /usr/bin/nwgbar -c ~/.config/nwg-launchers/nwgbar/space-light.css -wm sway
-else
-    # Dark theme
+if [[ "$now" < "$dawn" ]] || [[ "$now" > "$dusk" ]];; then
+    # Dark Theme
     /usr/bin/nwgbar -c ~/.config/nwg-launchers/nwgbar/space-dark.css -wm sway
+else
+    # Light Theme
+    /usr/bin/nwgbar -c ~/.config/nwg-launchers/nwgbar/space-light.css -wm sway
 fi
+

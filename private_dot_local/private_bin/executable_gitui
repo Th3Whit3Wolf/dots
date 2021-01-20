@@ -6,9 +6,9 @@ now=$(date +%H:%M)
 
 if [[ "$now" < "$dawn" ]] || [[ "$now" > "$dusk" ]];; then
     # Dark Theme
-    /usr/bin/nwggrid -wm sway -n 8 -b 222226 -c space-dark.css
+    /usr/bin/gitui -t space_dark.ron
 else
     # Light Theme
-    /usr/bin/nwggrid -wm sway -n 8 -b e7e5eb -c space-light.css 
+    /usr/bin/gitui -t space_light.ron
 fi
 
