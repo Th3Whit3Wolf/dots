@@ -173,6 +173,21 @@ for f in ~/.local/share/zsh/conf.d/*.zsh;do source $f; done
 for f in ~/.local/share/zsh/plugins/**/*.plugin.zsh; do source $f;done
 [[ -f /opt/git/git-subrepo/.rc ]] && . /opt/git/git-subrepo/.rc
 
+
+if [ -s "${XDG_CONFIG_HOME}/ssh/config" ]; then
+    SSH_CONFIG="-F ${XDG_CONFIG_HOME}/ssh/config"
+else
+    SSH_CONFIG="-F ~/.config/ssh/config"
+fi
+if [ -s "${XDG_DATA_HOME}/ssh/id_dsa" ]; then
+    SSH_ID="-i ${XDG_DATA_HOME}/ssh/id_dsa"
+else
+    SSH_ID="-i ~/.local/share/ssh/id_rsa"
+fi
+
+alias ssh="ssh $SSH_CONFIG $SSH_ID "
+alias ssh-copy-id="ssh-copy-id $SSH_ID"
+
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 

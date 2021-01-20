@@ -38,9 +38,9 @@ export GTK_USE_PORTAL=1
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export GPG_TTY=$(tty)
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
-    
     export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     export QT_WAYLAND_FORCE_DPI=96
     export QT_QPA_PLATFORMTHEME="qt5ct"
