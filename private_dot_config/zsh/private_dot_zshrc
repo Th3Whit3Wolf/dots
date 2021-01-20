@@ -187,6 +187,7 @@ fi
 
 alias ssh="ssh $SSH_CONFIG $SSH_ID "
 alias ssh-copy-id="ssh-copy-id $SSH_ID"
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"

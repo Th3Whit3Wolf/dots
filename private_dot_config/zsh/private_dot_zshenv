@@ -7,7 +7,6 @@ fi
 path=("$HOME/.local/bin" "$GOPATH" "$node_modules" "$dart" "$cabal" "$HOME/.local/share/cargo/bin" "$path[@]")
 
 export PATH
-export npm_config_prefix=~/.local/lib/node_modules
 
 # Colorful Man Pages
 export PAGER=less
@@ -30,10 +29,20 @@ export GPG_TTY=$(tty)
 # Atom
 export ATOM_HOME=$XDG_CONFIG_HOME/atom
 
+# AWS
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+
+# Azure
+export AZURE_CONFIG_DIR=$XDG_DATA_HOME/azure
+
 # Bazaar
 export BZRPATH=$XDG_CONFIG_HOME/bazaar
 export BZR_PLUGIN_PATH=$XDG_DATA_HOME/bazaar
 export BZR_HOME=$XDG_CACHE_HOME/bazaar
+
+# Bundle (Ruby)
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 
 # Cargo
 export CARGO_HOME="$XDG_DATA_HOME"/cargo 
@@ -52,6 +61,10 @@ export GOPATH="$HOME/.local/share/go"
 # GPG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
+# Gems (Ruby)
+export GEM_HOME="$XDG_DATA_HOME"/gem
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+
 # Lastpass
 export LPASS_HOME=$XDG_CONFIG_HOME/lpass
 
@@ -59,17 +72,61 @@ export LPASS_HOME=$XDG_CONFIG_HOME/lpass
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 
+# Most
+export MOST_INITFILE="$XDG_CONFIG_HOME"/mostrc
+
 # MPlayer
 export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+
+# MySQL
+export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+
+# Ncurses
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+
+# Node
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 
 # NPM
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
+# NVM
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+
+# PostgreSQL
+export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
+export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
+export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
+export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
+
+# Python
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
+
+# Redis
+export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+
 # Rustup
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup 
 
+# Screen
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+
+# SQLite
+export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+
+# Stack (Haskell)
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+
 # Subversion
 export SUBVERSION_HOME=$XDG_CONFIG_HOME/subversion
+
+# Vagrant
+export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliases
 
 # VSCode
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
