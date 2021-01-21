@@ -7,11 +7,13 @@ alias br='cargo build --release'
 alias c='clear'
 alias cargopwd='cargo install --force --path $PWD'
 alias cargogit='cargo install --force --git'
+alias cbuild='cmake --build build/ 2> >(tee build/errors.err >&2)'
+alias cbuild_='cmake -B build/ -DCMAKE_BUILD_TYPE=Debug && cmake --build build/'
+alias cmake_='cmake -B build/ -DCMAKE_BUILD_TYPE=Debug'
 alias chown='sudo chown -R $USER:users'
 alias cin='cargo install --force --path $PWD'
 alias cig='cargo install --git'
 alias clone='git clone'
-alias code='code-oss'
 alias crit='systemd-analyze critical-chain'
 alias dots='chezmoi'
 alias find='fd'
@@ -23,6 +25,7 @@ alias ngr='sudo nginx -s reload'
 alias mem='free -h --si'
 alias r='cargo run'
 alias rr='cargo run --release'
+alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias sudoenv='sudo env PATH=$PATH'
 alias suvim='sudo -E nvim'
 alias t='cargo test --release -- --nocapture'
@@ -34,7 +37,7 @@ alias xo='xdg-open &>/dev/null'
 alias xsetkeyr='xset r rate 182 42'
 alias wininfo='swaymsg -t get_tree'
 
-alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
+alias zshrc='nvim $XDG_CONFIG_HOME/zsh/.zshrc && source ${XDG_CONFIG_HOME}/zsh/.zshrc'
 alias aliasrc='nvim $XDG_DATA_HOME/zsh/conf.d/00-alias.zsh && source $XDG_DATA_HOME/zsh/conf.d/00-alias.zsh' # Hide from ali
 alias distrorc='nvim $XDG_DATA_HOME/zsh/conf.d/01-distro-specifi.zsh && source $XDG_DATA_HOME/zsh/conf.d/01-distro-specific.zsh' # Hide from ali
 alias sysrc='nvim $XDG_DATA_HOME/zsh/conf.d/02-system.zsh && source $XDG_DATA_HOME/zsh/conf.d/02-system.zsh' # Hide from ali
@@ -43,4 +46,12 @@ alias misc='nvim $XDG_DATA_HOME/zsh/conf.d/10-miscellanerous.zsh && $XDG_DATA_HO
 
 if which rsync >/dev/null 2>&1; then
 	alias scp='rsync -avzhe ssh --progress'
+fi
+
+if which code-oss >/dev/null 2>&1; then
+    alias code='code-oss'
+elif which codium >/dev/null 2>&1; then
+    alias code='codium'
+elif which code-git >/dev/null 2>&1; then
+    alias code='code-git'
 fi
