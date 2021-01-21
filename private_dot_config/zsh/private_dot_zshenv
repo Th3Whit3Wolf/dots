@@ -1,138 +1,198 @@
 typeset -U PATH path
 
-if [ -x "/usr/bin/npm" ]; then
-    node_modules="$PATH:$HOME/.local/lib/node_modules/bin:$PAH"
-fi
-
-path=("$HOME/.local/bin" "$GOPATH" "$node_modules" "$dart" "$cabal" "$HOME/.local/share/cargo/bin" "$path[@]")
-
-export PATH
+export BROWSER=firefox
+export EDITOR=nvim
+export VISUAL=code-oss
+export GTK_USE_PORTAL=1
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export GPG_TTY=$(tty)
 
 # Colorful Man Pages
 export PAGER=less
 export BAT_PAGER="less -RFXi"
 
 # XDG directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-
-export EDITOR=nvim
-export VISUAL=code-oss
-export GTK_USE_PORTAL=1
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export GPG_TTY=$(tty)
+[ -z "$XDG_CACHE_HOME"  ] && export XDG_CACHE_HOME="$HOME/.cache"
+[ -z "$XDG_CONFIG_DIRS" ] && export XDG_CONFIG_DIRS="/etc/xdg"
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
+[ -z "$XDG_DATA_DIRS"   ] && export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+[ -z "$XDG_DATA_HOME"   ] && export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_LIB_HOME="$XDG_LOCAL_HOME/lib"
+export XDG_BIN_HOME="$XDG_LOCAL_HOME/bin"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-$HOME/.local/.runtime}" # just in case
 
 # Set XDG Base Directories
+# Ack
+export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
+
+# Arduino
+export ARDUINO_DIRECTORIES_DATA="$XDG_DATA_HOME/arduino"
+export ARDUINO_DIRECTORIES_DOWNLOADS="$XDG_CACHE_HOME/arduino"
+export ARDUINO_DIRECTORIES_USER="$XDG_LIB_HOME/arduino"
+
 # Atom
-export ATOM_HOME=$XDG_CONFIG_HOME/atom
+export ATOM_HOME="$XDG_CONFIG_HOME/atom"
 
 # AWS
-export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
-export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials" \
+    AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 
 # Azure
-export AZURE_CONFIG_DIR=$XDG_DATA_HOME/azure
+export AZURE_CONFIG_DIR="$XDG_DATA_HOME/azure"
 
 # Bazaar
-export BZRPATH=$XDG_CONFIG_HOME/bazaar
-export BZR_PLUGIN_PATH=$XDG_DATA_HOME/bazaar
-export BZR_HOME=$XDG_CACHE_HOME/bazaar
-
-# Bundle (Ruby)
-export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
-
-# Cargo
-export CARGO_HOME="$XDG_DATA_HOME"/cargo 
+export BZRPATH="$XDG_CONFIG_HOME/bazaar" \
+    BZR_PLUGIN_PATH="$XDG_DATA_HOME/bazaar" \
+    BZR_HOME="$XDG_CACHE_HOME/bazaar"
 
 # CCache
-export CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache.config
-export CCACHE_DIR="$XDG_CACHE_HOME"/ccache
+export CCACHE_DIR="$XDG_CACHE_HOME/ccache" \
+    CCACHE_CONFIGPATH="$XDG_CONFIG_HOME/ccache.config"
+
+# Dconf
+export DCONF_PROFILE="$XDG_CONFIG_HOME/dconf/user"
+
+# Electrum
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+
+# Elinks
+export ELINKS_CONFDIR="$XDG_CONFIG_HOME/elinks"
 
 # Docker
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 
 # Git
-export GIT_SSH_COMMAND='ssh -F ~/.config/ssh/config'
+# GIT_SSH_COMMAND is no longer needed because of tweak openssh package
+# export GIT_SSH_COMMAND='ssh -F ~/.config/ssh/config'
+export GIT_TEMPLATE_DIR="$XDG_CONFIG_HOME/git/template"
 
 # GO
-export GOPATH="$HOME/.local/share/go"
+export GOBIN="$XDG_BIN_HOME"
+export GOPATH="$XDG_DATA_HOME/go"
 
 # GPG
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
-# Gems (Ruby)
-export GEM_HOME="$XDG_DATA_HOME"/gem
-export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+# Grip
+export GRIPHOME="$XDG_CONFIG_HOME/grip"
+
+# GTK 2
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+
+# ICEAuthority
+export ICEAUTHORITY="$XDG_CACHE_HOME/ICEauthority"
+
+# IMAPFilter
+export IMAPFILTER_HOME="$XDG_CONFIG_HOME/imapfilter"
 
 # Lastpass
-export LPASS_HOME=$XDG_CONFIG_HOME/lpass
+export LPASS_HOME="$XDG_CONFIG_HOME/lpass"
 
 # Less
-export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export LESSKEY="$XDG_CONFIG_HOME/less/lesskey" \
+    LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+
+# Mail (elinks, w3m, mutt, pine)
+export MAILCAP="$XDG_CONFIG_HOME/mailcap"
+export MAILCAPS="$MAILCAP"
+
+# Mathematica
+export MATHEMATICA_USERBASE="$XDG_CONFIG_HOME/Mathematica"
 
 # Most
-export MOST_INITFILE="$XDG_CONFIG_HOME"/mostrc
+export MOST_INITFILE="$XDG_CONFIG_HOME/mostrc"
 
 # MPlayer
-export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
 
 # MySQL
-export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+export MYSQL_HOME="$XDG_CONFIG_HOME/mysql"
+export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 
 # Ncurses
-export TERMINFO="$XDG_DATA_HOME"/terminfo
-export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Node
-export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+
+# NotMuch
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/config"
 
 # NPM
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
 # NVM
-export NVM_DIR="$XDG_DATA_HOME"/nvm
+export NVM_DIR="$XDG_DATA_HOME/nvm"
+
+# Parallel
+export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
 
 # PostgreSQL
-export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
-export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
-export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
-export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
+export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc" \
+    PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history" \
+    PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass" \
+    PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 
 # Python
-export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
-export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME/python-eggs"
+export PYLINTHOME="$XDG_CACHE_HOME/pylint"
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/config.py"
+
+# Readline
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 # Redis
-export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
-export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+export REDISCLI_HISTFILE="$XDG_DATA_HOME/redis/rediscli_history"
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
 
-# Rustup
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup 
+# Ruby
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle" \
+    BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle" \
+    BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+export GEM_HOME="$XDG_DATA_HOME/gem"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
+
+# Rust
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
 # Screen
-export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 
 # SQLite
-export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
 
 # Stack (Haskell)
-export STACK_ROOT="$XDG_DATA_HOME"/stack
+export STACK_ROOT="$XDG_DATA_HOME/stack"
 
 # Subversion
-export SUBVERSION_HOME=$XDG_CONFIG_HOME/subversion
+export SUBVERSION_HOME="$XDG_CONFIG_HOME/subversion"
+
+# Uncrustify (C,C++,Java)
+export UNCRUSTIFY_CONFIG="$XDG_CONFIG_HOME/uncrustify/default"
 
 # Vagrant
-export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
-export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliases
+export VAGRANT_HOME="$XDG_DATA_HOME/vagrant" \
+    VAGRANT_ALIAS_FILE="$XDG_DATA_HOME/vagrant/aliases"
 
 # VSCode
-export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+
+# WeeChat
+export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
+
+# Wine
+export WINEPREFIX="$XDG_DATA_HOME/wine"
+
+# X11
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 
 # Wayland Settings
 if [ -n "$WAYLAND_DISPLAY" ]; then
@@ -146,3 +206,14 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     export BEMENU_BACKEND=wayland
     export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 fi
+
+path=(
+    "$XDG_BIN_HOME" 
+    "$GOPATH" 
+    "$XDG_LIB_HOME/node_modules/bin" 
+    "$XDG_DATA_HOME/cargo/bin" 
+    "$path[@]"
+)
+
+export PATH
+
