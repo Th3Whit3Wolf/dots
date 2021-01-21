@@ -1,6 +1,3 @@
-host github
-	HostName github.com
-	User git
-	PreferredAuthentications publickey
+Match Exec "[ git@github.com:Th3Whit3Wolf = $(git config --get remote.origin.url  | cut -d '/' -f1)'' ]"
 	IdentityFile ~/.local/share/ssh/GithubID
 
