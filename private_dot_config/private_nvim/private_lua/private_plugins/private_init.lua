@@ -12,12 +12,43 @@ g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
 -- Endwise No default mapping
 g["endwise_no_mappings"] = 1
 
+if G.exists("/tmp/sway-colord/dawn") then
+    g["dusk_til_dawn_sway_colord"] = true
+end
 -- Dusk til Dawn
 g["dusk_til_dawn_morning"] = 7
 g["dusk_til_dawn_night"] = 19
 
+
+require("Dusk-til-Dawn").colorschemeManager(
+    function()
+        require('indent_guides').setup(
+    {
+        even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
+        odd_colors = {fg = "#e7e5eb", bg = "#e7e5eb"},
+        indent_space_guides = true,
+        indent_tab_guides = true,
+        indent_guide_size = 4
+    }
+)
+require('indent_guides').indent_guides_enable()
+    end,
+    function()
+        require('indent_guides').setup(
+            {
+                even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
+                odd_colors = {fg = "#434548", bg = "#434548"},
+                indent_space_guides = true,
+                indent_tab_guides = true,
+                indent_guide_size = 4
+            }
+        )
+        require('indent_guides').indent_guides_enable()
+    end
+)()
+
 -- Prose
-g["lexical#thesaurus"] = {'~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt'}
+--g["lexical#thesaurus"] = {'~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt'}
 g["lexical#dictionary"] = {'/usr/share/dict/words'}
 g["lexical#spellfile"] = {'~/.config/nvim/spell/en.utf-8.add'}
 g["lexical#thesaurus_key"] = '<leader>lt'
@@ -25,6 +56,7 @@ g["lexical#dictionary_key"] = '<leader>ld'
 
 require 'plugins.lsp'
 
+--[[
 local hours = tonumber(os.date("%H"))
 if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
     require('indent_guides').setup(
@@ -49,6 +81,7 @@ else
     )
     require('indent_guides').indent_guides_enable()
 end
+--]]
 
 require"toggleterm".setup{
     size = 12,
@@ -56,6 +89,6 @@ require"toggleterm".setup{
     shade_terminals = true,
     persist_size = true,
     direction = 'horizontal'
-  }
+}
 
 require 'plugins.statusline'
