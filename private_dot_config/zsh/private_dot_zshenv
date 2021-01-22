@@ -17,8 +17,8 @@ export BAT_PAGER="less -RFXi"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_DATA_DIRS"   ] && export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 [ -z "$XDG_DATA_HOME"   ] && export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_LIB_HOME="$XDG_LOCAL_HOME/lib"
-export XDG_BIN_HOME="$XDG_LOCAL_HOME/bin"
+export XDG_LIB_HOME="$HOME/.local/lib"
+export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-$HOME/.local/.runtime}" # just in case
 
 # Set XDG Base Directories
