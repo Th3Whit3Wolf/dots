@@ -4,6 +4,14 @@ dawn=$(cat /tmp/sway-colord/dawn)
 dusk=$(cat /tmp/sway-colord/dusk)
 now=$(date +%H:%M)
 
+# Force XDG Compliance for some applications
+export ATOM_HOME="~/.config/atom"
+export GPUPGHOME="~/.local/share/gnupg"
+export MPLAYER_HOME="~/.config/mplayer"
+export VSCODE_PORTABLE="~/.local/share/vscode"
+export WEECHAT_HOME="~/.config/weechat"
+export WINE="~/.local/share/wine"
+
 if [[ "$now" < "$dawn" ]] || [[ "$now" > "$dusk" ]]; then
     # Dark Theme
     /usr/bin/wofi --conf ~/.config/wofi/config -s ~/.config/wofi/space_dark.css
