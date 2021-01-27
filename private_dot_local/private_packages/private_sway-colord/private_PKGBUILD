@@ -1,5 +1,5 @@
 pkgname='sway-colord'
-pkgver=0.1.0.30.gbe051e3
+pkgver=0.1.0.132.g0cd2342
 pkgrel=1
 pkgdesc='WIP daemon for sway to automatically change light & dark themes'
 arch=('i686' 'x86_64')
@@ -18,12 +18,14 @@ pkgver() {
 
 build(){
   cd "$pkgname"
+  sed -i 's/cargo-husky.*//' Cargo.toml
   env CARGO_INCREMENTAL=0 cargo build --release
 }
 
 check(){
   cd "$pkgname"
-  env CARGO_INCREMENTAL=0 cargo test --release
+   sed -i 's/cargo-husky.*//' Cargo.toml 
+   env CARGO_INCREMENTAL=0 cargo test --release
 }
 
 
