@@ -9,11 +9,7 @@ cwd=$(pwd)
 # Install all plugins to ~/.local/share/zsh/plugins
 for pkg in "${packages[@]}"; do
 	cd $pkg
-	if [ "$(basename $(pwd))" == "openssh" ]; then
-		makepkg -esi --nocheck
-	else
-		makepkg -si
-	fi
+	makepkg -si
 	cd $cwd
 done
 {{ end }}
