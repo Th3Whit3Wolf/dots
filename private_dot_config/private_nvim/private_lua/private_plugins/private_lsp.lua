@@ -1,7 +1,8 @@
-local lspconfig = require("lspconfig")
-local completion = require("completion")
+local vim, api = vim, vim.api
+local lspconfig = require 'lspconfig'
 local G = require("global")
-local vim = vim
+local saga = require 'lspsaga'
+local action = require 'lspsaga.action'
 
 -- Configure the completion chains
 local chain_complete_list = {
@@ -9,7 +10,7 @@ local chain_complete_list = {
         {
             complete_items = {
                 "lsp",
-                --    'ts',
+                "ts",
                 "snippet",
                 "buffers"
             }
@@ -100,12 +101,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     }
 )
 
-local on_attach = function(client)
-    if client.config.flags then
-        client.config.flags.allow_incremental_sync = true
-    end
-
-    completion.on_attach(
+local on_attach = function(client,bufnr)
+    local has_completion,completion = pcall(require,'completion')
+  if not has_completion then
+    print('Does not load completion-nvim')
+    return
+  end
+  completion.on_attach(
         client,
         {
             sorting = "alphabet",
@@ -114,6 +116,28 @@ local on_attach = function(client)
         }
     )
 
+  if client.resolved_capabilities.document_formatting then
+    action.lsp_before_save()
+  end
+    if client.config.flags then
+        client.config.flags.allow_incremental_sync = true
+    end
+
+    local saga_opts = {
+        error_sign = '✘',
+        warn_sign = '',
+        hint_sign = 'ஐ',
+        infor_sign = '',
+        code_action_icon = ' '
+        -- finder_definition_icon = '  ',
+        -- finder_reference_icon = '  ',
+        -- definition_preview_icon = '  '
+        -- 1: thin border | 2: rounded border | 3: thick border
+        -- border_style = 1
+    }
+
+    saga.init_lsp_saga(saga_opts)
+
     -- Keybindings for LSPs
     -- Note these are in on_attach so that they don't override bindings in a non-LSP setting
     local opts = {
@@ -121,36 +145,37 @@ local on_attach = function(client)
         silent = true
     }
 
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ch", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ci", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ct", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cpd", "<cmd>lua vim.lsp.buf.peek_definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cR", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>csd", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>csw", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
+    local function leader_buf_map(key, command)
+        local options = {noremap = true}
+        if opts then options = vim.tbl_extend('force', options, opts) end
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>' ..key, "<cmd>lua " .. command .. "()<CR>", opts)
+    end
+      
+    -- preview definition
+    leader_buf_map("cd", "require'lspsaga.provider'.preview_definition")
+    -- lsp provider to find the currsor word definition and reference
+    leader_buf_map("cD", "require'lspsaga.provider'.lsp_finder")
+    -- show hover doc
+    leader_buf_map("ch",  "vim.lsp.buf.hover")
+    leader_buf_map("ci",  "vim.lsp.buf.implementation")
+    leader_buf_map("cs",  "vim.lsp.buf.signature_help")
+    leader_buf_map("ct",  "vim.lsp.buf.type_definition")
+    leader_buf_map("cr",  "vim.lsp.buf.references")
+    leader_buf_map("cpd", "vim.lsp.buf.peek_definition")
+    leader_buf_map("cR",  "vim.lsp.buf.rename")
+    -- leader_buf_map("cb",  "require'lspsaga.diagnostic'.show_buf_diagnostics")
+    leader_buf_map("csd", "vim.lsp.buf.document_symbol")
+    leader_buf_map("csw", "vim.lsp.buf.workspace_symbol")
+    
+    -- code action
+    leader_buf_map("ca", "require('lspsaga.codeaction').code_action")
+    leader_buf_map("c]", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev")
+    leader_buf_map("cd[", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
+    leader_buf_map("cdo", "vim.lsp.diagnostic.set_loclist")
 
-    vim.api.nvim_buf_set_keymap(0, "n", "gr", "Telescope lsp_references", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>fw", "Telescope lsp_workspace_symbols", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>ca", "Telescope lsp_code_actions", opts)
-
-    -- diagnostics-lsp
-    vim.fn.sign_define("LspDiagnosticsErrorSign", {text = "✘", texthl = "LspDiagnosticsError", linehl = "", numhl = ""})
-    vim.fn.sign_define(
-        "LspDiagnosticsWarningSign",
-        {text = "", texthl = "LspDiagnosticsWarning", linehl = "", numhl = ""}
-    )
-    vim.fn.sign_define(
-        "LspDiagnosticsInformationSign",
-        {text = "", texthl = "LspDiagnosticsInformation", linehl = "", numhl = ""}
-    )
-    vim.fn.sign_define("LspDiagnosticsHintSign", {text = "ஐ", texthl = "LspDiagnosticsHint", linehl = "", numhl = ""})
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>c]", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cd[", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>cdo", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+    -- Telescope
+    api.nvim_buf_set_keymap(bufnr, "n", "gr", "Telescope lsp_references", opts)
+    api.nvim_buf_set_keymap(bufnr, "n", "<leader>fw", "Telescope lsp_workspace_symbols", opts)
 end
 
 -- List of servers where config = {on_attach = on_attach}

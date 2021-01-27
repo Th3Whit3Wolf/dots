@@ -18,9 +18,9 @@ end
 -- Dusk til Dawn
 g["dusk_til_dawn_morning"] = 7
 g["dusk_til_dawn_night"] = 19
+g["space_nvim_transparent_bg"] = true
 
-
-require("Dusk-til-Dawn").colorschemeManager(
+require("Dusk-til-Dawn").timeMan(
     function()
         require('indent_guides').setup(
     {
@@ -55,33 +55,6 @@ g["lexical#thesaurus_key"] = '<leader>lt'
 g["lexical#dictionary_key"] = '<leader>ld'
 
 require 'plugins.lsp'
-
---[[
-local hours = tonumber(os.date("%H"))
-if hours >= vim.g["dusk_til_dawn_morning"] and hours < vim.g["dusk_til_dawn_night"] then
-    require('indent_guides').setup(
-        {
-            even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
-            odd_colors = {fg = "#e7e5eb", bg = "#e7e5eb"},
-            indent_space_guides = true,
-            indent_tab_guides = true,
-            indent_guide_size = 4
-        }
-    )
-    require('indent_guides').indent_guides_enable()
-else
-    require('indent_guides').setup(
-        {
-            even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
-            odd_colors = {fg = "#434548", bg = "#434548"},
-            indent_space_guides = true,
-            indent_tab_guides = true,
-            indent_guide_size = 4
-        }
-    )
-    require('indent_guides').indent_guides_enable()
-end
---]]
 
 require"toggleterm".setup{
     size = 12,

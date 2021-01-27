@@ -69,23 +69,39 @@ local function plugins()
     -- Like pgadmin but for vim
     paq {"kristijanhusak/vim-dadbod-ui"}
 
-    --use "nvim-treesitter/completion-treesitter"
+    -- Completion for vim-dadbod
     paq "kristijanhusak/vim-dadbod-completion"
 
     -- Completion for buffers word.
     paq "steelsojka/completion-buffers"
 
- -- Treesitter configurations and abstraction layer for Neovim.
+    -- Treesitter configurations and abstraction layer for Neovim.
     paq {
-	"nvim-treesitter/nvim-treesitter",
-	run = ":TSUpdate"
+        "nvim-treesitter/nvim-treesitter",
+        hook = function() vim.api.nvim_command('TSUpdate') end,
+        opt = true
+    }
+
+    -- View treesitter information directly in Neovim
+    paq {
+        'nvim-treesitter/playground',
+        opt = true
     }
 
     -- Show code context
-    paq 'romgrk/nvim-treesitter-context'
+    paq {
+        'romgrk/nvim-treesitter-context',
+        opt = true
+    }
 
     -- Get autocompletion from treesitter
-    paq 'nvim-treesitter/completion-treesitter'
+    paq {
+        'nvim-treesitter/completion-treesitter',
+        opt = true
+    }
+
+    -- A light-weight lsp plugin based on neovim built-in lsp with highly performance UI.
+    paq 'glepnir/lspsaga.nvim'
 
     -- high-performance color highlighter for Neovim
     paq {
@@ -101,11 +117,8 @@ local function plugins()
         opt = true
     }
 
-    -- Auto pair plugin
-    paq {
-        "Raimondi/delimitMate",
-        opt = true
-    }
+    -- Auto pair for neovim written in lua
+    paq "windwp/nvim-autopairs"
 
     --  commentary.vim: comment stuff out
     paq "tpope/vim-commentary"
@@ -203,12 +216,6 @@ local function plugins()
     -- Uncover usage problems in your writing
     paq {
         "reedes/vim-wordy",
-        opt = true
-    }
-
-    -- Highlights overused words
-    paq {
-        "dbmrq/vim-ditto",
         opt = true
     }
 

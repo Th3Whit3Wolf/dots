@@ -11,43 +11,43 @@ local extension = require("plugins.statusline.providers.extension")
 local buffer = require("plugins.statusline.providers.buffer")
 local vimode = require("plugins.statusline.providers.vimode")
 
-BufferIcon = buffer.get_buffer_type_icon
-BufferNumber = buffer.get_buffer_number
-DiagnosticError = diagnostic.get_diagnostic_error
-DiagnosticWarn = diagnostic.get_diagnostic_warn
-DiagnosticInfo = diagnostic.get_diagnostic_info
-DiagnosticEndSpace = diagnostic.end_space
-DiagnosticSeperator = diagnostic.seperator
-DiffAdd = vcs.diff_add
-DiffModified = vcs.diff_modified
-DiffRemove = vcs.diff_remove
-FileFormat = fileinfo.get_file_format
-FileEncode = fileinfo.get_file_encode
-FileSize = fileinfo.get_file_size
-FileIcon = fileinfo.get_file_icon
-FileName = fileinfo.get_current_file_name
-FileType = fileinfo.get_file_type
-FileTypeName = buffer.get_buffer_filetype
-FiletTypeSeperator = fileinfo.filetype_seperator
-GitBranch = vcs.get_git_branch_formatted
-GitSeperator = vcs.seperator
-LineColumn = fileinfo.line_column
-LinePercent = fileinfo.current_line_percent
-ScrollBar = extension.scrollbar_instance
-Space = u.space
-ViMode = vimode.get_mode
-ViModeSeperator = vimode.seperator
+bufferIcon = buffer.get_buffer_type_icon
+bufferNumber = buffer.get_buffer_number
+diagnosticError = diagnostic.get_diagnostic_error
+diagnosticWarn = diagnostic.get_diagnostic_warn
+diagnosticInfo = diagnostic.get_diagnostic_info
+diagnosticEndSpace = diagnostic.end_space
+diagnosticSeperator = diagnostic.seperator
+diffAdd = vcs.diff_add
+diffModified = vcs.diff_modified
+diffRemove = vcs.diff_remove
+fileFormat = fileinfo.get_file_format
+fileEncode = fileinfo.get_file_encode
+fileSize = fileinfo.get_file_size
+fileIcon = fileinfo.get_file_icon
+fileName = fileinfo.get_current_file_name
+fileType = fileinfo.get_file_type
+fileTypeName = buffer.get_buffer_filetype
+filetTypeSeperator = fileinfo.filetype_seperator
+gitBranch = vcs.get_git_branch_formatted
+gitSeperator = vcs.seperator
+lineColumn = fileinfo.line_column
+linePercent = fileinfo.current_line_percent
+scrollBar = extension.scrollbar_instance
+space = u.space
+viMode = vimode.get_mode
+viModeSeperator = vimode.seperator
 
 gls.left[1] = {
     ViMode = {
-        provider = ViMode,
+        provider = viMode,
         highlight = {c.color('act1'), c.color('DarkGoldenrod2')}
     }
 }
 
 gls.left[2] = {
     ViModeSeperator = {
-        provider = ViModeSeperator,
+        provider = viModeSeperator,
         highlight = {
             c.color('comments'),
             function()
@@ -62,7 +62,7 @@ gls.left[2] = {
 
 gls.left[3] = {
     FileSize = {
-        provider = FileSize,
+        provider = fileSize,
         condition = u.buffer_not_empty,
         highlight = {c.color('white'), c.color('bg2')}
     }
@@ -70,7 +70,7 @@ gls.left[3] = {
 
 gls.left[4] = {
     FileName = {
-        provider = FileName,
+        provider = fileName,
         condition = u.buffer_not_empty,
         separator = i.slant.Left,
         separator_highlight = {c.color('purple'), c.color('bg2')},
@@ -80,7 +80,7 @@ gls.left[4] = {
 
 gls.left[5] = {
     FileType = {
-        provider = FileType,
+        provider = fileType,
         condition = u.buffer_not_empty,
         highlight = {c.color('white'), c.color('purple')}
     }
@@ -88,106 +88,107 @@ gls.left[5] = {
 
 gls.left[6] = {
     FiletTypeSeperator = {
-        provider = FiletTypeSeperator
+        provider = filetTypeSeperator
     }
 }
 
-gls.left[8] = {
+gls.left[7] = {
     DiagnosticError = {
-        provider = DiagnosticError,
+        provider = diagnosticError,
         icon = " " .. i.bullet,
         highlight = {c.color('error'), c.color('bg2')}
     }
 }
 
-gls.left[9] = {
+gls.left[8] = {
     DiagnosticWarn = {
-        provider = DiagnosticWarn,
+        provider = diagnosticWarn,
         icon = " " .. i.bullet,
         highlight = {c.color('warning'), c.color('bg2')}
     }
 }
 
-gls.left[10] = {
+gls.left[9] = {
     DiagnosticInfo = {
-        provider = DiagnosticInfo,
+        provider = diagnosticInfo,
         icon = " " .. i.bullet,
         highlight = {c.color('info'), c.color('bg2')}
     }
 }
 
-gls.left[11] = {
+gls.left[10] = {
     DiagnosticEndSpace = {
-        provider = DiagnosticEndSpace,
+        provider = diagnosticEndSpace,
         highlight = {c.color('bg2'), c.color('bg2')}
     }
 }
 
-gls.left[12] = {
+gls.left[11] = {
     DiagnosticSeperator = {
-        provider = DiagnosticSeperator,
+        provider = diagnosticSeperator,
         highlight = {c.color('purple'), c.color('bg2')}
     }
 }
 
-gls.left[13] = {
+gls.left[12] = {
     GitBranch = {
-        provider = GitBranch,
+        provider = gitBranch,
         icon = " " .. i.git .. " ",
         condition = u.buffer_not_empty,
         highlight = {c.color('base'), c.color('purple')}
     }
 }
 
-gls.left[14] = {
+gls.left[13] = {
     DiffAdd = {
-        provider = DiffAdd,
+        provider = diffAdd,
         condition = u.checkwidth,
         icon = i.diff.Add,
         highlight = {c.color('green'), c.color('purple')}
     }
 }
-gls.left[15] = {
+
+gls.left[14] = {
     DiffModified = {
-        provider = DiffModified,
+        provider = diffModified,
         condition = u.checkwidth,
         icon = i.diff.Modified,
         highlight = {c.color('orange'), c.color('purple')}
     }
 }
-gls.left[16] = {
+gls.left[15] = {
     DiffRemove = {
-        provider = DiffRemove,
+        provider = diffRemove,
         condition = u.checkwidth,
         icon = i.diff.Remove,
         highlight = {c.color('red'), c.color('purple')}
     }
 }
 
-gls.left[17] = {
+gls.left[16] = {
     GitSeperator = {
-        provider = GitSeperator,
+        provider = gitSeperator,
         condition = u.buffer_not_empty,
         highlight = {c.color('purple'), c.color('bg2')}
     }
 }
 
-gls.left[18] = {
+gls.left[17] = {
     Space = {
-        provider = Space,
+        provider = space,
         highlight = {c.color('blue'), c.color('purple')}
     }
 }
 
 gls.right[1] = {
     FileFormat = {
-        provider = FileFormat,
+        provider = fileFormat,
         highlight = {c.color('base'), c.color('purple')}
     }
 }
 gls.right[2] = {
     LineInfo = {
-        provider = LineColumn,
+        provider = lineColumn,
         separator = " | ",
         separator_highlight = {c.color('base'), c.color('purple')},
         highlight = {c.color('base'), c.color('purple')}
@@ -195,7 +196,7 @@ gls.right[2] = {
 }
 gls.right[3] = {
     PerCent = {
-        provider = LinePercent,
+        provider = linePercent,
         separator = i.slant.Left,
         separator_highlight = {c.color('bg2'), c.color('purple')},
         highlight = {c.color('base'), c.color('bg2')}
@@ -203,14 +204,14 @@ gls.right[3] = {
 }
 gls.right[4] = {
     ScrollBar = {
-        provider = ScrollBar,
+        provider = scrollBar,
         highlight = {c.color('yellow'), c.color('purple')}
     }
 }
 
 gls.short_line_left[1] = {
     BufferType = {
-        provider = FileTypeName,
+        provider = fileTypeName,
         separator = i.slant.Right,
         separator_highlight = {c.color('purple'), c.color('bg')},
         highlight = {c.color('base'), c.color('purple')}
@@ -219,7 +220,7 @@ gls.short_line_left[1] = {
 
 gls.short_line_right[1] = {
     BufferIcon = {
-        provider = BufferIcon,
+        provider = bufferIcon,
         separator = i.slant.Left,
         separator_highlight = {c.color('purple'), c.color('bg')},
         highlight = {c.color('base'), c.color('purple')}

@@ -210,9 +210,9 @@ opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
 
 require "autocmd"
-require "mapping"
 require "typing"
-require 'plugins'
+require "mapping"
+require "plugins"
 -------------------- COMMANDS ------------------------------
 --  Install all packages
 command(

@@ -146,24 +146,46 @@ function mapping:load_vim_define()
     }
 end
 
+-- this is my mapping with completion-nvim
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+vim.g.completion_confirm_key = ""
+
+MUtils.completion_confirm=function()
+  if vim.fn.pumvisible() ~= 0  then
+    if vim.fn.complete_info()["selected"] ~= -1 then
+      require'completion'.confirmCompletion()
+      return npairs.esc("<c-y>")
+    else
+      vim.fn.nvim_select_popupmenu_item(0 , false , false ,{})
+      require'completion'.confirmCompletion()
+      return npairs.esc("<c-n><c-y>")
+    end
+  else
+    return npairs.check_break_line_char()
+  end
+end
+
 function mapping:load_plugin_define()
     self.plugin = {
         -- Autocompletion and snippets
         ["i|<TAB>"] = Map_cmd(
             [[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]
         ):with_expr():with_silent(),
-        ["i|<S-TAB>"] = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
-        ["i|<CR>"] = Map_cmd(
-            [[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]
-        ):with_expr(),
+        ["i|<S-TAB>"]         = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
+        ["i|<CR>"]           = Map_cmd("v:lua.MUtils.completion_confirm()"):with_noremap():with_expr(),
         -- Plugin vim-operator-surround
-        ["n|sa"] = Map_cmd("<Plug>(operator-surround-append)"):with_silent(),
-        ["n|sd"] = Map_cmd("<Plug>(operator-surround-delete)"):with_silent(),
-        ["n|sr"] = Map_cmd("<Plug>(operator-surround-replace)"):with_silent(),
+        ["n|sa"]             = Map_cmd("<Plug>(operator-surround-append)"):with_silent(),
+        ["n|sd"]             = Map_cmd("<Plug>(operator-surround-delete)"):with_silent(),
+        ["n|sr"]             = Map_cmd("<Plug>(operator-surround-replace)"):with_silent(),
         -- kyazdani42/nvim-tree.lua
-        ["n|<leader>tf"] = Map_cr("NvimTreeToggle"):with_noremap():with_silent(),
-        ["n|<leader>rf"] = Map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
-        ["n|<leader>ff"] = Map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
+        ["n|<leader>tf"]     = Map_cr("NvimTreeToggle"):with_noremap():with_silent(),
+        ["n|<leader>rf"]     = Map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
+        ["n|<leader>ff"]     = Map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
         -- Plugin Vista
         ["n|<space>tv"] = Map_cmd("<cmd>Vista!!<CR>"):with_noremap():with_silent(),
         -- Vim Easy Align
@@ -186,6 +208,7 @@ function mapping:load_plugin_define()
 end
 
 local function load_mapping()
+    require('nvim-autopairs').setup()
     mapping:load_vim_define()
     mapping:load_plugin_define()
     Load_mapping(mapping.vim)
@@ -193,24 +216,3 @@ local function load_mapping()
 end
 
 load_mapping()
-
--- <Tab> to navigate the completion menu
---map("i", "<S-Tab>", 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
---map("i", "<Tab>", 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
---map(
---    "i",
---    "<Nop>",
---    [[pumvisible() ? complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"]],
---    {expr = true, silent = true, noremap = false}
---)
--- Expand
---map("i", "<CR>", [[vsnip#jumpable() ? "\<Plug>(vsnip-jump-next)" : "\<CR>"]], {expr = true})
---map("i", "<Tab>", [[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]], {expr = true, silent = true })
---map("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<C-h>"]], {expr = true })
---map("i", "<CR>", [[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]], {expr = true})
-
---map("", "<leader>c", '"+y') -- Copy to clipboard in normal, visual, select and operator modes
---map("i", "<C-u>", "<C-g>u<C-u>") -- Make <C-u> undoable
---map("i", "<C-w>", "<C-g>u<C-w>") -- Make <C-w> undoable
---map("n", "<C-l>", "<cmd>noh<CR>") -- Clear highlights
---map("n", "<leader>o", "m`o<Esc>``") -- Insert a newline in normal mode

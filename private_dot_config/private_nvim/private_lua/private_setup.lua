@@ -97,8 +97,8 @@ local function packerInit()
         print(out)
         print("Downloading paq...")
         cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "paq-nvim")
+        require "plug_paq".install()
     end
-    require "plug_paq".install()
 end
 
 local function quoteGenerator()
