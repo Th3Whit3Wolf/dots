@@ -1,0 +1,13 @@
+[[tag]]
+tag = "default"
+name = "Default"
+
+[[tag]]
+tag = "tag1"
+name = "Section 1"
+
+[[tag]]
+[[tag.subtag]]
+tag = "tag2"
+name = "Subsection 1"
+footers = ["Fixes"]

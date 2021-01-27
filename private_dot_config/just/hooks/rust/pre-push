@@ -1,0 +1,29 @@
+#!/bin/bash
+
+CARGO_TOML=$(echo $(git rev-parse --show-toplevel)/Cargo.toml)
+CHANGELOG=$(echo $(git rev-parse --show-toplevel)/CHANGELOG.md)
+VERSION=$(cat $CARGO_TOML | grep version | head -n1 | cut -d '"' -f2)
+tagref=$(grep -Po 'refs/tags/([^ ]*) ' </dev/stdin | head -n1 | cut -c11- | tr -d '[:space:]')
+
+if [[ "$tagref" == ""  ]]; then
+    ## pushing without --tags , exit normally
+    exit 0
+fi
+
+if [[ $tagref = v* ]]; then
+    if [[ "${tagref:1}" != "${VERSION}" ]]; then
+        sed -i -e 's/^version = .*/version = "${tagref:1}"/' $CARGO_TOML
+    fi
+    git journal -o $CHANGELOG
+    git add $CHANGELOG
+    git commit $CHANGELOG - Updated changelog
+    git push origin main
+fi
+if [[ "${tagref:1}" == "$VERSION" ]]; then
+    ## tag matches ver
+    exit 0
+fi
+echo "Tag name don't match version file. Preventing push."
+echo "tag name: ${tagref:1}"
+echo "version:  $VERSION"
+exit 1
