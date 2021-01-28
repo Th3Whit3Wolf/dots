@@ -1,9 +1,5 @@
 -- Original work can be found here, https://github.com/kdheepak/lazygit.nvim
 
-vim.g.lazygit_floating_window_winblend = 0
-vim.g.lazygit_floating_window_scaling_factor = 0.8
-vim.g.lazygit_use_neovim_remote = 1
-
 local window = require 'utils/windows'
 local vcs = require 'myplugins/vcs/git'
 
@@ -37,20 +33,32 @@ end
 --- :LazyGit entry point
 local function lazygit(path)
     if path == nil then
-        path = vcs.project_root_dir()
+        path = (function() 
+            if fn.getftype(fn.expand("%:p")) == "link" then
+                return vcs.get_root_dir(fn.fnamemodify(fn.resolve(fn.expand("%:p")), ":h")):gsub("/.git", "")
+            else
+                return vcs.get_root_dir(fn.expand("%:p:h")):gsub("/.git", "")
+            end
+        end)()
     end
-    window.open_floating_window(vim.g.lazygit_floating_window_scaling_factor, vim.g.lazygit_floating_window_winblend, LAZYGIT_BUFFER, 'lazygit', LAZYGIT_LOADED)
+    window.open_floating_window(LAZYGIT_BUFFER, 'lazygit', LAZYGIT_LOADED)
     local cmd = "lazygit " .. "-p " .. path
     exec_lazygit_command(cmd)
 end
 
 --- :LazyGitFilter entry point
-local function lazygitfilter(path)
+local function lazygitfilter(git_path)
     if path == nil then
-        path = vcs.project_root_dir()
+        path = (function() 
+            if fn.getftype(fn.expand("%:p")) == "link" then
+                return vcs.get_root_dir(fn.fnamemodify(fn.resolve(fn.expand("%:p")), ":h")):gsub("/.git", "")
+            else
+                return vcs.get_root_dir(fn.expand("%:p:h")):gsub("/.git", "")
+            end
+        end)()
     end
-    window.open_floating_window(vim.g.lazygit_floating_window_scaling_factor, vim.g.lazygit_floating_window_winblend, LAZYGIT_BUFFER, 'lazygit', LAZYGIT_LOADED)
-    local cmd = "lazygit " .. "-f " .. path
+    window.open_floating_window(LAZYGIT_BUFFER, 'lazygit', LAZYGIT_LOADED)
+    local cmd = "lazygit " .. "-f " .. git_path
     exec_lazygit_command(cmd)
 end
 

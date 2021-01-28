@@ -55,6 +55,11 @@ g["loaded_python_provider"] = 0
 g["loaded_ruby_provider"] = 0
 g["loaded_perl_provider"] = 0
 
+-- Used for floating windows
+g["floating_window_winblend"] = 0
+g["floating_window_scaling_factor"] = 0.8
+g["neovim_remote"] = 1
+
 g["rg_derive_root"] = true
 -------------------- OPTIONS -------------------------------
 opt("o", "mouse", "a") -- Enable mouse
@@ -117,7 +122,7 @@ opt("o", "shiftwidth", 4) -- Number of spaces to use in auto(indent)
 opt("o", "softtabstop", -1) -- Number of spaces to use in auto(indent)
 opt("o", "smarttab", true) -- Tab insert blanks according to 'shiftwidth'
 opt("o", "autoindent", true) -- Use same indenting on new lines
-opt("o", "shiftround", true) -- Round indent to multiple of 'shiftwidth'
+opt("o", "shiftround", false) -- Round indent to multiple of 'shiftwidth'
 opt("o", "cindent", true) -- Increase indent on line after opening brace
 opt("b", "smartindent", true) -- Insert indents automatically
 opt("o", "breakindentopt", "shift:2,min:20") -- Settingf for breakindent

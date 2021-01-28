@@ -176,6 +176,7 @@ end
 function Git.run()
     local gStatus = Git.check_workspace()
     if gStatus == true then
+        
         local options = {noremap = true, silent = true}
         api.nvim_command("augroup vcsGit")
         if fn.executable('nvr') then

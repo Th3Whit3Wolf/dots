@@ -3,9 +3,6 @@ local loop = vim.loop
 local api = vim.api
 local results = {}
 
-vim.g.floating_window_winblend = 0
-vim.g.loating_window_scaling_factor = 0.8
-
 CMD_RUNNER_BUFFER = nil
 CMD_RUNNER_LOADED = false
 vim.g.cmd_runner_opened = 0
@@ -119,7 +116,7 @@ end
 
 --- :cmd entry point
 function M.cmdRunner(cmd)
-    window.open_floating_window(vim.g.loating_window_scaling_factor, vim.g.floating_window_winblend, CMD_RUNNER_BUFFER, 'cmd_runner', CMD_RUNNER_LOADED)
+    window.open_floating_window(CMD_RUNNER_BUFFER, 'cmd_runner', CMD_RUNNER_LOADED)
     exec_command(cmd .. ' && sleep 1')
 end
 

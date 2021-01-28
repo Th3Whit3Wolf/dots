@@ -74,6 +74,9 @@ local definitions = {
     yank = {
         {"TextYankPost", "*", [[ silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}
     },
+    vcs = {
+        {"BufEnter", "*", "lua require'myplugins/vcs'"}
+    },
     plugins = {
         {"BufEnter", "*", "lua require('completion').on_attach()"},
         {

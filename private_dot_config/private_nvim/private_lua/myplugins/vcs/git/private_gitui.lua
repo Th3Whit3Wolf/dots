@@ -1,7 +1,3 @@
-vim.g.gitui_floating_window_winblend = 0
-vim.g.gitui_floating_window_scaling_factor = 0.8
-vim.g.gitui_use_neovim_remote = 1
-
 local window = require 'utils/windows'
 local vcs = require 'myplugins/vcs/git'
 
@@ -35,9 +31,15 @@ end
 --- :GitUI entry point
 local function gitui(path)
     if path == nil then
-        path = vcs.project_root_dir()
+        path = (function() 
+            if fn.getftype(fn.expand("%:p")) == "link" then
+                return vcs.get_root_dir(fn.fnamemodify(fn.resolve(fn.expand("%:p")), ":h")):gsub("/.git", "")
+            else
+                return vcs.get_root_dir(fn.expand("%:p:h")):gsub("/.git", "")
+            end
+        end)()
     end
-    window.open_floating_window(vim.g.gitui_floating_window_scaling_factor, vim.g.gitui_floating_window_winblend, GITUI_BUFFER, 'gitui', GITUI_LOADED)
+    window.open_floating_window(GITUI_BUFFER, 'gitui', GITUI_LOADED)
     local cmd = "gitui " .. "-p " .. path
     exec_gitui_command(cmd)
 end
