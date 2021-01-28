@@ -64,7 +64,7 @@ gls.left[3] = {
     FileSize = {
         provider = fileSize,
         condition = u.buffer_not_empty,
-        highlight = {c.color('white'), c.color('bg2')}
+        highlight = {c.color('base'), c.color('bg2')}
     }
 }
 
@@ -82,7 +82,7 @@ gls.left[5] = {
     FileType = {
         provider = fileType,
         condition = u.buffer_not_empty,
-        highlight = {c.color('white'), c.color('purple')}
+        highlight = {c.color('base'), c.color('purple')}
     }
 }
 
