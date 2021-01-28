@@ -36,6 +36,9 @@ local function plugins()
     -- devicons in lua
     paq "kyazdani42/nvim-web-devicons"
 
+    -- A neovim tabline plugin. 
+    paq 'romgrk/barbar.nvim'
+
     -- A File Explorer For Neovim Written In Lua
     paq {"kyazdani42/nvim-tree.lua", opt = true}
 
