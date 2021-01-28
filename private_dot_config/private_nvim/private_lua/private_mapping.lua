@@ -94,7 +94,6 @@ local mapping = setmetatable({}, {__index = {vim = {}, plugin = {}}})
 function mapping:load_vim_define()
     self.vim = {
         -- Vim map
-        ["n|<C-x>"] = Map_cr("bd!"):with_noremap(),
         ["n|<C-s>"] = Map_cu("write"):with_noremap(),
         ["n|<C-z>"] = Map_cu("undo"):with_noremap(),
         ["n|<M-z>"] = Map_cu("redo"):with_noremap(),
@@ -177,7 +176,23 @@ function mapping:load_plugin_define()
             [[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]
         ):with_expr():with_silent(),
         ["i|<S-TAB>"]         = Map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
-        ["i|<CR>"]           = Map_cmd("v:lua.MUtils.completion_confirm()"):with_noremap():with_expr(),
+        ["i|<CR>"]            = Map_cmd("v:lua.MUtils.completion_confirm()"):with_noremap():with_expr(),
+        -- Barbar
+        ["n|<Leader>bd"]       = Map_cr("BufferOrderByDirectory"):with_noremap():with_expr(),
+        ["n|<Leader>bl"]       = Map_cr("BufferOrderByLanguage"):with_noremap():with_expr(),
+        ["n|<A-,>"]            = Map_cr("BufferPrevious"):with_noremap():with_expr(),
+        ["n|<A-.>"]            = Map_cr("BufferNext"):with_noremap():with_expr(),
+        ["n|<A-1>"]            = Map_cr("BufferGoto 1"):with_noremap():with_expr(),
+        ["n|<A-2>"]            = Map_cr("BufferGoto 2"):with_noremap():with_expr(),
+        ["n|<A-3>"]            = Map_cr("BufferGoto 3"):with_noremap():with_expr(),
+        ["n|<A-4>"]            = Map_cr("BufferGoto 4"):with_noremap():with_expr(),
+        ["n|<A-5>"]            = Map_cr("BufferGoto 5"):with_noremap():with_expr(),
+        ["n|<A-6>"]            = Map_cr("BufferGoto 6"):with_noremap():with_expr(),
+        ["n|<A-7>"]            = Map_cr("BufferGoto 7"):with_noremap():with_expr(),
+        ["n|<A-8>"]            = Map_cr("BufferGoto 8"):with_noremap():with_expr(),
+        ["n|<A-9>"]            = Map_cr("BufferLast"):with_noremap():with_expr(),
+        ["n|<C-x>"]            = Map_cr("BufferClose"):with_noremap():with_expr(),
+
         -- Plugin vim-operator-surround
         ["n|sa"]             = Map_cmd("<Plug>(operator-surround-append)"):with_silent(),
         ["n|sd"]             = Map_cmd("<Plug>(operator-surround-delete)"):with_silent(),
