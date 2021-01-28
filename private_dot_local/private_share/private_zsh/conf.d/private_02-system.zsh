@@ -16,7 +16,7 @@ alias p='ps aux | grep '
 alias topcpu='/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10'
 
 # Like du -h but faster
-alias du='diskus'
+alias du='dust'
 
 # Search files in the current folder
 alias f='fd . | grep '
