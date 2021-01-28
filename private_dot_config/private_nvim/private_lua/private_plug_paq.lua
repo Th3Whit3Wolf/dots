@@ -147,7 +147,6 @@ local function plugins()
     -- Vim plugin that shows keybindings in popup
     paq {
         "liuchengxu/vim-which-key",
-        opt = true
     }
 
     -- improves the git commit buffer

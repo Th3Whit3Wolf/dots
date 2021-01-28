@@ -2,13 +2,6 @@
 local typo = require("utils").fixSpell
 local cmd = vim.cmd
 
--- Start an external command with a single bang
-cmd "nnoremap ! :!"
-cmd "imap ;date %d %b %Y"
-cmd "iab btw by the way"
-cmd "iab atm at the moment"
-cmd "iab ily I love you ❤️"
-
 -- Allow misspellings
 local cmdDefs = {
     bd = {

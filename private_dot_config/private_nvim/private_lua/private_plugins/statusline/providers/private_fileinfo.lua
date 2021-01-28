@@ -40,9 +40,12 @@ local pybang = function()
   end
 end
 
-local shellbang = function()
+local function shellbang(shell)
+
   local b = (function()
-    if vim.fn.getline(1):sub(-2) == "sh" then
+    if shell ~= nil then
+      return shell
+    elseif vim.fn.getline(1):sub(-3) == "/sh" then
       return os.capture("readlink /usr/bin/sh")
     else
       return vim.fn.getline(1)
@@ -52,7 +55,7 @@ local shellbang = function()
     return "Bourne Again SHell"
   elseif b:sub(-4) == "dash" or b == "dash" then
     return "Debian Almquist SHell"
-  elseif b:sub(-3) == "csh" or b:sub(-4) == "tcsh" or b == "csh" or "tcsh" then
+  elseif b:sub(-3) == "csh" or b:sub(-4) == "tcsh" or b == "csh" or b == "tcsh" then
     return "C SHell"
   elseif b:sub(-3) == "ksh" or b:sub(-4) == "mksh" or b:sub(-5) == "pdksh" or b == "ksh" or b == "mksh" or b == "pdksh" then
     return "Korn SHell"
@@ -107,7 +110,11 @@ function M.get_current_file_name()
       return file .. "   "
     end
   end
-  return file .. " "
+  if vim.bo.filetype == "toggleterm" then
+    return "Term " .. vim.b.toggle_number
+  else
+    return file .. " "
+  end
 end
 
 -- format print current file size
@@ -295,6 +302,8 @@ function M.get_file_type()
       return "Yet Another Markup Language"
     elseif ft == "zsh" then
       return "Z SHell"
+    elseif ft == "toggleterm" then
+      return shellbang(vim.o.shell)
     elseif ft == "" or ft == nil then
       return bangcheck()
     else

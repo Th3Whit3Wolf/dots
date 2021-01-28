@@ -20,6 +20,16 @@ g["dusk_til_dawn_morning"] = 7
 g["dusk_til_dawn_night"] = 19
 g["space_nvim_transparent_bg"] = true
 
+-- Prose
+--g["lexical#thesaurus"] = {'~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt'}
+g["lexical#dictionary"] = {'/usr/share/dict/words'}
+g["lexical#spellfile"] = {'~/.config/nvim/spell/en.utf-8.add'}
+g["lexical#thesaurus_key"] = '<leader>lt'
+g["lexical#dictionary_key"] = '<leader>ld'
+
+-- No default mapping for git_messenger
+g["git_messenger_no_default_mappings"] = true
+
 require("Dusk-til-Dawn").timeMan(
     function()
         require('indent_guides').setup(
@@ -47,24 +57,13 @@ require('indent_guides').indent_guides_enable()
     end
 )()
 
--- Prose
---g["lexical#thesaurus"] = {'~/.config/nvim/thesaurus/mthesaur.txt', '~/.config/nvim/moby_thesaurus.txt'}
-g["lexical#dictionary"] = {'/usr/share/dict/words'}
-g["lexical#spellfile"] = {'~/.config/nvim/spell/en.utf-8.add'}
-g["lexical#thesaurus_key"] = '<leader>lt'
-g["lexical#dictionary_key"] = '<leader>ld'
-
-require 'plugins.lsp'
-
 require"toggleterm".setup{
     size = 12,
     open_mapping = [[<a-t>]],
-    shade_terminals = true,
+    shade_terminals = false,
     persist_size = true,
     direction = 'horizontal'
 }
-
-require 'plugins.statusline'
 
 require('telescope').setup{
     defaults = {
@@ -107,4 +106,8 @@ require('telescope').setup{
       -- Developer configurations: Not meant for general override
       buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
     }
-  }
+}
+
+require 'plugins.lsp'
+require('nvim-autopairs').setup()
+require 'plugins.statusline'
