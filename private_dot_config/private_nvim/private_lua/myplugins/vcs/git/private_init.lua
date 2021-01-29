@@ -182,6 +182,27 @@ function Git.run()
         if fn.executable('nvr') then
 	        cmd "let $GIT_EDITOR = \"nvr -cc split --remote-wait +'set bufhidden=wipe'\""
         end
+
+        -- Get Which-Key keymap
+        key_maps = vim.g.which_key_map
+
+        -- Add keys to Which-Key keymap
+        key_maps.g = {
+            name = "Git",
+            b = "Branch",
+            c = "Commit",
+            C = "Commit --amend",
+            f = "Files",
+            L = "Log",
+            s = "Status",
+            t = "Tag",
+        }
+        key_maps.l = {
+            name = "Lexical",
+            b = "Dictionary",
+            c = "Thesaurus",
+        }
+
         api.nvim_command("autocmd!")
         api.nvim_command("autocmd CursorHold * lua require'myplugins/vcs/git/gitlens'.blameVirtText()")
         api.nvim_command("autocmd CursorMoved * lua require'myplugins/vcs/git/gitlens'.clearBlameVirtText()")
@@ -192,10 +213,12 @@ function Git.run()
             api.nvim_command("command! LazyGitFilter lua require'myplugins/vcs/git/lazygit'.lazygitfilter()")
             api.nvim_command("command! LazyGitConfig lua require'myplugins/vcs/git/lazygit'.lazygitconfig()")
             api.nvim_set_keymap("n", "<Space>gl", "lua require'myplugins/vcs/git/lazygit'.lazygit()<CR>", options)
+            key_maps.g.l = "LazyGit"
         end
         if fn.executable("gitui") then
             api.nvim_command("command! GitUI lua require'myplugins/vcs/git/gitui'.gitui()")
             api.nvim_set_keymap("n", "<Space>gl", "lua require'myplugins/vcs/git/gitui'.gitui()<CR>", options)
+            key_maps.g.l = "GitUI"
         end
         -- Vim Signify
         api.nvim_command("packadd vim-signify")
@@ -250,10 +273,27 @@ function Git.run()
         g["git_messenger_no_default_mappings"] = true
         api.nvim_set_keymap("n", "gm", "<cmd>GitMessenger<CR>", {silent = true})
         api.nvim_command("packadd committia.vim")
+
+        -- Update Which-Key keymap
+        vim.g.which_key_map = key_maps
     else
         api.nvim_command("augroup vcsGit")
         api.nvim_command("autocmd!")
         api.nvim_command("augroup END")
+        
+        -- Get Which-Key keymap
+        key_maps = vim.g.which_key_map
+
+        -- Remove keys from Which-Key keymap
+        if key_maps.g ~=nil then
+            key_maps.g = nil
+        end
+        if key_maps.l ~=nil then
+            key_maps.l = nil
+        end
+
+        -- Update Which-Key keymap
+        vim.g.which_key_map = key_maps
     end
 end
 

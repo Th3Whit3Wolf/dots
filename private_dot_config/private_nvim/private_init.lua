@@ -18,7 +18,19 @@ end
 
 -- Set map leader (needs to be set before mappings)
 g["mapleader"] = " "
-g["completion_confirm_key"] = ""
+
+-- Check for .env in local and parent recursively
+-- Until after home directory is checked
+function _G.check_env(path)
+    local new_path = path .. G.path_sep .. ".env"
+    if G.exists(new_path) then
+        cmd("Dotenv " .. new_path)
+    elseif path == env.HOME then
+        return
+    else
+        check_env(vim.fn.fnamemodify(path, ':h'))
+    end
+end
 -------------------- VARIABLES ----------------------------
 if G.isdir(G.python3 .. "bin") then
     g["python3_host_prog"] = G.python3 .. "bin" .. G.path_sep .. "python"
@@ -213,24 +225,6 @@ opt("o", "concealcursor", "niv")
 opt("o", "foldenable", true)
 opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
-
-require "autocmd"
-require "typing"
-require "mapping"
-require "plugins"
-
--- Check for .env in local and parent recursively
--- Until after home directory is checked
-function _G.check_env(path)
-    local new_path = path .. G.path_sep .. ".env"
-    if G.exists(new_path) then
-        cmd("Dotenv " .. new_path)
-    elseif path == env.HOME then
-        return
-    else
-        check_env(vim.fn.fnamemodify(path, ':h'))
-    end
-end
 -------------------- COMMANDS ------------------------------
 --  Install all packages
 command(
@@ -280,3 +274,9 @@ command(
     "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').sync()"
 )
 --]]
+
+-- Plugins and stuff
+require "autocmd"
+require "typing"
+require "mapping"
+require "plugins"

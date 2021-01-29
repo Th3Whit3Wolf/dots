@@ -10,7 +10,7 @@ function G.load_variables()
     G.cache_dir = home .. path_sep .. '.cache' .. path_sep .. 'nvim' .. path_sep
     G.modules_dir = G.vim_path .. 'modules'
     G.python3 = G.cache_dir .. 'venv' .. path_sep .. 'python' .. path_sep
-    G.node = home .. path_sep .. ".local" .. path_sep .. "lib" .. path_sep .. "node_modules" .. path_sep .. "bin" .. path_sep .. "neovim-node-host"
+    G.node = home .. path_sep .. ".local" .. path_sep .. "bin" .. path_sep .. "neovim-node-host"
     G.path_sep = path_sep
     G.home = home
     G.local_nvim = home .. path_sep .. '.local' .. path_sep .. 'share' .. path_sep .. 'nvim' .. path_sep

@@ -12,7 +12,7 @@ local function augroups(definitions)
     end
 end
 
-local definitions = {
+local autocmds = {
     bufs = {
         -- Reload vim config automatically
         {"BufWritePost", [[$VIM_PATH/{*.vim,*.yaml,vimrc} nested source $MYVIMRC | redraw]]},
@@ -86,7 +86,18 @@ local definitions = {
         { "CursorHold", "*", "lua vim.lsp.diagnostic.show_line_diagnostics()" },
         -- Automatically load .env variables
         {"BufEnter", "*", "call v:lua.check_env(expand('%:p:h'))"},
+        {"BufEnter", "*", "call v:lua.WhichKey.SetKeyOnFT()"},
     }
 }
 
-augroups(definitions)
+if vim.fn.executable('ctags') ~= 0 then
+    autocmds.filetype = {
+        {
+            "FileType", 
+            "ada,ansible,asm,awk,asciidoc,clojure,cmake,d,elixir,erlang,java,make,matlab,markdown,objc,ocaml,perl,pod,proto,ps1,ps1xml,pug,puppet,ruby,rspec,rst,svg,systemd,tex,verilog,xml,xsl,zephir",
+            "packadd vim-gutentags"
+        }
+    }
+end
+
+augroups(autocmds)

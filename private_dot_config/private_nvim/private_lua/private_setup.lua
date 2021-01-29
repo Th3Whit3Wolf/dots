@@ -43,23 +43,27 @@ local function nodeHostInit()
         if not G.exists(G.node) then
             local needs_install = {
                 "neovim",
+                "@angular/language-server",
+                "bash-language-server",
                 "vscode-css-languageserver-bin",
                 "dockerfile-language-server-nodejs",
                 "elm",
                 "elm-test",
                 "elm-format",
                 "@elm-tooling/elm-language-server",
+                "graphql-language-service-cli",
                 "vscode-html-languageserver-bin",
                 "intelephense",
                 "vscode-json-languageserver",
                 "purescript-language-server",
                 "rome",
+                "sql-language-server",
                 "svelte-language-server",
                 "typescript",
                 "typescript-language-server",
-                'vim-language-server',
-                'vls',
-                'yaml-language-server'
+                "vim-language-server",
+                "vls",
+                "yaml-language-server"
             }
             for _, v in pairs(needs_install) do
                 os.execute("npm install -g " .. v)

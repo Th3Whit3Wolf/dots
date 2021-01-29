@@ -27,10 +27,34 @@ g["vista_default_executive"] = 'ctags'
 -- instead of the default one for these filetypes when using `:Vista` without
 -- specifying the executive.
 g["vista_executive_for"] = {
+    angular = 'nvim_lsp',
+    bash = 'nvim_lsp',
+    bib = 'nvim_lsp',
+    docker = 'nvim_lsp',
+    c = 'nvim_lsp',
+    cpp = 'nvim_lsp',
+    css = 'nvim_lsp',
+    elm = 'nvim_lsp',
+    graphql = 'nvim_lsp',
+    html = 'nvim_lsp',
+    json = 'nvim_lsp',
+    latex = 'nvim_lsp',
+    less = 'nvim_lsp',
     markdown = 'toc',
+    php = 'nvim_lsp',
+    purescript = 'nvim_lsp',
+    python = 'nvim_lsp',
+    rome = 'nvim_lsp',
     rust = 'nvim_lsp',
+    sass = 'nvim_lsp',
+    scss = 'nvim_lsp',
+    sql = 'nvim_lsp',
+    svelte = 'nvim_lsp',
     typescript = 'nvim_lsp',
     typescriptreact = 'nvim_lsp',
+    yaml = 'nvim_lsp',
+    vim = 'nvim_lsp',
+    vue = 'nvim_lsp',
 }
 
 g["vista_disable_statusline"] = 1
@@ -44,6 +68,17 @@ g["endwise_no_mappings"] = 1
 if G.exists("/tmp/sway-colord/dawn") then
     g["dusk_til_dawn_sway_colord"] = true
 end
+
+-- Gutentags
+g["gutentags_cache_dir"] = G.cache_dir .. '/tags'
+g["gutentags_project_root"] = {'.root', '.git', '.svn', '.hg', '.project','go.mod', 'Cargo.toml', '.bzr', '_darcs', '_FOSSIL_', '.fslckout','tsconfig.js','jsconfig.js'}
+g["gutentags_generate_on_write"] = 0
+g["gutentags_generate_on_missing"] = 0
+g["gutentags_generate_on_new"] = 0
+g["gutentags_exclude_filetypes"] = {'defx', 'denite', 'vista', 'magit'}
+g["gutentags_ctags_extra_args"] = {'--output-format=e-ctags'}
+g["gutentags_ctags_exclude"] = {'*.json', '*.js', '*.ts', '*.jsx', '*.css', '*.less', '*.sass', '*.go', '*.dart', 'node_modules', 'dist', 'vendor'}
+
 -- Dusk til Dawn
 g["dusk_til_dawn_morning"] = 7
 g["dusk_til_dawn_night"] = 19

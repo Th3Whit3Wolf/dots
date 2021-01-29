@@ -1,69 +1,29 @@
-local vim, api = vim, vim.api
+local vim, api, fn = vim, vim.api, vim.fn
 local lspconfig = require 'lspconfig'
 local G = require("global")
 local saga = require 'lspsaga'
 local action = require 'lspsaga.action'
 
+
+function get_exec_path(exec)
+    if vim.fn.executable(exec) then
+        local paths = {}
+        for match in (vim.env.PATH..":"):gmatch("(.-):") do
+            table.insert(paths, match);
+        end
+        for _,path in pairs(paths) do
+            local t_path = path .. G.path_sep .. exec
+            if G.exists(t_path) then
+                return true, t_path
+            end
+        end
+    else
+        return false, 0
+    end
+end
+
 --[[
--- Configure the completion chains
-local chain_complete_list = {
-    default = {
-        {
-            complete_items = {
-                "lsp",
-                "ts",
-                "snippet",
-                "buffers"
-            }
-        },
-        {
-            complete_items = {"path"},
-            triggered_only = {"/"}
-        },
-        {
-            complete_items = {"buffers"}
-        }
-    },
-    string = {
-        {
-            complete_items = {"path"},
-            triggered_only = {"/"}
-        }
-    },
-    comment = {},
-    sql = {
-        {
-            complete_items = {
-                "vim-dadbod-completion",
-                "lsp"
-            }
-        }
-    },
-    vim = {
-        {
-            complete_items = {"snippet"}
-        },
-        {
-            mode = {"cmd"}
-        }
-    }
-}
-
-
--- Completion Nvim settings
--- Fix for completion with other plugins mapped to enter
-vim.g.completion_confirm_key = ""
--- Use snippets.nvim for snippet completion
-vim.g.completion_enable_snippet = "vim-vsnip"
--- Enable auto signature
-vim.g.completion_enable_auto_signature = 1
--- Auto change completion source
-vim.g.completion_auto_change_source = 1
--- Complete on delete
-vim.g.completion_trigger_on_delete = 1
--- ignore case matching
-vim.g.completion_matching_ignore_case = 1
--- Custom label
+-- Keeping these in case it gets implemented in nvim-compe
 vim.g.completion_customize_lsp_label = {
     Function = "",
     Method = "",
@@ -104,17 +64,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 )
 
 local on_attach = function(client,bufnr)
-  --[[
-  completion.on_attach(
-        client,
-        {
-            sorting = "alphabet",
-            matching_strategy_list = {"exact", "fuzzy", "substring"},
-            chain_complete_list = chain_complete_list
-        }
-    )
-    --]]
-
   if client.resolved_capabilities.document_formatting then
     action.lsp_before_save()
   end
@@ -155,26 +104,25 @@ local on_attach = function(client,bufnr)
     end
       
     -- preview definition
-    leader_buf_map("cd", "require'lspsaga.provider'.preview_definition")
+    leader_buf_map("cD", "require'lspsaga.provider'.preview_definition")
     -- lsp provider to find the currsor word definition and reference
-    leader_buf_map("cD", "require'lspsaga.provider'.lsp_finder")
+    leader_buf_map("cf", "require'lspsaga.provider'.lsp_finder")
     -- show hover doc
-    leader_buf_map("ch",  "vim.lsp.buf.hover")
-    leader_buf_map("ci",  "vim.lsp.buf.implementation")
-    leader_buf_map("cS",  "vim.lsp.buf.signature_help")
-    leader_buf_map("ct",  "vim.lsp.buf.type_definition")
-    leader_buf_map("cr",  "vim.lsp.buf.references")
-    leader_buf_map("cp", "vim.lsp.buf.peek_definition")
-    leader_buf_map("cR",  "vim.lsp.buf.rename")
-    -- leader_buf_map("cb",  "require'lspsaga.diagnostic'.show_buf_diagnostics")
-    leader_buf_map("csd", "vim.lsp.buf.document_symbol")
-    leader_buf_map("csw", "vim.lsp.buf.workspace_symbol")
-    
     -- code action
-    leader_buf_map("ca", "require('lspsaga.codeaction').code_action")
-    leader_buf_map("c]", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev")
-    leader_buf_map("c[", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
-    leader_buf_map("co", "vim.lsp.diagnostic.set_loclist")
+    leader_buf_map("ca",  "require('lspsaga.codeaction').code_action")
+    leader_buf_map("clh", "vim.lsp.buf.hover")
+    leader_buf_map("cli", "vim.lsp.buf.implementation")
+    leader_buf_map("clS", "vim.lsp.buf.signature_help")
+    leader_buf_map("clt", "vim.lsp.buf.type_definition")
+    leader_buf_map("clr", "vim.lsp.buf.references")
+    leader_buf_map("clp", "vim.lsp.buf.peek_definition")
+    leader_buf_map("clR", "vim.lsp.buf.rename")
+    -- leader_buf_map("cb",  "require'lspsaga.diagnostic'.show_buf_diagnostics")
+    leader_buf_map("clsd", "vim.lsp.buf.document_symbol")
+    leader_buf_map("clsw", "vim.lsp.buf.workspace_symbol")
+    leader_buf_map("cdp", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev")
+    leader_buf_map("cdn", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
+    leader_buf_map("cdl", "vim.lsp.diagnostic.set_loclist")
 
     -- Telescope
     api.nvim_buf_set_keymap(bufnr, "n", "gr", "Telescope lsp_references", opts)
@@ -183,105 +131,115 @@ end
 
 -- List of servers where config = {on_attach = on_attach}
 local simple_lsp = {
-    "als",
-    "dockerls",
-    "elmls",
-    "html",
-    "jdtls",
-    "metals",
-    "ocamlls",
-    "purescriptls",
-    "rnix",
-    "sqlls",
-    "vimls",
-    "vuels",
-    "yamlls"
+    angularls = "ngserver",
+    dockerls = "docker-langserver",
+    elmls = "elm-language-server",
+    graphql = "graphql-lsp",
+    html = "html-languageserver",
+    intelephense = "intelephense",
+    purescriptls = "purescript-language-server",
+    rnix = "rnix",
+    rome = "rome",
+    svelte= "svelteserver",
+    texlab = "texlab",
+    vimls = "vim-language-server",
+    vuels = "vls",
+    yamlls = "yaml-language-server",
 }
 
 -- List of installed LSP servers
-local installed_lsp = vim.fn.systemlist("ls ~/.cache/nvim/nvim_lsp")
-for k, _ in pairs(installed_lsp) do
-    if installed_lsp[k] == "bashls" then
-        lspconfig.bashls.setup {
-            cmd = {
-                "bash-language-server",
-                "start"
-            },
-            filetypes = {
-                "sh",
-                "zsh"
-            },
-            root_dir = lspconfig.util.root_pattern(".git"),
-            on_attach = on_attach
-        }
-    elseif installed_lsp[k] == "cssls" then
-        lspconfig.cssls.setup {
-            filetypes = {
-                "css",
-                "less",
-                "sass",
-                "scss"
-            },
-            root_dir = lspconfig.util.root_pattern("package.json", ".git"),
-            on_attach = on_attach
-        }
-    elseif installed_lsp[k] == "jsonls" then
-        lspconfig.jsonls.setup {
-            cmd = {
-                "json-languageserver",
-                "--stdio"
-            },
-            on_attach = on_attach
-        }
-    elseif installed_lsp[k] == "sumneko_lua" then
-        lspconfig.sumneko_lua.setup {
-            on_attach = on_attach,
-            settings = {
-                Lua = {
-                    runtime = {
-                        version = "LuaJIT",
-                        path = vim.split(package.path, ";")
-                    },
-                    diagnostics = {
-                        enable = true,
-                        globals = {"vim"}
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-                        }
+if fn.executable("bash-language-server") == 1 then
+    lspconfig.bashls.setup {
+        cmd = {
+            "bash-language-server",
+            "start"
+        },
+        filetypes = {
+            "sh",
+            "zsh"
+        },
+        root_dir = lspconfig.util.root_pattern(".git"),
+        on_attach = on_attach
+    }
+end
+if fn.executable("css-languageserver") == 1 then
+    lspconfig.cssls.setup {
+        filetypes = {
+            "css",
+            "less",
+            "sass",
+            "scss"
+        },
+        root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+        on_attach = on_attach
+    }
+end
+if fn.executable("vscode-json-languageserver") == 1 then
+    lspconfig.jsonls.setup {
+        cmd = {
+            "vscode-json-languageserver",
+            "--stdio"
+        },
+        on_attach = on_attach
+    }
+end
+
+local sqlls_exists, sqlls_path = get_exec_path("sql-language-server")
+if sqlls_exists == true then
+    lspconfig.sqlls.setup {
+        cmd = {sqlls_path, "up", "--method", "stdio"};
+        on_attach = on_attach
+    }
+end
+if fn.executable("sumneko_lua") == 1 then
+    lspconfig.sumneko_lua.setup {
+        on_attach = on_attach,
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                    path = vim.split(package.path, ";")
+                },
+                diagnostics = {
+                    enable = true,
+                    globals = {"vim"}
+                },
+                workspace = {
+                    library = {
+                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
                     }
                 }
             }
         }
-    elseif installed_lsp[k] == "tsserver" then
-        lspconfig.tsserver.setup {
-            cmd = {
-                "typescript-language-server",
-                "--stdio"
-            },
-            filetypes = {
-                "javascript",
-                "javascriptreact",
-                "javascript.jsx",
-                "typescript",
-                "typescriptreact",
-                "typescript.tsx"
-            },
-            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+    }
+end
+if fn.executable("typescript-language-server") == 1 then
+    lspconfig.tsserver.setup {
+        cmd = {
+            "typescript-language-server",
+            "--stdio"
+        },
+        filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx"
+        },
+        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+        on_attach = on_attach
+    }
+end
+for lsp, executable in pairs(simple_lsp) do
+    if vim.fn.executable(executable) == 1 then
+        lspconfig[lsp].setup {
             on_attach = on_attach
         }
-    else
-        for j, _ in pairs(simple_lsp) do
-            if installed_lsp[k] == simple_lsp[j] then
-                lspconfig[simple_lsp[j]].setup {
-                    on_attach = on_attach
-                }
-            end
-        end
     end
 end
+
 
 if vim.fn.executable("ccls") > 0 then
     lspconfig.ccls.setup {
