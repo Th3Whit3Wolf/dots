@@ -1,4 +1,4 @@
-prefix=~/.config/local/lib/node_modules
+prefix=~/.local/
 cache=${XDG_CACHE_HOME}/npm
 tmp=${XDG_RUNTIME_DIR}/npm
 init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
