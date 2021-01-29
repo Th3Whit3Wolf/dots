@@ -143,6 +143,12 @@ local function plugins()
         opt = true
     }
 
+    -- A Vim plugin that manages your tag files 
+    paq {
+        "ludovicchabant/vim-gutentags",
+        opt = true
+    }
+
     -- shows the history of commits under the cursor in popup window
     paq {
         "rhysd/git-messenger.vim",
@@ -164,6 +170,7 @@ local function plugins()
     -- A simple, easy-to-use Vim alignment plugin
     paq "junegunn/vim-easy-align"
 
+    -- Viewer & Finder for LSP symbols and tags 
     paq "liuchengxu/vista.vim"
 
      -- Vim plugin that shows keybindings in popup
