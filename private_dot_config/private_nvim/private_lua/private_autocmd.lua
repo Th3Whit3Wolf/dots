@@ -78,12 +78,14 @@ local definitions = {
         {"BufEnter", "*", "lua require'myplugins/vcs'"}
     },
     plugins = {
-        {"BufEnter", "*", "lua require('completion').on_attach()"},
         {
             "InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost",
             "*.rs",
             [[ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}} ]]
-        }
+        },
+        { "CursorHold", "*", "lua vim.lsp.diagnostic.show_line_diagnostics()" },
+        -- Automatically load .env variables
+        {"BufEnter", "*", "call v:lua.check_env(expand('%:p:h'))"},
     }
 }
 

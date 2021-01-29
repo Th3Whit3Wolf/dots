@@ -4,6 +4,7 @@ local G = require("global")
 local saga = require 'lspsaga'
 local action = require 'lspsaga.action'
 
+--[[
 -- Configure the completion chains
 local chain_complete_list = {
     default = {
@@ -48,6 +49,7 @@ local chain_complete_list = {
     }
 }
 
+
 -- Completion Nvim settings
 -- Fix for completion with other plugins mapped to enter
 vim.g.completion_confirm_key = ""
@@ -89,7 +91,7 @@ vim.g.completion_customize_lsp_label = {
     TypeParameter = "",
     Default = ""
 }
-
+--]]
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
@@ -102,11 +104,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 )
 
 local on_attach = function(client,bufnr)
-    local has_completion,completion = pcall(require,'completion')
-  if not has_completion then
-    print('Does not load completion-nvim')
-    return
-  end
+  --[[
   completion.on_attach(
         client,
         {
@@ -115,6 +113,7 @@ local on_attach = function(client,bufnr)
             chain_complete_list = chain_complete_list
         }
     )
+    --]]
 
   if client.resolved_capabilities.document_formatting then
     action.lsp_before_save()
@@ -137,6 +136,10 @@ local on_attach = function(client,bufnr)
     }
 
     saga.init_lsp_saga(saga_opts)
+    vim.fn.sign_define('LspDiagnosticsSignError', {text='✘'})
+    vim.fn.sign_define('LspDiagnosticsSignWarning', {text=''})
+    vim.fn.sign_define('LspDiagnosticsSignInformation', {text=''})
+    vim.fn.sign_define('LspDiagnosticsSignHint', {text='ஐ'})
 
     -- Keybindings for LSPs
     -- Note these are in on_attach so that they don't override bindings in a non-LSP setting
@@ -158,10 +161,10 @@ local on_attach = function(client,bufnr)
     -- show hover doc
     leader_buf_map("ch",  "vim.lsp.buf.hover")
     leader_buf_map("ci",  "vim.lsp.buf.implementation")
-    leader_buf_map("cs",  "vim.lsp.buf.signature_help")
+    leader_buf_map("cS",  "vim.lsp.buf.signature_help")
     leader_buf_map("ct",  "vim.lsp.buf.type_definition")
     leader_buf_map("cr",  "vim.lsp.buf.references")
-    leader_buf_map("cpd", "vim.lsp.buf.peek_definition")
+    leader_buf_map("cp", "vim.lsp.buf.peek_definition")
     leader_buf_map("cR",  "vim.lsp.buf.rename")
     -- leader_buf_map("cb",  "require'lspsaga.diagnostic'.show_buf_diagnostics")
     leader_buf_map("csd", "vim.lsp.buf.document_symbol")
@@ -170,8 +173,8 @@ local on_attach = function(client,bufnr)
     -- code action
     leader_buf_map("ca", "require('lspsaga.codeaction').code_action")
     leader_buf_map("c]", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev")
-    leader_buf_map("cd[", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
-    leader_buf_map("cdo", "vim.lsp.diagnostic.set_loclist")
+    leader_buf_map("c[", "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
+    leader_buf_map("co", "vim.lsp.diagnostic.set_loclist")
 
     -- Telescope
     api.nvim_buf_set_keymap(bufnr, "n", "gr", "Telescope lsp_references", opts)

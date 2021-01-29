@@ -4,16 +4,16 @@ local npairs = require('nvim-autopairs')
 
 local nnoremap, inoremap, vnoremap, xnoremap, cnoremap, nmap, imap, vmap = mappings.nnoremap, mappings.inoremap, mappings.vnoremap, mappings.xnoremap, mappings.cnoremap, mappings.nmap, mappings.imap, mappings.vmap
 
-_G.MUtils= {}
+_G.MUtils = {}
 
 MUtils.completion_confirm=function()
     if vim.fn.pumvisible() ~= 0  then
       if vim.fn.complete_info()["selected"] ~= -1 then
-        require'completion'.confirmCompletion()
+        vim.fn["compe#complete"]("<CR>")
         return npairs.esc("<c-y>")
       else
         vim.fn.nvim_select_popupmenu_item(0 , false , false ,{})
-        require'completion'.confirmCompletion()
+        vim.fn["compe#complete"]("<CR>")
         return npairs.esc("<c-n><c-y>")
       end
     else
@@ -44,8 +44,6 @@ MUtils.s_tab=function()
         end
     end
 end
-
-
 
 local function cnoreabbrev(command)
     api.nvim_command("cnoreabbrev " .. command)
@@ -159,8 +157,8 @@ nnoremap("<leader>sl", ":SessionLoad<CR>")
 -- Switch Buffers ()
 nmap("<Leader>bd", ":BufferOrderByDirectory<CR>")
 nmap("<Leader>bl", ":BufferOrderByLanguage<CR>")
-nmap("<Leader>,", ":BufferPrevious<CR>")
-nmap("<Leader>.", ":BufferPrevious<CR>")
+nmap("<Leader>bp", ":BufferPrevious<CR>")
+nmap("<Leader>bn", ":BufferNext<CR>")
 nmap("<Leader>1", ":BufferGoto 1<CR>")
 nmap("<Leader>2", ":BufferGoto 2<CR>")
 nmap("<Leader>3", ":BufferGoto 3<CR>")
@@ -185,32 +183,27 @@ nmap("sr", "<Plug>(operator-surround-replace)")
 
 -- File Tree (nvim-tree.lua)
 nnoremap("<leader>tf", "<C-u>:NvimTreeToggle<CR>")
-nnoremap("<leader>rf", "<C-u>:NvimTreeRefresh<CR>")
-nnoremap("<leader>ff", "<C-u>:NvimTreeFindFile<CR>")
-
+--nnoremap("<leader>rf", "<C-u>:NvimTreeRefresh<CR>")
+--nnoremap("<leader>sf", "<C-u>:NvimTreeFindFile<CR>")
 
 -- Plugin Vista
 nnoremap("<leader>tv", "<cmd>Vista!!<CR>")
+
 -- Vim Easy Align
 nmap("<leader>a", "<Plug>(EasyAlign)")
 vmap("<leader>a", "<Plug>(EasyAlign)")
 
 -- Plugin DadbodUI
-nnoremap("<leader>od", ":DBUIToggle<CR>")
+nnoremap("<leader>td", ":DBUIToggle<CR>")
+
 -- Telescope
-nnoremap("<Leader>bb", "<C-u>:Telescope buffers<CR>")
+nnoremap("<Leader>bs", "<C-u>:Telescope buffers<CR>")
 nnoremap("<Leader>fg", "<C-u>:Telescope git_files<CR>")
-nnoremap("<Leader>fw", "<C-u>:Telescope grep_string<CR>")
+nnoremap("<Leader>fs", "<C-u>:Telescope grep_string<CR>")
 nnoremap("<Leader>fl", "<C-u>:Telescope loclist<CR>")
 nnoremap("<Leader>fc", "<C-u>:Telescope git_commits<CR>")
 nnoremap("<C-p>", "<C-u>:Telescope fd<CR>")
-nnoremap("<Leader>fa", "<C-u>:DashboardFindWord<CR>")
+nnoremap("<Leader>fw", "<C-u>:DashboardFindWord<CR>")
 nnoremap("<Leader>fb", "<C-u>:DashboardJumpMark<CR>")
 nnoremap("<Leader>ff", "<C-u>:DashboardFindFile<CR>")
 nnoremap("<Leader>fh", "<C-u>:DashboardFindHistory<CR>")
-
--- Vim-Which-Key
-nnoremap("<leader>", "<cmd>WhichKey '<space>'<cr>")
-
-
-fn['which_key#register']('<space>', 'g:which_key_map')

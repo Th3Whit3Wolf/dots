@@ -191,9 +191,11 @@ function Git.run()
             api.nvim_command("command! LazyGit lua require'myplugins/vcs/git/lazygit'.lazygit()")
             api.nvim_command("command! LazyGitFilter lua require'myplugins/vcs/git/lazygit'.lazygitfilter()")
             api.nvim_command("command! LazyGitConfig lua require'myplugins/vcs/git/lazygit'.lazygitconfig()")
+            api.nvim_set_keymap("n", "<Space>gl", "lua require'myplugins/vcs/git/lazygit'.lazygit()<CR>", options)
         end
         if fn.executable("gitui") then
             api.nvim_command("command! GitUI lua require'myplugins/vcs/git/gitui'.gitui()")
+            api.nvim_set_keymap("n", "<Space>gl", "lua require'myplugins/vcs/git/gitui'.gitui()<CR>", options)
         end
         -- Vim Signify
         api.nvim_command("packadd vim-signify")
@@ -219,9 +221,10 @@ function Git.run()
         api.nvim_set_keymap("n", "<Space>gc", "<cmd>Gina commit<CR>",         options)
         api.nvim_set_keymap("n", "<Space>gC", "<cmd>Gina commit --amend<CR>", options)
         api.nvim_set_keymap("n", "<Space>gt", "<cmd>Gina tag<CR>",            options)
-        api.nvim_set_keymap("n", "<Space>gl", "<cmd>Gina log<CR>",            options)
-        api.nvim_set_keymap("n", "<Space>gL", "<cmd>Gina log :%<CR>",         options)
+        api.nvim_set_keymap("n", "<Space>gL", "<cmd>Gina log<CR>",            options)
+        --api.nvim_set_keymap("n", "<Space>gL", "<cmd>Gina log :%<CR>",         options)
         api.nvim_set_keymap("n", "<Space>gf", "<cmd>Gina ls<CR>",             options)
+
         fn["gina#custom#command#option"]("commit", "-v|--verbose")
         fn["gina#custom#command#option"]([[/\%(status\|commit\)]], "-u|--untracked-files")
         fn["gina#custom#command#option"]("status", "-b|--branch")

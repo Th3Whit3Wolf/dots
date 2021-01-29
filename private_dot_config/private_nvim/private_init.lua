@@ -1,6 +1,6 @@
 -------------------- HELPERS -------------------------------
 local vim = vim
-local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
+local api, cmd, fn, g, env = vim.api, vim.cmd, vim.fn, vim.g, vim.env
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 local G = require "global"
 require "setup"
@@ -196,7 +196,7 @@ opt("o", "cmdwinheight", 5) -- Command-line lines
 opt("o", "equalalways", false) -- Don't resize windows on split or close
 opt("o", "colorcolumn", "100") -- Highlight the 100th character limit
 opt("o", "display", "lastline")
-if vim.env == "linux" then
+if env["TERM"] == "linux" then
     opt("o", "termguicolors", false)
 else
     opt("o", "termguicolors", true)
@@ -218,6 +218,19 @@ require "autocmd"
 require "typing"
 require "mapping"
 require "plugins"
+
+-- Check for .env in local and parent recursively
+-- Until after home directory is checked
+function _G.check_env(path)
+    local new_path = path .. G.path_sep .. ".env"
+    if G.exists(new_path) then
+        cmd("Dotenv " .. new_path)
+    elseif path == env.HOME then
+        return
+    else
+        check_env(vim.fn.fnamemodify(path, ':h'))
+    end
+end
 -------------------- COMMANDS ------------------------------
 --  Install all packages
 command(

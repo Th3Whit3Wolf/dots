@@ -42,8 +42,20 @@ local function plugins()
     -- A File Explorer For Neovim Written In Lua
     paq {"kyazdani42/nvim-tree.lua", opt = true}
 
+    --[[
     -- auto completion framework that aims to provide a better completion experience with neovim's built-in LSP
     paq "nvim-lua/completion-nvim"
+    -- Completion for buffers word.
+    paq "steelsojka/completion-buffers"
+    -- Get autocompletion from treesitter
+    paq {
+        'nvim-treesitter/completion-treesitter',
+        opt = true
+    }
+    --]]
+
+    -- Auto completion plugin for nvim
+    paq "hrsh7th/nvim-compe"
 
     -- Collection of common configurations for the Nvim LSP client.
     paq "neovim/nvim-lspconfig"
@@ -75,8 +87,7 @@ local function plugins()
     -- Completion for vim-dadbod
     paq "kristijanhusak/vim-dadbod-completion"
 
-    -- Completion for buffers word.
-    paq "steelsojka/completion-buffers"
+
 
     -- Treesitter configurations and abstraction layer for Neovim.
     paq {
@@ -94,12 +105,6 @@ local function plugins()
     -- Show code context
     paq {
         'romgrk/nvim-treesitter-context',
-        opt = true
-    }
-
-    -- Get autocompletion from treesitter
-    paq {
-        'nvim-treesitter/completion-treesitter',
         opt = true
     }
 
@@ -144,11 +149,6 @@ local function plugins()
         opt = true
     }
 
-    -- Vim plugin that shows keybindings in popup
-    paq {
-        "liuchengxu/vim-which-key",
-    }
-
     -- improves the git commit buffer
     paq {
         "rhysd/committia.vim",
@@ -164,9 +164,11 @@ local function plugins()
     -- A simple, easy-to-use Vim alignment plugin
     paq "junegunn/vim-easy-align"
 
-    paq {
-        "liuchengxu/vista.vim",
-        opt = true
+    paq "liuchengxu/vista.vim"
+
+     -- Vim plugin that shows keybindings in popup
+     paq {
+        "liuchengxu/vim-which-key",
     }
 
     -- Auto close (X)HTML tags

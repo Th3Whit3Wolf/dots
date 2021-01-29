@@ -5,9 +5,38 @@ local g =  vim.g
 g["db_ui_env_variable_url"] = "DATABASE_URL"
 g["db_ui_env_variable_name"] = "DATABASE_NAME"
 g["db_ui_save_location"] = G.cache_dir .. "dadbod_queries"
+g["db_ui_win_position"] = 'left'
+g["db_ui_use_nerd_fonts"] = 1
+g["db_ui_winwidth"] = 35
 
 -- Vsnip snippet directories
 g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
+
+-- Vista
+--- How each level is indented and what to prepend.
+--- This could make the display more compact or more spacious.
+--- e.g., more compact: ["▸ ", ""]
+--- Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+g["vista_icon_indent"] = {"╰─▸ ", "├─▸ "}
+
+--- Executive used when opening vista sidebar without specifying it.
+--- See all the avaliable executives via `:echo g:vista#executives`.
+g["vista_default_executive"] = 'ctags'
+
+-- Set the executive for some filetypes explicitly. Use the explicit executive
+-- instead of the default one for these filetypes when using `:Vista` without
+-- specifying the executive.
+g["vista_executive_for"] = {
+    markdown = 'toc',
+    rust = 'nvim_lsp',
+    typescript = 'nvim_lsp',
+    typescriptreact = 'nvim_lsp',
+}
+
+g["vista_disable_statusline"] = 1
+
+-- Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+g["vista#renderer#enable_icon"] = 1
 
 -- Endwise No default mapping
 g["endwise_no_mappings"] = 1
@@ -108,6 +137,25 @@ require('telescope').setup{
     }
 }
 
-require 'plugins.lsp'
 require('nvim-autopairs').setup()
+
+require('compe').setup {
+    enabled = true;
+    debug = false;
+    min_length = 2;
+    preselect = "enable";
+    source_timeout = 200;
+    incomplete_delay = 400;
+    allow_prefix_unmatch = false;
+    source = {
+      nvim_lsp = true;
+      vim_dadbod_completion = true;
+      vsnip = true;
+      path = true;
+      buffer = true;
+    };
+}
+
+require 'plugins.lsp'
+require 'plugins.which-key'
 require 'plugins.statusline'
