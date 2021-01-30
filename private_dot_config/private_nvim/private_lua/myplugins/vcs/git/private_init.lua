@@ -197,11 +197,6 @@ function Git.run()
             s = "Status",
             t = "Tag",
         }
-        key_maps.l = {
-            name = "Lexical",
-            b = "Dictionary",
-            c = "Thesaurus",
-        }
 
         api.nvim_command("autocmd!")
         api.nvim_command("autocmd CursorHold * lua require'myplugins/vcs/git/gitlens'.blameVirtText()")
@@ -287,9 +282,6 @@ function Git.run()
         -- Remove keys from Which-Key keymap
         if key_maps.g ~=nil then
             key_maps.g = nil
-        end
-        if key_maps.l ~=nil then
-            key_maps.l = nil
         end
 
         -- Update Which-Key keymap
