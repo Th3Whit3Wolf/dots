@@ -69,14 +69,16 @@ vim.g.which_key_map = {
 vim.api.nvim_set_keymap('n', "<leader>", "<cmd>WhichKey '<space>'<cr>",  {noremap = true, silent = true})
 vim.fn['which_key#register']('<space>', 'g:which_key_map')
 
-local function has_value (tab, val)
-    for index, value in ipairs(tab) do
-        if value == val then
+local function isProse()
+  local current_filetype = vim.bo.filetype
+    for index, prose_filetype in ipairs({'asciidoc', 'html', 'gitcommit', 'mail', 'markdown', 'rst', 'tex', 'text', 'textile', 'xml'}) do
+        if prose_filetype == current_filetype then
             return true
         end
     end
     return false
 end
+
 
 function code_map(lhs, rhs, opts)
     local options = { noremap = true, silent = true }
@@ -257,55 +259,41 @@ end
 
 _G.WhichKey = {}
 
-local CompileRunList = {'c','cpp','go', 'haskell', 'javac'}
-local RunList = {'fish', 'html', 'ion', 'javascript','mardown', 'python', 'sh'}
-local CompileList = {'coffee','less'}
-local Prose = {'asciidoc', 'html', 'mail', 'markdown', 'rst', 'tex', 'text', 'textile', 'xml'}
-
 WhichKey.SetKeyOnFT=function()
-    local ft = vim.bo.filetype
-    if has_value(CompileRunList, ft) == true then
-        WhichKeyCodeCompileRun()
-    elseif has_value(RunList, ft) == true and has_value(Prose, ft) == true then
+    local compile = (function()
+      if vim.fn.exists("*CompileMyCode") == 1 then
+        return true
+      else
+        return false
+      end
+    end)()
+    local run = (function()
+      if vim.fn.exists("*RunMyCode") == 1 then
+        return true
+      else
+        return false
+      end
+    end)()
+    local test = (function()
+      if vim.fn.exists("*TestMyCode") == 1 then
+        return true
+      else
+        return false
+      end
+    end)()
+    if compile == true and run == true and test == true then 
+      WhichKeyCodeTest()
+    elseif compile == true and run == true then
+      WhichKeyCodeCompileRun()
+    elseif compile == true then
+      WhichKeyCodeCompile()
+    elseif run == true then
+      if isProse == true then
         WhichKeyProseRun()
-    elseif has_value(RunList, ft) == true then
+      else
         WhichKeyCodeRun()
-    elseif has_value(Prose, ft) == true then
-        WhichKeyProse()
-    elseif has_value(CompileList, ft) == true then
-        WhichKeyCodeCompile()
-    elseif ft == 'ruby' then
-        if vim.fn.filereadable("app/controllers/application_controller.rb") then
-			if vim.fn.executable('rails') then
-				WhichKeyCodeRun()
-			else
-				WhichKeyCodeNone()
-			end
-		else
-			if vim.fn.executable('ruby') then
-				WhichKeyCodeRun()
-			else
-				WhichKeyCodeNone()
-			end
-		end
-    elseif ft == 'rust' then
-		if vim.fn.filereadable("Cargo.toml") or vim.fn.filereadable("../Cargo.toml") or vim.fn.filereadable("../../Cargo.toml") or vim.fn.filereadable("../../../Cargo.toml") then
-			if vim.fn.executable('cargo') then
-				WhichKeyCodeTest()
-			else
-				WhichKeyCodeNone()
-			end
-		else
-            if vim.fn.executable('rustc') then
-                WhichKeyCodeCompileRun()
-            else
-                WhichKeyCodeNone()
-			end
-        end
-    else
-        WhichKeyCodeNone()
+      end
+    elseif isProse == true then
+      WhichKeyProse()
     end
 end
-
-
-
