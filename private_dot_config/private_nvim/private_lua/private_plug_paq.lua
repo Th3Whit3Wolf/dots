@@ -39,6 +39,9 @@ local function plugins()
     -- A neovim tabline plugin. 
     paq 'romgrk/barbar.nvim'
 
+    -- A snazzy bufferline for Neovim 
+    -- paq 'akinsho/nvim-bufferline.lua'
+
     -- A File Explorer For Neovim Written In Lua
     paq {"kyazdani42/nvim-tree.lua", opt = true}
 
@@ -87,8 +90,6 @@ local function plugins()
     -- Completion for vim-dadbod
     paq "kristijanhusak/vim-dadbod-completion"
 
-
-
     -- Treesitter configurations and abstraction layer for Neovim.
     paq {
         "nvim-treesitter/nvim-treesitter",
@@ -111,6 +112,9 @@ local function plugins()
     -- A light-weight lsp plugin based on neovim built-in lsp with highly performance UI.
     paq 'glepnir/lspsaga.nvim'
 
+    --  VSCode bulb for neovim's built-in LSP.
+    paq 'kosayoda/nvim-lightbulb'
+
     -- high-performance color highlighter for Neovim
     paq {
         "norcalli/nvim-colorizer.lua",
@@ -129,7 +133,7 @@ local function plugins()
     paq "windwp/nvim-autopairs"
 
     --  commentary.vim: comment stuff out
-    paq "tpope/vim-commentary"
+    paq "b3nj5m1n/kommentary"
 
     -- uses the sign column to indicate added, modified and removed lines in a file that is managed by a version control system
     paq {

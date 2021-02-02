@@ -83,7 +83,11 @@ local autocmds = {
             "*.rs",
             [[ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}} ]]
         },
+        -- Code action
+        { "CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()" },
+        -- Show type in virtual text while in rust
         { "CursorHold", "*", "lua vim.lsp.diagnostic.show_line_diagnostics()" },
+
         -- Automatically load .env variables
         {"BufEnter", "*", "call v:lua.check_env(expand('%:p:h'))"},
         {"BufEnter", "*", "call v:lua.WhichKey.SetKeyOnFT()"},
