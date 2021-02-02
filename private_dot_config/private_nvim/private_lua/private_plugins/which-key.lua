@@ -1,6 +1,22 @@
 -- Vim-Which-Key
 vim.g.which_key_sep = ''
 vim.g.which_key_map = {
+      a = {
+        name = "Align",
+        a = "by Addition operator",
+        A = "by Ampersamp operator",
+        c = "by Colon",
+        C = "by Comma",
+        d = "by Division operator",
+        e = "by Equal operator",
+        h = "by Hashtag",
+        i = "Interactive",
+        m = "by Mutliplication operator",
+        p = "by Period",
+        q = "by Double Quotes",
+        s = "by Subtraction operator",
+        S = "by Semicolon",
+    },
     b = {
         name = "Buffer",
         d = "Order by directory",
@@ -79,7 +95,6 @@ local function isProse()
     return false
 end
 
-
 function code_map(lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then options = vim.tbl_extend('force', options, opts) end
@@ -102,7 +117,7 @@ function WhichKeyCodeTest()
 
     -- Remove keys from Which-Key keymap
     if key_maps.l ~=nil then
-		key_maps.l = nil
+		  key_maps.l = nil
     end
 
     -- Update Which-Key keymap
@@ -123,10 +138,10 @@ function WhichKeyCodeCompileRun()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
     if key_maps.l ~=nil then
-		key_maps.l = nil
+		  key_maps.l = nil
     end
 
     -- Update Which-Key keymap
@@ -145,13 +160,13 @@ function WhichKeyCodeCompile()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.r ~=nil then
-		key_maps.c.r = nil
+		  key_maps.c.r = nil
     end
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
     if key_maps.l ~=nil then
-		key_maps.l = nil
+	  	key_maps.l = nil
     end
 
     -- Update Which-Key keymap
@@ -170,10 +185,10 @@ function WhichKeyCodeRun()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.c ~=nil then
-		key_maps.c.c = nil
+		  key_maps.c.c = nil
     end
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
 
     -- Update Which-Key keymap
@@ -197,13 +212,12 @@ function WhichKeyProseRun()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.c ~=nil then
-		key_maps.c.c = nil
+		  key_maps.c.c = nil
     end
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
     
-
     -- Update Which-Key keymap
     vim.g.which_key_map = key_maps
 end
@@ -222,13 +236,13 @@ function WhichKeyProse()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.c ~=nil then
-		key_maps.c.c = nil
+		  key_maps.c.c = nil
     end
     if key_maps.c.r ~=nil then
-		key_maps.c.r = nil
+		  key_maps.c.r = nil
     end
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
 
     -- Update Which-Key keymap
@@ -241,16 +255,16 @@ function WhichKeyCodeNone()
 
     -- Remove keys from Which-Key keymap
     if key_maps.c.c ~=nil then
-		key_maps.c.c = nil
+		  key_maps.c.c = nil
     end
     if key_maps.c.r ~=nil then
-		key_maps.c.r = nil
+		  key_maps.c.r = nil
     end
     if key_maps.c.t ~=nil then
-		key_maps.c.t = nil
+		  key_maps.c.t = nil
     end
     if key_maps.l ~=nil then
-		key_maps.l = nil
+	  	key_maps.l = nil
     end
     
     -- Update Which-Key keymap
