@@ -18,6 +18,7 @@ end
 
 -- Set map leader (needs to be set before mappings)
 g["mapleader"] = " "
+g["completion_confirm_key"] = ""
 
 -- Check for .env in local and parent recursively
 -- Until after home directory is checked
@@ -25,7 +26,7 @@ function _G.check_env(path)
     local new_path = path .. G.path_sep .. ".env"
     if G.exists(new_path) then
         cmd("Dotenv " .. new_path)
-    elseif path == env.HOME then
+    elseif path == env.HOME or path == "/" then 
         return
     else
         check_env(vim.fn.fnamemodify(path, ':h'))
@@ -84,13 +85,13 @@ opt("o", "magic", true) -- For regular expressions turn magic on
 opt("o", "path", ".,**") -- Directories to search when using gf
 opt("o", "virtualedit", "block") -- Position cursor anywhere in visual block
 opt("o", "synmaxcol", 2500) -- Don't syntax highlight long lines
-opt("o", "formatoptions", "1jcroql") -- Don't break lines after a one-letter word & Don't auto-wrap text
+opt("o", "formatoptions", "1jtcroq") -- Don't break lines after a one-letter word & Don't auto-wrap text
 opt("o", "lazyredraw", true) -- Don't redraw screen while running macros
 opt("o", "encoding", "utf-8")
 
 -- What to save for views and sessions:
 opt("o", "viewoptions", "folds,cursor,curdir,slash,unix")
-opt("o", "sessionoptions", "curdir,help,tabpages,winsize")
+opt("o", "sessionoptions", "curdir,globals,help,tabpages,winsize")
 opt("o", "clipboard", "unnamedplus")
 
 -- Wildmenu
@@ -161,7 +162,7 @@ opt("o", "grepformat", "%f:%l:%c:%m")
 opt("o", "grepprg", "rg --hidden --vimgrep --smart-case --")
 
 -- Behavior
-opt("o", "wrap", false) -- No wrap by default
+opt("o", "wrap", true) -- No wrap by default
 opt("o", "linebreak", true) -- Break long lines at 'breakat'
 opt("o", "breakat", [[\ \	;:,!?]]) -- Long lines break chars
 opt("o", "startofline", false) -- Cursor in same column for few commands
