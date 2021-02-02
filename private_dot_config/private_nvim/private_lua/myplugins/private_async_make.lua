@@ -117,7 +117,7 @@ end
 --- :cmd entry point
 function M.cmdRunner(cmd)
     window.open_floating_window(CMD_RUNNER_BUFFER, 'cmd_runner', CMD_RUNNER_LOADED)
-    exec_command(cmd .. ' && sleep 1')
+    exec_command(cmd)
 end
 
 return M
