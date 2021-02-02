@@ -1,3 +1,4 @@
+
 -- Allow misspellings
 local typo = require("utils").fixSpell
 local cmd = vim.cmd
