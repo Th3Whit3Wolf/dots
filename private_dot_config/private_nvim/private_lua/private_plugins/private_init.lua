@@ -9,13 +9,15 @@ g["db_ui_win_position"] = 'left'
 g["db_ui_use_nerd_fonts"] = 1
 g["db_ui_winwidth"] = 35
 
+-- BarBar
+--g["bufferline"].icon_default_file        = ''
+--g["bufferline"].icon_separator_active    = '▎'
+--g["bufferline"].icon_separator_inactive  = '▎'
+--g["bufferline"].icon_close_tab           = ''
+--g["bufferline"].icon_close_tab_modified  = '●'
+
 -- Vsnip snippet directories
 g["vsnip_snippet_dir"] = G.vim_path .. "snippets"
-
-
--- Barbar
--- Enable/disable animations
-g["bufferline.animation"] = false
 
 -- Vista
 --- How each level is indented and what to prepend.
@@ -179,7 +181,17 @@ require('telescope').setup{
   },
 }
 
-require('nvim-autopairs').setup()
+require('nvim-autopairs').setup({
+  pairs_map = {
+    ["'"] = "'",
+    ['"'] = '"',
+    ['('] = ')',
+    ['['] = ']',
+    ['{'] = '}',
+    ['`'] = '`',
+    ['<'] = '>',
+  }
+})
 
 require('compe').setup {
     enabled = true;
