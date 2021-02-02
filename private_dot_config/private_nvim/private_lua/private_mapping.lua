@@ -8,16 +8,16 @@ _G.MUtils = {}
 
 MUtils.completion_confirm=function()
     if vim.fn.pumvisible() ~= 0  then
-      if vim.fn.complete_info()["selected"] ~= -1 then
-        vim.fn["compe#complete"]("<CR>")
-        return npairs.esc("<c-y>")
+        if vim.fn.complete_info()["selected"] ~= -1 then
+          vim.fn["compe#confirm"]()
+          return npairs.esc("<c-y>")
+        else
+          vim.fn.nvim_select_popupmenu_item(0, false, false,{})
+          vim.fn["compe#confirm"]()
+          return npairs.esc("<c-n><c-y>")
+        end
       else
-        vim.fn.nvim_select_popupmenu_item(0 , false , false ,{})
-        vim.fn["compe#complete"]("<CR>")
-        return npairs.esc("<c-n><c-y>")
-      end
-    else
-      return npairs.check_break_line_char()
+        return npairs.check_break_line_char()
     end
 end
 
@@ -149,6 +149,12 @@ nnoremap("<leader>tn", "<C-u>:setlocal nonumber!<CR>")
 nnoremap("<leader>tl", "<C-u>:setlocal nolist!<CR>")
 -- tf toggles files
 -- tv toggles vista
+-- td toggles database
+
+-- Select entire Buffer
+nnoremap("<C-a>", ":normal maggVG<CR>")
+-- Yank entire buffer
+nnoremap("<A-a>", ":normal maggyG`a<CR>")
 
 -- :: Session Management
 nnoremap("<leader>ss", ":SessionSave<CR>")
@@ -174,12 +180,19 @@ imap("<CR>", "v:lua.MUtils.completion_confirm()", {expr = true , noremap = true}
 imap("<Tab>", "v:lua.MUtils.tab()", {expr = true , noremap = true})
 imap("<S-Tab>", "v:lua.MUtils.s_tab()", {expr = true , noremap = true})
 
---imap("<Tab>", [[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]])
-
--- Plugin vim-operator-surround
-nmap("sa", "<Plug>(operator-surround-append)")
-nmap("sd", "<Plug>(operator-surround-delete)")
-nmap("sr", "<Plug>(operator-surround-replace)")
+--- :: Visual mode insert text around visual block
+-- Replace 3  with Some(3)
+vnoremap("<leader>ms", [[:s/\%V\(.*\)\%V/Some(\1)/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace 3  with Ok(3)
+vnoremap("<leader>mo", [[:s/\%V\(.*\)\%V/Ok(\1)/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace 3  with Err(3)
+vnoremap("<leader>me", [[:s/\%V\(.*\)\%V/Err(\1)/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace 3  with (3)
+vnoremap("<leader>m(", [[:s/\%V\(.*\)\%V/(\1)/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace 3  with '3'
+vnoremap("<leader>m'", [[:s/\%V\(.*\)\%V/'\1'/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace 3  with "3"
+vnoremap("<leader>m\"", [[:s/\%V\(.*\)\%V/"\1"/ <CR> <bar> :nohlsearch<CR>]])
 
 -- File Tree (nvim-tree.lua)
 nnoremap("<leader>tf", "<C-u>:NvimTreeToggle<CR>")
@@ -190,8 +203,32 @@ nnoremap("<leader>tf", "<C-u>:NvimTreeToggle<CR>")
 nnoremap("<leader>tv", "<cmd>Vista!!<CR>")
 
 -- Vim Easy Align
-nmap("<leader>a", "<Plug>(EasyAlign)")
-vmap("<leader>a", "<Plug>(EasyAlign)")
+nmap("<leader>aa", [[:'<,'>EasyAlign /[+;]\+/]])
+vmap("<leader>aa", [[:'<,'>EasyAlign /[+;]\+/]])
+nmap("<leader>aA", ":'<,'>EasyAlign*&")
+vmap("<leader>aA", ":'<,'>EasyAlign*&")
+nmap("<leader>ac", ":'<,'>EasyAlign*:")
+vmap("<leader>ac", ":'<,'>EasyAlign*:")
+nmap("<leader>aC", ":'<,'>EasyAlign*,")
+vmap("<leader>aC", ":'<,'>EasyAlign*,")
+nmap("<leader>ad", [[:'<,'>EasyAlign /[\;]\+/]])
+vmap("<leader>ad", [[:'<,'>EasyAlign /[\;]\+/]])
+nmap("<leader>ae", ":'<,'>EasyAlign*=")
+vmap("<leader>ae", ":'<,'>EasyAlign*=")
+nmap("<leader>ah", ":'<,'>EasyAlign*#")
+vmap("<leader>ah", ":'<,'>EasyAlign*#")
+nmap("<leader>ai", "<Plug>(EasyAlign)")
+vmap("<leader>ai", "<Plug>(EasyAlign)")
+nmap("<leader>am", [[:'<,'>EasyAlign /[*;]\+/]])
+vmap("<leader>am", [[:'<,'>EasyAlign /[*;]\+/]])
+nmap("<leader>ap", ":'<,'>EasyAlign*.")
+vmap("<leader>ap", ":'<,'>EasyAlign*.")
+nmap("<leader>aq", ":'<,'>EasyAlign*\"")
+vmap("<leader>aq", ":'<,'>EasyAlign*=\"")
+nmap("<leader>as", [[:'<,'>EasyAlign /[-;]\+/]])
+vmap("<leader>as", [[:'<,'>EasyAlign /[-;]\+/]])
+nmap("<leader>aS", ":'<,'>EasyAlign*;")
+vmap("<leader>aS", ":'<,'>EasyAlign*;")
 
 -- Plugin DadbodUI
 nnoremap("<leader>td", ":DBUIToggle<CR>")
@@ -202,7 +239,7 @@ nnoremap("<Leader>fg", "<C-u>:Telescope git_files<CR>")
 nnoremap("<Leader>fs", "<C-u>:Telescope grep_string<CR>")
 nnoremap("<Leader>fl", "<C-u>:Telescope loclist<CR>")
 nnoremap("<Leader>fc", "<C-u>:Telescope git_commits<CR>")
-nnoremap("<C-p>",      "<C-u>:Telescope fd<CR>")
+nnoremap("<C-p>",      "<C-u>:Telescope find_files<CR>")
 nnoremap("<Leader>fw", "<C-u>:DashboardFindWord<CR>")
 nnoremap("<Leader>fb", "<C-u>:DashboardJumpMark<CR>")
 nnoremap("<Leader>ff", "<C-u>:DashboardFindFile<CR>")
