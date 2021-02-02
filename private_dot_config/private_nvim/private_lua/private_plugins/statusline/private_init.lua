@@ -48,15 +48,7 @@ gls.left[1] = {
 gls.left[2] = {
     ViModeSeperator = {
         provider = viModeSeperator,
-        highlight = {
-            c.color('comments'),
-            function()
-                if not u.buffer_not_empty() or vim.bo.filetype == 'dashboard' then
-                    return c.color('purple')
-                end
-                return c.color('bg2')
-            end
-        }
+        highlight = {c.color('act1'), c.color('DarkGoldenrod2')}
     }
 }
 
@@ -64,7 +56,7 @@ gls.left[3] = {
     FileSize = {
         provider = fileSize,
         condition = u.buffer_not_empty,
-        highlight = {c.color('base'), c.color('bg2')}
+        highlight = {c.color('base'), c.color('act1')}
     }
 }
 
@@ -73,8 +65,8 @@ gls.left[4] = {
         provider = fileName,
         condition = u.buffer_not_empty,
         separator = i.slant.Left,
-        separator_highlight = {c.color('purple'), c.color('bg2')},
-        highlight = {c.color('comp'), c.color('bg2'), "bold"}
+        separator_highlight = {c.color('purple'), c.color('act1')},
+        highlight = {c.color('func'), c.color('act1'), "bold"}
     }
 }
 
@@ -96,7 +88,7 @@ gls.left[7] = {
     DiagnosticError = {
         provider = diagnosticError,
         icon = " " .. i.bullet,
-        highlight = {c.color('error'), c.color('bg2')}
+        highlight = {c.color('error'), c.color('act1')}
     }
 }
 
@@ -104,7 +96,7 @@ gls.left[8] = {
     DiagnosticWarn = {
         provider = diagnosticWarn,
         icon = " " .. i.bullet,
-        highlight = {c.color('warning'), c.color('bg2')}
+        highlight = {c.color('warning'), c.color('act1')}
     }
 }
 
@@ -112,21 +104,21 @@ gls.left[9] = {
     DiagnosticInfo = {
         provider = diagnosticInfo,
         icon = " " .. i.bullet,
-        highlight = {c.color('info'), c.color('bg2')}
+        highlight = {c.color('info'), c.color('act1')}
     }
 }
 
 gls.left[10] = {
     DiagnosticEndSpace = {
         provider = diagnosticEndSpace,
-        highlight = {c.color('bg2'), c.color('bg2')}
+        highlight = {c.color('act1'), c.color('act1')}
     }
 }
 
 gls.left[11] = {
     DiagnosticSeperator = {
         provider = diagnosticSeperator,
-        highlight = {c.color('purple'), c.color('bg2')}
+        highlight = {c.color('purple'), c.color('act1')}
     }
 }
 
@@ -135,7 +127,6 @@ gls.left[12] = {
         provider = gitBranch,
         icon = " " .. i.git .. " ",
         condition = u.buffer_not_empty,
-        highlight = {c.color('base'), c.color('purple')}
     }
 }
 
@@ -169,7 +160,6 @@ gls.left[16] = {
     GitSeperator = {
         provider = gitSeperator,
         condition = u.buffer_not_empty,
-        highlight = {c.color('purple'), c.color('bg2')}
     }
 }
 
@@ -198,8 +188,8 @@ gls.right[3] = {
     PerCent = {
         provider = linePercent,
         separator = i.slant.Left,
-        separator_highlight = {c.color('bg2'), c.color('purple')},
-        highlight = {c.color('base'), c.color('bg2')}
+        separator_highlight = {c.color('act1'), c.color('purple')},
+        highlight = {c.color('base'), c.color('act1')}
     }
 }
 gls.right[4] = {

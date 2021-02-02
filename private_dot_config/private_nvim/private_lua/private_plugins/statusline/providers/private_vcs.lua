@@ -54,15 +54,17 @@ function M.get_git_branch_formatted()
   if diagnostic.has_diagnostics() then
     u.GalaxyBG("GitBranch", 'purple')
   else
-    u.GalaxyBG("GitBranch", 'bg2')
+    u.GalaxyBG("GitBranch", 'act1')
   end
   return git.get_branch()
 end
 
 function M.seperator()
   if diagnostic.has_diagnostics() and not git.check_workspace() then
+    u.GalaxyFG("GitSeperator", 'purple', 'act1')
     return i.slant.Left
   elseif not diagnostic.has_diagnostics() and git.check_workspace() then
+    u.GalaxyHi("GitSeperator", 'purple','act1')
     return i.slant.Left
   else
     return ""

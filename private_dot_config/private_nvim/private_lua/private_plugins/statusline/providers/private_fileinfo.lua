@@ -315,10 +315,10 @@ end
 
 function M.filetype_seperator()
   if not diagnostic.has_diagnostics() and not git.check_workspace() or vim.bo.filetype == "" then
-    u.GalaxyHi("FiletTypeSeperator", 'bg2', 'purple')
+    u.GalaxyHi("FiletTypeSeperator", 'act1', 'purple')
     return ""
   else
-    u.GalaxyHi("FiletTypeSeperator", 'purple', 'bg2')
+    u.GalaxyHi("FiletTypeSeperator", 'purple', 'act1')
     return i.slant.Right
   end
 end

@@ -7,6 +7,7 @@ M.dark = {
     bg2 = "#212026",
     base = "#b2b2b2",
     comp = "#c56ec3",
+    func = "#bc6ec5",
     act1 = "#222226",
     DarkGoldenrod2 = "#eead0e", -- normal / unmodified
     chartreuse3 = "#66cd00", --insert
@@ -31,12 +32,14 @@ M.dark = {
     info = "#8DE6F7"
 }
 
+
 M.light = {
     bg = "#fbf8ef",
     bg2 = "#efeae9",
     base = "#655370",
     comp = "#6c4173",
     act1 = "#e7e5eb",
+    func = "#6c3163",
     DarkGoldenrod2 = "#eead0e", -- normal / unmodified
     chartreuse3 = "#66cd00", --insert
     SkyBlue2 = "#7ec0ee", -- modified
