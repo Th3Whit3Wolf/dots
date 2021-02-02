@@ -2,8 +2,6 @@ local vim, api, fn = vim, vim.api, vim.fn
 local lspconfig = require 'lspconfig'
 local G = require("global")
 local saga = require 'lspsaga'
-local action = require 'lspsaga.action'
-
 
 function get_exec_path(exec)
     if vim.fn.executable(exec) then
@@ -65,7 +63,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 
 local on_attach = function(client,bufnr)
   if client.resolved_capabilities.document_formatting then
-    action.lsp_before_save()
+    local defs = {}
+    local ext = vim.fn.expand('%:e')
+    table.insert(defs,{"BufWritePre", '*.'..ext ,
+                        "lua vim.lsp.buf.formatting_sync(nil,1000)"})
+    vim.api.nvim_command('augroup lsp_before_save')
+    vim.api.nvim_command('autocmd!')
+    for _, def in ipairs(defs) do
+        local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
+        vim.api.nvim_command(command)
+    end
+    vim.api.nvim_command('augroup END')
   end
     if client.config.flags then
         client.config.flags.allow_incremental_sync = true
