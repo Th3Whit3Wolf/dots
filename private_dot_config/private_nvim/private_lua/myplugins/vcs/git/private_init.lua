@@ -194,7 +194,8 @@ function Git.run()
             C = "Commit --amend",
             f = "Files",
             L = "Log",
-            s = "Status",
+            m = "Messenger",
+            S = "Status",
             t = "Tag",
         }
 
@@ -215,58 +216,15 @@ function Git.run()
             api.nvim_set_keymap("n", "<Space>gl", "lua require'myplugins/vcs/git/gitui'.gitui()<CR>", options)
             key_maps.g.l = "GitUI"
         end
-        -- Vim Signify
-        api.nvim_command("packadd vim-signify")
-        g["signify_sign_add"] = ''
-        g["signify_sign_delete"] = ''
-        g["signify_sign_delete_first_line"] = ''
-        g["signify_sign_change"] = ''
-        api.nvim_command("SignifyEnableAll")
-        api.nvim_set_keymap("n", "\\<Space>gd", "<cmd>SignifyDiff<CR>",     options)
-        api.nvim_set_keymap("n", "\\<Space>gp", "<cmd>SignifyHunkDiff<CR>", options)
-        api.nvim_set_keymap("n", "\\<Space>gu", "<cmd>SignifyHunkUndo<CR>", options)
-        api.nvim_set_keymap("n", "\\<Space>g[", "<Plug>(signify-prev-hunk)", {silent = true})
-        api.nvim_set_keymap("n", "\\<Space>g]", "<Plug>(signify-next-hunk)", {silent = true})
-        api.nvim_set_keymap("o", "ih", "<Plug>(signify-inner-pending)", {silent = true})
-        api.nvim_set_keymap("x", "ih", "<Plug>(signify-inner-visual)",  {silent = true})
-        api.nvim_set_keymap("o", "ah", "<Plug>(signify-outer-pending)", {silent = true})
-        api.nvim_set_keymap("x", "ah", "<Plug>(signify-outer-visual)",  {silent = true})
-        api.nvim_command("SignifyEnableAll")
+        -- Git Signs
+        api.nvim_command("packadd gitsigns.nvim")
         -- Gina
-        api.nvim_command("packadd gina.vim")
-        api.nvim_set_keymap("n", "<Space>gs", "<cmd>Gina status<CR>",         options)
-        api.nvim_set_keymap("n", "<Space>gb", "<cmd>Gina branch<CR>",         options)
-        api.nvim_set_keymap("n", "<Space>gc", "<cmd>Gina commit<CR>",         options)
-        api.nvim_set_keymap("n", "<Space>gC", "<cmd>Gina commit --amend<CR>", options)
-        api.nvim_set_keymap("n", "<Space>gt", "<cmd>Gina tag<CR>",            options)
-        api.nvim_set_keymap("n", "<Space>gL", "<cmd>Gina log<CR>",            options)
-        --api.nvim_set_keymap("n", "<Space>gL", "<cmd>Gina log :%<CR>",         options)
-        api.nvim_set_keymap("n", "<Space>gf", "<cmd>Gina ls<CR>",             options)
+        vim.api.nvim_command("packadd gina.vim")
 
-        fn["gina#custom#command#option"]("commit", "-v|--verbose")
-        fn["gina#custom#command#option"]([[/\%(status\|commit\)]], "-u|--untracked-files")
-        fn["gina#custom#command#option"]("status", "-b|--branch")
-        fn["gina#custom#command#option"]("status", "-s|--short")
-        fn["gina#custom#command#option"]([[/\%(commit\|tag\)]], "--restore")
-        fn["gina#custom#command#option"]("show", "--show-signature")
-        fn["gina#custom#action#alias"]("branch", "track",  "checkout:track")
-        fn["gina#custom#action#alias"]("branch", "merge",  "commit:merge")
-        fn["gina#custom#action#alias"]("branch", "rebase", "commit:rebase")
-        fn["gina#custom#action#alias"]([[/\%(blame\|log\|reflog\)]], "preview", "topleft show:commit:preview")
-        fn["gina#custom#action#alias"]([[/\%(blame\|log\|reflog\)]], "changes", "topleft changes:of:preview")
-        fn["gina#custom#mapping#nmap"]("branch", "g<CR>", "<Plug>(gina-commit-checkout-track)")
-        fn["gina#custom#mapping#nmap"]("status", "<C-^>", ":<C-u>Gina commit<CR>", options)
-        fn["gina#custom#mapping#nmap"]("commit", "<C-^>", ":<C-u>Gina status<CR>", options)
-        fn["gina#custom#mapping#nmap"]("status", "<C-6>", ":<C-u>Gina commit<CR>", options)
-        fn["gina#custom#mapping#nmap"]("commit", "<C-6>", ":<C-u>Gina status<CR>", options)
-        fn["gina#custom#mapping#nmap"]([[/\%(blame\|log\|reflog\)]], "p",
-            "<cmd>call gina#action#call(''preview'')<CR>", options)
-        fn["gina#custom#mapping#nmap"]([[/\%(blame\|log\|reflog\)]],
-            "c", "<cmd>call gina#action#call(''changes'')<CR>", options)
         -- Git Messenger
         api.nvim_command("packadd git-messenger.vim")
-        g["git_messenger_no_default_mappings"] = true
-        api.nvim_set_keymap("n", "gm", "<cmd>GitMessenger<CR>", {silent = true})
+
+        -- Git Commit
         api.nvim_command("packadd committia.vim")
 
         -- Update Which-Key keymap
