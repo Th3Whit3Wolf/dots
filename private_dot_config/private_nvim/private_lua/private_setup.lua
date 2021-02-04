@@ -75,7 +75,6 @@ end
 
 local function packerInit()
     if not G.isdir(G.plugins .. "packer" .. G.path_sep .. "opt" .. G.path_sep .. "packer.nvim") then
-        fn.mkdir(G.plugins .. "opt", "p")
         local out =
             fn.system(
             string.format(
@@ -87,9 +86,10 @@ local function packerInit()
         print(out)
         print("Downloading packer.nvim...")
         cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "packer.nvim")
+        require "plug_packer".install()
     end
+    --[[
     if not G.isdir(G.plugins .. "paqs" .. G.path_sep .. "opt" .. G.path_sep .. "paq-nvim") then
-        fn.mkdir(G.plugins .. "opt", "p")
         local out =
             fn.system(
             string.format(
@@ -103,6 +103,7 @@ local function packerInit()
         cmd("set runtimepath+=" .. G.plugins .. "opt" .. G.path_sep .. "paq-nvim")
         require "plug_paq".install()
     end
+    --]]
 end
 
 local function quoteGenerator()
