@@ -1,6 +1,3 @@
-packadd vim-ruby
-packadd vim-yardoc
-
 let b:endwise_addition='end'
 let b:endwise_words='module,class,def,if,unless,case,while,until,begin,do'
 let b:endwise_pattern='^\(.*=\)\?\s*\%(private\s\+\|protected\s\+\|public\s\+\|module_function\s\+\)*\zs\%(module\|class\|def\|if\|unless\|case\|while\|until\|for\|\|begin\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$'
@@ -31,7 +28,3 @@ if !stridx(&rtp, resolve(expand('~/.config/nvim/lazy/vim-endwise.vim'))) == 0
 endif
 
 imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
-
-lua require 'plugins.tree_sitter'
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()

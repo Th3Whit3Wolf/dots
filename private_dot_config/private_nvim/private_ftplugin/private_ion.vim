@@ -1,5 +1,3 @@
-packadd ion-vim
-
 function! RunMyCode()
     if executable('ion')
         call Run("ion %")

@@ -1,1 +1,0 @@
-packadd vim-log-highlighting

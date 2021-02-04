@@ -1,1 +1,0 @@
-packadd pgsql.vim

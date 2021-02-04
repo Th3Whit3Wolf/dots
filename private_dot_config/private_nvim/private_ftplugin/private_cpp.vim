@@ -27,7 +27,3 @@ if !stridx(&rtp, resolve(expand('~/.config/nvim/lazy/vim-endwise.vim'))) == 0
 endif
 
 imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
-
-lua require 'plugins.tree_sitter'
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()

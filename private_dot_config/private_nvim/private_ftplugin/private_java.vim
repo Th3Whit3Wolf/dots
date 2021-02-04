@@ -13,9 +13,3 @@ function! RunMyCode()
         echo 'Java is not installed!'
     endif
 endfunction
-
-lua require 'plugins.tree_sitter'
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
-

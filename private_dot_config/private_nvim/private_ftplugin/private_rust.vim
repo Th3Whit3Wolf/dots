@@ -1,9 +1,6 @@
-packad rust-vim
-
 let g:rustfmt_autosave = 1
 
 set colorcolumn=9999
-setlocal tags=./rusty-tags.vi;/
 
 " Code formatting on save
 augroup rustPreWrite
@@ -18,13 +15,13 @@ endfunction
 function! CompileMyCode() abort
     if InCargoProject()
         if executable('cargo')
-            call Run("cargo build")
+            lua require'myplugins/async_make'.cmdRunner("cargo build")
         else
             echom 'Cargo is not installed!'
         endif
     else
         if executable('rustc')
-            call Run("rustc % -o %<")
+            lua require'myplugins/async_make'.cmdRunner('rustc ' .. vim.fn.expand('%') .. ' -o ' .. vim.fn.expand('%<'))
         else
             echom 'Rustc is not installed or this is not a cargo project'
         endif
@@ -59,7 +56,6 @@ function! TestMyCode()
     endif
 endfunction!
 
-
-lua require 'plugins.tree_sitter'
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+command! CodeBuild call CompileMyCode()
+command! CodeRun call RunMyCode()
+command! CodeTest call TestMyCode()

@@ -1,8 +1,3 @@
-packadd vimtex
-packadd vim-latex-live-preview
-packadd vim-lexical
-packadd vim-pencil
-
 call lexical#init()
 call pencil#init()
 

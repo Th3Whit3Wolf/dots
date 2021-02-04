@@ -1,1 +1,0 @@
-packadd vala.vim

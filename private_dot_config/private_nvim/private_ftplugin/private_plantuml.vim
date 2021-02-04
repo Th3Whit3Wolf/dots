@@ -1,1 +1,0 @@
-packadd plantuml-syntax

@@ -1,1 +1,0 @@
-packadd Jenkinsfile-vim-syntax

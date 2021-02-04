@@ -1,10 +1,5 @@
-packadd vim-markdown
-packadd vim-markdown-composer
-packadd vim-lexical
-packadd vim-pencil
-
-setlocal spell nofoldenable
-
+" setlocal spell nofoldenable
+setlocal nofoldenable
 call lexical#init()
 call pencil#init({'wrap': 'hard'})
 

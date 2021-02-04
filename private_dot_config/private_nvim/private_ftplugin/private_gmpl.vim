@@ -1,1 +1,0 @@
-packadd gmpl.vim

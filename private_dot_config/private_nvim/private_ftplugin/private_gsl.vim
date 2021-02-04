@@ -1,1 +1,0 @@
-packadd vim-gdscript3

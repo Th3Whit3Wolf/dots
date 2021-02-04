@@ -63,10 +63,3 @@ function! RunMyCode()
         echom 'Please set a python shebang'
     endif
 endfunction
-
-set expandtab tabstop=4 softtabstop=4 shiftwidth=4
-
-lua require 'plugins.tree_sitter'
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-

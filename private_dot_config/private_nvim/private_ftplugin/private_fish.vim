@@ -1,5 +1,3 @@
-packadd vim-fish
-
 function! RunMyCode()
     if executable('fish')
         call Run("fish %")

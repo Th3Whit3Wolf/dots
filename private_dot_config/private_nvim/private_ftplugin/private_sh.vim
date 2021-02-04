@@ -1,5 +1,3 @@
-packadd vim-sh
-
 let b:endwise_addition = '\=submatch(0)=="then" ? "fi" : submatch(0)=="case" ? "esac" : "done"'
 let b:endwise_words = 'then,case,do'
 let b:endwise_pattern = '\%(^\s*\zscase\>\ze\|\zs\<\%(do\|then\)\ze\s*$\)'
@@ -86,5 +84,3 @@ if !stridx(&rtp, resolve(expand('~/.config/nvim/lazy/vim-endwise.vim'))) == 0
 endif
 
 imap <buffer> <CR> <CR><Plug>DiscretionaryEnd
-
-set shiftwidth=4
