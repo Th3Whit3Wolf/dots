@@ -226,29 +226,30 @@ opt("o", "concealcursor", "niv")
 opt("o", "foldenable", true)
 opt("o", "foldmethod", "indent")
 opt("o", "foldlevelstart", 99)
+-------------------- FOLDTEXT ------------------------------
+function _G.FoldText()
+    local padding = vim.wo.fdc + vim.fn.max({vim.wo.numberwidth, vim.fn.strlen(vim.v.foldstart - vim.fn.line('w0')), vim.fn.strlen(vim.fn.line('w$') - vim.v.foldstart), vim.fn.strlen(vim.v.foldstart)})
+    -- expand tabs
+    local t_start = vim.fn.substitute(vim.fn.getline(vim.v.foldstart), '\t', string.rep(' ', vim.bo.tabstop), 'g')
+    local t_end   = vim.fn.substitute(vim.fn.substitute(vim.fn.getline(vim.v.foldend), '\t', string.rep(' ', vim.bo.tabstop), 'g'), '^\\s*', '', 'g')
+        
+    local info    = ' (' .. (vim.v.foldend - vim.v.foldstart) .. ')'
+    local infolen = vim.fn.strlen(vim.fn.substitute(info, '.', 'x', 'g'))
+    local width   = vim.fn.winwidth(0) - padding - infolen
+
+    local separator    = ' … '
+    local separatorlen = vim.fn.strlen(vim.fn.substitute(separator, '.', 'x', 'g'))
+    local start        = vim.fn.strpart(t_start , 0, width - vim.fn.strlen(vim.fn.substitute(t_end, '.', 'x', 'g')) - separatorlen)
+    local text         = start .. ' … ' .. t_end
+    return text .. string.rep(' ', width - vim.fn.strlen(vim.fn.substitute(text, ".", "x", "g")) - 2) .. info
+end
+
+vim.wo.foldtext="v:lua.FoldText()"
 -------------------- COMMANDS ------------------------------
---  Install all packages
-command(
-    "PaqInstall",
-    "lua require('plug_paq').install()"
-)
-
--- Update all packages 
-command(
-    "PaqClean",
-    "lua require('plug_paq').clean()"
-)
-
--- Remove all packages
-command(
-    "PaqUpdate",
-    "lua require('plug_paq').update()"
-)
-
 -- Get highlight group name and it's
 -- foreground and background color
 command("GetHi", "lua require('utils').GetHi()")
---[[
+
 --- Only install missing plugins
 command(
     "PlugInstall",
@@ -257,24 +258,23 @@ command(
 --- Update and install plugins
 command(
     "PlugUpdate",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').update()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').update()"
 )
 --- Remove any disabled or unused plugins
 command(
     "PlugClean",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').clean()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').clean()"
 )
 --- Recompiles lazy loaded plugins
 command(
     "PlugCompile",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').compile()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').compile()"
 )
 --- Performs `PlugClean` and then `PlugUpdate`
 command(
     "PlugSync",
-    "execute 'luafile ' . stdpath('config') . '/lua/plug_packer.lua' | packadd packer.nvim | lua require('plug_packer').sync()"
+    "execute 'luafile ' . stdpath('config') . '/lua/plug.lua' | packadd packer.nvim | lua require('plug').sync()"
 )
---]]
 
 -- Plugins and stuff
 require "autocmd"
