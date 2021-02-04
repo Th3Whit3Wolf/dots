@@ -87,4 +87,14 @@ function M.color(val)
     end
 end
 
+function M.Color(val)
+      return function()
+        if vim.o.background ~= nil and vim.o.background == "light" then
+            return M.light[val]
+        elseif vim.o.background ~= nil and vim.o.background == "dark" then
+            return M.dark[val]
+        end
+    end
+end
+
 return M

@@ -4,20 +4,20 @@ local c = require("plugins.statusline.colors")
 local M = {}
 
 function M.GalaxyFG(item, col)
-    vim.api.nvim_command("hi Galaxy" .. item .. " guifg=" .. c.color(col))
+    vim.api.nvim_command("hi Galaxy" .. item .. " guifg=" .. c.Color(col)())
 end
 function M.GalaxyBG(item, col)
-    vim.api.nvim_command("hi Galaxy" .. item .. " guibg=" .. c.color(col))
+    vim.api.nvim_command("hi Galaxy" .. item .. " guibg=" .. c.Color(col)())
 end
 function M.GalaxyHi(item, colorfg, colorbg)
     vim.api.nvim_command(
-        "hi Galaxy" .. item .. " guifg=" .. c.color(colorfg) .. " guibg=" .. c.color(colorbg)
+        "hi Galaxy" .. item .. " guifg=" .. c.Color(colorfg)() .. " guibg=" .. c.Color(colorbg)()
     )
 end
 
 function M.GalaxyHiB(item, colorfg, colorbg)
     vim.api.nvim_command(
-        "hi Galaxy" .. item .. " guifg=" .. c.color(colorfg) .. " guibg=" .. c.color(colorbg) .. " gui=bold"
+        "hi Galaxy" .. item .. " guifg=" .. c.Color(colorfg)() .. " guibg=" .. c.Color(colorbg)() .. " gui=bold"
     )
 end
 
