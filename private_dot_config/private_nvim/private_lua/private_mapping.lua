@@ -10,13 +10,13 @@ MUtils.completion_confirm=function()
     if vim.fn.pumvisible() ~= 0  then
         if vim.fn.complete_info()["selected"] ~= -1 then
           vim.fn["compe#confirm"]()
-          return npairs.esc("<c-y>")
+          return npairs.esc("")
         else
           vim.fn.nvim_select_popupmenu_item(0, false, false,{})
           vim.fn["compe#confirm"]()
-          return npairs.esc("<c-n><c-y>")
+          return npairs.esc("<c-n>")
         end
-      else
+    else
         return npairs.check_break_line_char()
     end
 end
@@ -26,7 +26,8 @@ MUtils.tab=function()
         return npairs.esc("<C-n>")
     else
         if vim.fn["vsnip#available"](1) ~= 0 then
-            return fn.feedkeys(string.format('%c%c%c(vsnip-expand-or-jump)', 0x80, 253, 83))
+            vim.fn.feedkeys(string.format('%c%c%c(vsnip-expand-or-jump)', 0x80, 253, 83))
+            return npairs.esc("")
         else
             return npairs.esc("<Tab>")
         end
@@ -38,7 +39,8 @@ MUtils.s_tab=function()
         return npairs.esc("<C-p>")
     else
         if vim.fn["vsnip#jumpable"](-1) ~= 0 then
-            return fn.feedkeys(string.format('%c%c%c(vsnip-jump-prev)', 0x80, 253, 83))
+            vim.fn.feedkeys(string.format('%c%c%c(vsnip-jump-prev)', 0x80, 253, 83))
+            return npairs.esc("")
         else
             return npairs.esc("<C-h>")
         end
@@ -181,17 +183,23 @@ imap("<Tab>", "v:lua.MUtils.tab()", {expr = true , noremap = true})
 imap("<S-Tab>", "v:lua.MUtils.s_tab()", {expr = true , noremap = true})
 
 --- :: Visual mode insert text around visual block
--- Replace 3  with Some(3)
+-- Replace type  with Option<Type>
+vnoremap("<leader>mO", [[:s/\%V\(.*\)\%V/Option<\1>/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace type  with Result<Type, Err>
+vnoremap("<leader>mR", [[:s/\%V\(.*\)\%V/Result<\1, Err>/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace val  with Some(val)
 vnoremap("<leader>ms", [[:s/\%V\(.*\)\%V/Some(\1)/ <CR> <bar> :nohlsearch<CR>]])
--- Replace 3  with Ok(3)
+-- Replace val  with Some(val)
+vnoremap("<leader>ms", [[:s/\%V\(.*\)\%V/Some(\1)/ <CR> <bar> :nohlsearch<CR>]])
+-- Replace val  with Ok(val)
 vnoremap("<leader>mo", [[:s/\%V\(.*\)\%V/Ok(\1)/ <CR> <bar> :nohlsearch<CR>]])
--- Replace 3  with Err(3)
+-- Replace val  with Err(val)
 vnoremap("<leader>me", [[:s/\%V\(.*\)\%V/Err(\1)/ <CR> <bar> :nohlsearch<CR>]])
--- Replace 3  with (3)
+-- Replace val  with (val)
 vnoremap("<leader>m(", [[:s/\%V\(.*\)\%V/(\1)/ <CR> <bar> :nohlsearch<CR>]])
--- Replace 3  with '3'
+-- Replace val  with 'val'
 vnoremap("<leader>m'", [[:s/\%V\(.*\)\%V/'\1'/ <CR> <bar> :nohlsearch<CR>]])
--- Replace 3  with "3"
+-- Replace val  with "val"
 vnoremap("<leader>m\"", [[:s/\%V\(.*\)\%V/"\1"/ <CR> <bar> :nohlsearch<CR>]])
 
 -- File Tree (nvim-tree.lua)
