@@ -1,0 +1,48 @@
+# SpaceLight
+[colors]
+# The default text color
+foreground = "#655370"
+# The default background color
+background = "#fbf8ef"
+# Overrides the cell background color when the current cell is occupied by the
+# cursor and the cursor style is set to Block
+cursor_bg = "#100a14"
+# Overrides the text color when the current cell is occupied by the cursor
+cursor_fg = "#efeae9"
+# Specifies the border color of the cursor when the cursor style is set to Block,
+# of the color of the vertical or horizontal bar when the cursor style is set to
+# Bar or Underline.
+cursor_border = "#100a14"
+
+# The color of the scrollbar "thumb"; the portion that represents the current viewport
+scrollbar_thumb = "#222222" # untouched
+
+# The color of the split lines between panes
+split = "#444444" # untouched
+
+ansi = [
+    "#d2ceda", 
+    "#f2241f", 
+    "#67b11d", 
+    "#b1951d", 
+    "#3a81c3", 
+    "#a31db1", 
+    "#21b8c7", 
+    "#655370"
+]
+brights = [
+    "#efeae9", 
+    "#DF201C", 
+    "#29A0AD", 
+    "#DB742E", 
+    "#3980C2", 
+    "#2C9473", 
+    "#6B3062", 
+    "#a094a2"
+]
+
+[[tab_bar]]
+background = "#efeae9"
+[[tab_bar.active_tab]]
+bg_color = "#655370"
+fg_color = "#d2ceda"
