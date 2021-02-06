@@ -62,6 +62,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 )
 
 local on_attach = function(client,bufnr)
+    require('lspkind').init()
   if client.resolved_capabilities.document_formatting then
     local defs = {}
     local ext = vim.fn.expand('%:e')
