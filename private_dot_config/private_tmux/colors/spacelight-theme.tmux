@@ -19,7 +19,7 @@ set-window-option -g window-status-current-format ""
 
 # status left
 # are we controlling tmux or the content of the panes?
-set -g status-left "#[bg=${darkGoldenrod}]#[fg=${act1}] #(~/.config/tmux/scripts/left_icon)#[fg=${darkGoldenrod}, bg=${act1}] #[fg=${comp}, bg=${act1}]#{pane_title} "
+set -g status-left "#[bg=${darkGoldenrod}]#[fg=${act1}] #(~/.config/tmux/scripts/left_icon)#[fg=${darkGoldenrod}, bg=${act1}] #[fg=${comp}, bg=${act1}]#{pane_current_command} "
 
 # status right
 
