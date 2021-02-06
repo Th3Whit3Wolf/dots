@@ -122,14 +122,15 @@ gls.left[11] = {
     }
 }
 
+
 gls.left[12] = {
     GitBranch = {
         provider = gitBranch,
-        icon = " " .. i.git .. " ",
+        icon = "Git-", --" " .. i.git .. " ",
         condition = u.buffer_not_empty,
     }
 }
-
+--[[
 gls.left[13] = {
     DiffAdd = {
         provider = diffAdd,
@@ -138,7 +139,6 @@ gls.left[13] = {
         highlight = {c.Color('green'), c.Color('purple')}
     }
 }
-
 gls.left[14] = {
     DiffModified = {
         provider = diffModified,
@@ -155,15 +155,15 @@ gls.left[15] = {
         highlight = {c.Color('red'), c.Color('purple')}
     }
 }
-
-gls.left[16] = {
+--]]
+gls.left[13] = {
     GitSeperator = {
         provider = gitSeperator,
         condition = u.buffer_not_empty,
     }
 }
 
-gls.left[17] = {
+gls.left[14] = {
     Space = {
         provider = space,
         highlight = {c.Color('blue'), c.Color('purple')}

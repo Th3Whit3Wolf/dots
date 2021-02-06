@@ -60,8 +60,14 @@ function M.get_mode()
     end)()
 
     local vimMode = mode[vim.fn.mode()]
-    u.GalaxyBG("ViMode", vimMode[2])
-    return vimMode[1] .. " | " .. n .. " "
+    if mode[vim.fn.mode()] ~= nil then
+        u.GalaxyBG("ViMode", vimMode[2])
+        return vimMode[1] .. " | " .. n .. " "
+    else
+        u.GalaxyBG("ViMode", 'error')
+        return " ? | " .. n .. " "
+    end
+
 end
 
 function M.seperator()
@@ -88,10 +94,15 @@ function M.seperator()
         ["!"]  = 'plum3'
     }
 
+    local m_color = 'error'
+    if mode_color[vim.fn.mode()] ~= nil then
+        m_color = mode_color[vim.fn.mode()]
+    end
+
     if not u.buffer_not_empty() or vim.bo.filetype == 'dashboard' then
-        u.GalaxyHi("ViModeSeperator", mode_color[vim.fn.mode()], 'purple')
+        u.GalaxyHi("ViModeSeperator", m_color, 'purple')
     else
-        u.GalaxyHi("ViModeSeperator", mode_color[vim.fn.mode()], 'act1')
+        u.GalaxyHi("ViModeSeperator", m_color, 'act1')
     end
 
     return i.slant.Right
