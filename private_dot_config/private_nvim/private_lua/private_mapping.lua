@@ -47,6 +47,17 @@ MUtils.s_tab=function()
     end
 end
 
+function os.capture(cmd, raw)
+    local f = assert(io.popen(cmd, 'r'))
+    local s = assert(f:read('*a'))
+    f:close()
+    if raw then return s end
+    s = string.gsub(s, '^%s+', '')
+    s = string.gsub(s, '%s+$', '')
+    s = string.gsub(s, '[\n\r]+', ' ')
+    return s
+end
+
 local function cnoreabbrev(command)
     api.nvim_command("cnoreabbrev " .. command)
 end
@@ -79,7 +90,7 @@ cnoreabbrev "W! w!"
 -- Abbrev
 iabbrev "btw by the way"
 iabbrev "atm at the moment"
-imap(";date", "%d %b %Y")
+inoremap(";date", "<C-R>=strftime('%d %b %y')<CR>")
 
 -- Folds
 nnoremap("<CR>", "za")
@@ -252,3 +263,28 @@ nnoremap("<Leader>fw", "<C-u>:DashboardFindWord<CR>")
 nnoremap("<Leader>fb", "<C-u>:DashboardJumpMark<CR>")
 nnoremap("<Leader>ff", "<C-u>:DashboardFindFile<CR>")
 nnoremap("<Leader>fh", "<C-u>:DashboardFindHistory<CR>")
+
+
+local name = os.capture('git config --list | grep "user.name" | cut -d "=" -f2')
+if name ~= nil then
+    inoremap(';name', name)
+
+    words = {}
+    for word in string.gmatch(name, "[^%s]+") do
+        table.insert(words, word)
+     end
+
+     if table.getn(words) == 2 then
+        inoremap(';fn', words[1])
+        inoremap(';ln', words[2])
+     elseif table.getn(words) >= 3 then
+        inoremap(';fn', words[1])
+        inoremap(';mn', words[2])
+        inoremap(';ln', words[3])
+    end
+end
+
+local email = os.capture('git config --list | grep "user.email" | cut -d "=" -f2')
+if email ~= nil then
+    inoremap(';email', email)
+end
