@@ -1,0 +1,14 @@
+#!/bin/bash
+
+session_name=$(tmux display-message -p '#S')
+
+if [[ ! -z "${TMUX_PANE}" && -f "$(tmux display-message -p -F "#{pane_current_path}")/todo.md" ]]; then
+    if [[ -z "${TAX_FILE}" ]]; then
+        export TAX_FILE="$(tmux display-message -p -F "#{pane_current_path}")/todo.md"
+    fi
+    tax current
+elif [[ ! -z "${session_name}" ]]; then
+    echo " $session_name"
+else    
+    echo $(basename $(tmux display-message -p -F "#{pane_current_path}"))
+fi

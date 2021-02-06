@@ -1,0 +1,29 @@
+#!/bin/bash
+pane_id="$(tmux display-message -p -F "#{pane_id}")"
+window_index="$(tmux display-message -p -F "#{window_index}")"
+pane_id=${pane_id:1}
+window_id=${window_index:1}
+num=(
+    "⓿"
+    "❶"
+    "❷"
+    "❸"
+    "❹"
+    "❺"
+    "❻"
+    "❼"
+    "❽"
+    "❾"
+    "❿"
+    "⓫"
+    "⓬"
+    "⓭"
+    "⓮"
+    "⓯"
+    "⓰"
+    "⓱"
+    "⓲"
+    "⓳"
+    "⓴"
+)
+echo "${num[$window_index]} | ${num[$pane_id]} "

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $(tmux list-windows | wc -l) -gt 1 ]]; then
+    tmux set-window-option -g window-status-current-format "#[fg=#b2b2b2]#[bg=#222226]#[fg=#5d4d7a, bg=#b2b2b2] #W #[fg=#b2b2b2, bg=#222226] #(~/.config/tmux/scripts/extra) #[fg=#5d4d7a]#[bg=#222226]"
+    tmux set-window-option -g window-status-format ""
+    tmux set-window-option -g window-status-separator ""
+else
+    tmux set-window-option -g window-status-current-format "#[fg=#5d4d7a]#[bg=#222226]"
+    tmux set-window-option -g window-status-format ""
+fi
