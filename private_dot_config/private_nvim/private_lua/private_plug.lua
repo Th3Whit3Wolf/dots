@@ -63,7 +63,6 @@ local function init()
     end
   }
 
-
   -- neovim statusline plugin written in lua
   use {
     "glepnir/galaxyline.nvim",
@@ -79,30 +78,22 @@ local function init()
     config = function()
       require("Dusk-til-Dawn").timeMan(
         function()
-            require('indent_guides').setup(
-        {
+          require('indent_guides').setup({
             even_colors = {fg = "#d3d3e7", bg = "#d3d3e7"},
-            odd_colors = {fg = "#e7e5eb", bg = "#e7e5eb"},
-            indent_space_guides = true,
-            indent_tab_guides = true,
+            odd_colors = {fg = "#e7e7fc", bg = "#e7e7fc"},
             indent_guide_size = 4
-        }
-    )
-    require('indent_guides').indent_guides_enable()
+          })
+          require('indent_guides').indent_guides_enable()
         end,
         function()
-            require('indent_guides').setup(
-                {
-                    even_colors = {fg = "#5C5E61", bg = "#5C5E61"},
-                    odd_colors = {fg = "#434548", bg = "#434548"},
-                    indent_space_guides = true,
-                    indent_tab_guides = true,
-                    indent_guide_size = 4
-                }
-            )
-            require('indent_guides').indent_guides_enable()
+          require('indent_guides').setup({
+            even_colors = {fg = "#444155", bg = "#444155"},
+            odd_colors = {fg = "#3b314d", bg = "#3b314d"},
+            indent_guide_size = 4
+          })
+          require('indent_guides').indent_guides_enable()
         end
-    )()
+      )()
     end
   }
 
@@ -163,7 +154,7 @@ local function init()
           vim_dadbod_completion = true;
           vsnip = true;
           path = true;
-          buffer = true;
+          buffer = false;
         };
     }
   end
@@ -177,6 +168,8 @@ local function init()
       require 'plugins.lsp'
     end,
   }
+  
+  use "onsails/lspkind-nvim"
 
   -- bunch of info & extension callbacks for built-in LSP (provides inlay hints)
   use {"tjdevries/lsp_extensions.nvim"}
